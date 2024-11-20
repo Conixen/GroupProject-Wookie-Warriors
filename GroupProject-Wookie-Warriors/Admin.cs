@@ -15,10 +15,23 @@ namespace GroupProject_Wookie_Warriors
             Permissions = permissions;
         }
 
-        public override void CreateUser()
+        public User CreateUser(string username, string password)
         {
+            if (!HasPermission("Create User"))
+            {
+                Console.WriteLine($"{UserName} does not have persmission to create users.");
+                return null;
+            }
 
+            User newUser = new User(username, password);
+            Console.WriteLine($"User {username} created successfully by {UserName}");
+            return newUser;
         }
 
+        public bool HasPermission(string permission)
+        {
+            return Permissions.Contains(permission);
+        }
+        
     }
 }
