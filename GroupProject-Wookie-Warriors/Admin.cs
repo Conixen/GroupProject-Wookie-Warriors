@@ -9,5 +9,9 @@ namespace GroupProject_Wookie_Warriors
     public class Admin : User
     {
 
+        public void test()
+        {
+
+        }
     }
 }

@@ -26,7 +26,9 @@ namespace GroupProject_Wookie_Warriors
 
         public void LoginUser()
         {
-
+            Admin admin = new Admin();
+            admin.test();
+            
         }
 
         public void LoginAdmin()
