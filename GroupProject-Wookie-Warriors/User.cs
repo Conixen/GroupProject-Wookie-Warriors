@@ -8,9 +8,6 @@ namespace GroupProject_Wookie_Warriors
 {
     public class User
     {
-
-
-=======
         public string UserName { get; set; } = ("Simon");
         public string Password { get; set; }
         public bool isAdmin { get; set; }
