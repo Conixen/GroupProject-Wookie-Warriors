@@ -2,7 +2,7 @@
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class Login : User
+    public class Login
     {
         public void Menu()
         {
@@ -26,8 +26,7 @@ namespace GroupProject_Wookie_Warriors
 
         public void LoginUser()
         {
-            Admin admin = new Admin();
-            admin.test();
+            
             
         }
 
