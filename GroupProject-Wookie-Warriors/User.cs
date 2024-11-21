@@ -8,6 +8,6 @@ namespace GroupProject_Wookie_Warriors
 {
     public class User
     {
-        
+
     }
 }
