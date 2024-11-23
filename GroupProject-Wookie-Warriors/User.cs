@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class User
+    public class User 
     {
         public string UserName { get; set; } //= ("Simon");
         public string Password { get; set; }
