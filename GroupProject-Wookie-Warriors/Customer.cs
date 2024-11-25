@@ -1,6 +1,6 @@
 ﻿namespace GroupProject_Wookie_Warriors
 {
-    class Customer : User
+    class Customer
     {
        static void CustomerAccounts()
        {

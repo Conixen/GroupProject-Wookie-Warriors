@@ -6,7 +6,7 @@ namespace GroupProject_Wookie_Warriors
     public class Login 
     {
         // För huvudmenyn
-        static void Main1()
+        public void Main1()
         {
             if (LoginUser())
             {
@@ -20,7 +20,7 @@ namespace GroupProject_Wookie_Warriors
             }
         }
 
-        static bool LoginUser() 
+        public bool LoginUser() 
         {
             var users = new Dictionary<string, string>
         {
@@ -64,7 +64,7 @@ namespace GroupProject_Wookie_Warriors
         }
 
         // Detta är menyn för när du har loggat in
-        static void ShowMenu()
+        public void ShowMenu()
         {
             while (true)
             {

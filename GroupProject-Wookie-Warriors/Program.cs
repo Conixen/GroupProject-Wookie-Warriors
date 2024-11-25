@@ -12,7 +12,7 @@ namespace GroupProject_Wookie_Warriors
             // Skriv inget i Master, skapa en ny branch
             // Skriv in ditt namn på vilken del man tar??
             // Fråga om hjälp om det behövs Wookie Warriors stronk toghether
-            
+
 
             // Backlog
             //Som systemägare vill jag att alla användare ska logga in med ett unikt användarnamn och lösenord
@@ -29,7 +29,10 @@ namespace GroupProject_Wookie_Warriors
             //Som bankägare vill jag begränsa hur mycket varje kund kan låna av banken så att de maximalt kan låna 5 ggr de pengar de redan har i banken
             //Som användare vill jag kunna se en logg på alla överföringar m.m som skett på mina konton
             //Som bankägare vill jag att appen ser snygg ut med tydliga menyer, färgsättning och en snygg logga i ASCII-art som syns när användaren loggar in
-            //Som bankägare vill jag inte att transaktioner sker direkt när användarna lägger in dem utan istället var 15e minut så att vi har kontroll på när de sker          
+            //Som bankägare vill jag inte att transaktioner sker direkt när användarna lägger in dem utan istället var 15e minut så att vi har kontroll på när de sker
+            //
+            var programOn = new Startmenu();
+            programOn.Menu();
         }
     }
 }

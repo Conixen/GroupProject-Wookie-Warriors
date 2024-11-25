@@ -14,14 +14,6 @@ namespace GroupProject_Wookie_Warriors
         public int attempts {  get; set; }
         public bool logInSecurity { get; set; }
 
-        List<(string UserName, string Password)> users = new List<(string, string)> { 
-            ("Simon", "Wakanda"), 
-            ("Tim", "Ironman"), 
-            ("Filip", "Superman"), 
-            ("Shokran", "Batman"), 
-            ("Leon", "Joker") 
-        };
-       
 
         public User(string userName, string password) 
         { 
@@ -29,6 +21,13 @@ namespace GroupProject_Wookie_Warriors
             Password = password;
         }
    
+        /*List<(string UserName, string Password)> users = new List<(string, string)> { 
+            ("Simon", "Wakanda"), 
+            ("Tim", "Ironman"), 
+            ("Filip", "Superman"), 
+            ("Shokran", "Batman"), 
+            ("Leon", "Joker") 
+        };*/
         
     }
 }

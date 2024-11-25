@@ -42,5 +42,42 @@ namespace GroupProject_Wookie_Warriors
         {
 
         }
+        // Detta är menyn för när du har loggat in customer
+        static void ShowMenu()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("==== Huvudmeny ====");
+                Console.WriteLine("1. Visa saldo");
+                Console.WriteLine("2. Gör en insättning");
+                Console.WriteLine("3. Gör ett uttag");
+                Console.WriteLine("4. Logga ut");
+                Console.Write("Välj ett alternativ: ");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Ditt saldo är: 10,000 SEK");
+                        break;
+                    case "2":
+                        Console.WriteLine("Insättning gjord.");
+                        break;
+                    case "3":
+                        Console.WriteLine("Uttag gjort.");
+                        break;
+                    case "4":
+                        Console.WriteLine("Du har loggat ut.");
+                        return;
+                    default:
+                        Console.WriteLine("Ogiltigt val, försök igen.");
+                        break;
+                }
+                Console.WriteLine("Tryck på valfri tangent för att fortsätta...");
+                Console.ReadKey();
+            }
+        }
     }
 }
