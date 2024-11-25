@@ -21,7 +21,6 @@ namespace GroupProject_Wookie_Warriors
             ("Shokran", "Batman"), 
             ("Leon", "Joker") 
         };
-        List<Account> accounts = new List<Account>(){new Account("Savings", 10000, "Sek")};
        
 
         public User(string userName, string password) 
@@ -30,41 +29,6 @@ namespace GroupProject_Wookie_Warriors
             Password = password;
         }
    
-        /*
-         * public void LogInUser(string userName, string password, int attempts)
-        {
-            UserName = userName;
-            Password = password;
-            logInSecurity = true;
-            attempts = 0;
-            while (logInSecurity)
-            {
-                if (attempts == 3)
-                {
-                    Console.WriteLine("To many failed log in attempts");
-                    Console.ReadLine();
-                    logInSecurity = false;
-                }
-                else if (userName != UserName)
-                {
-                    Console.WriteLine("Wrong Username");
-                    attempts++;
-                }
-                else if (password != Password)
-                {
-                    Console.WriteLine("Wrong password");
-                    attempts++;
-                }
-            
-            }
-        }*/
-        //public void LogInAdmin(string userName, string password, int attempts, bool isAdmin)
-        //{
-          //  UserName = userName;
-            //Password = password;
-            //logInSecurity = true;
-            //attempts = 0;
-
-        //}
+        
     }
 }
