@@ -1,7 +1,11 @@
 ﻿namespace GroupProject_Wookie_Warriors
 {
-    class Customer //hej
+    internal class Customer : Account
     {
+        public Customer(string accountType, double Balance, string Currency) : base(accountType, Balance, Currency)
+        {
+
+        }
 
        static void CustomerAccounts()
        {
@@ -15,32 +19,39 @@
 
         public bool Withdraw(double amount)
         {
-            if (amount >= Balance && amount < 0)
+            if (amount < 0)
             {
-                Balance -= amount;
-                Console.WriteLine($"Withdrawn {amount}, new balance: {Balance}");
-                return true;
+                Console.WriteLine("Withdrawal amount must be greater than 0.");
+                return false;
             }
-            else
+            
+            if (amount > Balance)
             {
                 Console.WriteLine("Not enough balance or invalid amount.");
                 return false;
             }
+
+            Balance -= amount;
+            Console.WriteLine($"Withdrew {amount} {Currency} New balance: {Balance}");
+            return true;
         }
 
-        public bool TransferToOtherCustomer1(BankAccount recipient, double amount)
+        public bool TransferToOtherCustomer1(Account targetAccount, double amount)
         {
-            if(Withdraw(amount))
-            {
-                recipient.Deposit(amount);
-                Console.WriteLine($"The transfer of {amount} to {recipient.Accountholder} was successfull.");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("The transfer failed.");
+            if(amount <= 0)
+            {  
+                Console.WriteLine("The transfer amount must be greater than 0.");
                 return false;
             }
+            
+            if (this.Withdraw(amount))
+            {
+                targetAccount.Deposit(amount);
+                Console.WriteLine($"Transferred {amount} {Currency} from {AccountType} to {targetAccount.AccountType}.");
+                return true;
+            }
+            return false;
+
         }
        static void TransferToOtherCustomer(decimal[][] accounts, int userIndex)
        {
