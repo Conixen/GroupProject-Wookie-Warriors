@@ -27,5 +27,19 @@ namespace GroupProject_Wookie_Warriors
         {
             return $"{AccountType} {Balance} {Currency}";
         }
+
+        public void Deposit(double amount)
+        {
+            if (amount > 0)
+            {
+                Balance += amount;
+                Console.WriteLine($"Deposited {amount} {Currency} New balance: {Balance}");
+            }
+        }
+
+        internal void TransferLog1(double amount, string accountType1, string accountType2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
