@@ -14,8 +14,7 @@ namespace GroupProject_Wookie_Warriors
         // Take on later
         public string Currency { get; set; }    // ex. Sek, pund
 
-        List<Account> accounts = new List<Account>() { new Account("Savings", 10000, "Sek") };
-
+       
         public Account(string accountType, double balance, string currency) 
         { 
             AccountType = accountType;

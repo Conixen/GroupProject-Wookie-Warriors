@@ -1,15 +1,13 @@
 ﻿namespace GroupProject_Wookie_Warriors
 {
-    internal class Customer : Account
+    public class Customer : Login
     {
-        public Customer(string accountType, double Balance, string Currency) : base(accountType, Balance, Currency)
-        {
+        
 
-        }
-
-       static void CustomerAccounts()
+       public void CustomerAccounts(User user)
        {
-          
+            Console.WriteLine(user.Accounts);
+            
        }
 
        static void TransferToAccount()
@@ -17,7 +15,7 @@
          // överföring mellan två konton   
        }
 
-        public bool Withdraw(double amount)
+        public bool Withdraw(User user,double amount)
         {
             if (amount < 0)
             {

@@ -5,31 +5,18 @@ namespace GroupProject_Wookie_Warriors
 {
     public class Login 
     {
-        // För huvudmenyn
-        public void Main1()
+        // User login 
+        public Dictionary<string, User> users = new Dictionary<string, User>
         {
-            if (LoginUser())
-            {
-                // Hit kommer du när du har loggat in korrekt
-                ShowMenu();
-            }
-            else
-            {
-                Console.WriteLine("För många misslyckade försök. Programmet avslutas.");
-                Console.ReadKey();
-            }
-        }
+                {"Filip", new User ("Filip","123",1) },
+                {"Sim", new User ("Sim","124",2) }
+        };
 
         public bool LoginUser() 
         {
-            var users = new Dictionary<string, string>
-            {
-                { "Filip", "123" },
-                { "Leon", "1234" },
-                { "Simon", "12345" },
-                { "Tim", "123456" },
-                { "Shokran", "1234567" }
-            };
+            users["Filip"].AddAccount(new Account("SavingsAccount", 100, "Sek"));
+            users["Filip"].AddAccount(new Account("Hej", 100, "Sek"));
+            users["Sim"].AddAccount(new Account("PensionAccount", 100, "Euro"));
 
             int failedAttempts = 0;
             const int maxAttempts = 3;
@@ -45,10 +32,12 @@ namespace GroupProject_Wookie_Warriors
                 string password = Console.ReadLine();
 
 
-                if (users.TryGetValue(username, out string correctPassword) && correctPassword == password)
+                if (users.TryGetValue(username, out User user) && user.Password == password)
                 {
                     Console.Clear();
                     Console.WriteLine($"Välkommen, {username}!");
+                    var usermenu = new Startmenu();
+                    usermenu.UserMenu(user); 
                     return true;  
                 }
                 else
@@ -63,45 +52,11 @@ namespace GroupProject_Wookie_Warriors
             return false;  
         }
 
-        // Detta är menyn för när du har loggat in
-        static void ShowUserMenu(decimal[] accounts, string username)
+        // Admin login
+       
+        public bool LoginAdmin()
         {
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("==== Huvudmeny ====");
-                Console.WriteLine("1. Visa saldo");
-                Console.WriteLine("2. Gör en insättning");
-                Console.WriteLine("3. Gör ett uttag");
-                Console.WriteLine("4. Logga ut");
-                Console.Write("Välj ett alternativ: ");
-
-                if (int.TryParse(Console.ReadLine(), out int userChoice))
-                { 
-
-                    switch (userChoice)
-                    {
-                        case 1:
-                            DisplayBankAccount(accounts);
-                            Console.WriteLine("Ditt saldo är: 10,000 SEK");
-                            break;
-                        case 2:
-                            Console.WriteLine("Insättning gjord.");
-                            break;
-                        case 3:
-                            Console.WriteLine("Uttag gjort.");
-                            break;
-                        case 4:
-                            Console.WriteLine("Du har loggat ut.");
-                            return;
-                        default:
-                            Console.WriteLine("Ogiltigt val, försök igen.");
-                            break;
-                    }
-                    Console.WriteLine("Tryck på valfri tangent för att fortsätta...");
-                    Console.ReadKey();
-                }
-            }
+            return false; 
         }
     }
 }
