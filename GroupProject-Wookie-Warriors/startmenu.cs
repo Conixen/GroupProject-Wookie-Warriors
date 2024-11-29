@@ -10,8 +10,8 @@ namespace GroupProject_Wookie_Warriors
     {
         public void Menu()
         {
-            var login = new Login();
-            //Startmenu when program starts. 
+            //Startmenu when program starts.
+            var login = new Login();           
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Welcome to the login menu!\n" +
                 "\n1. Login as customer\n" +
@@ -29,7 +29,7 @@ namespace GroupProject_Wookie_Warriors
 
                 case "2":
                     Console.Clear();
-                    LoginAdmin();
+                    login.LoginAdmin();
                     break;
 
                 default:
@@ -38,12 +38,9 @@ namespace GroupProject_Wookie_Warriors
                     break;
             }
         }
-        public void LoginAdmin()
-        {
-
-        }
-        // Detta är menyn för när du har loggat in customer
-        static void ShowMenu()
+        
+        // User menu
+        public void UserMenu(User user)
         {
             while (true)
             {
@@ -61,6 +58,8 @@ namespace GroupProject_Wookie_Warriors
                 {
                     case "1":
                         Console.WriteLine("Ditt saldo är: 10,000 SEK");
+                        var a = new Customer();
+                        a.CustomerAccounts(user); 
                         break;
                     case "2":
                         Console.WriteLine("Insättning gjord.");
@@ -78,6 +77,11 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("Tryck på valfri tangent för att fortsätta...");
                 Console.ReadKey();
             }
+        }
+        // Admin menu 
+        public void AdminMenu()
+        {
+
         }
     }
 }
