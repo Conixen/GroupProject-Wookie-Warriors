@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class User 
+    public class User
     {
-        public string UserName { get; set; } 
+        public string UserName { get; set; }
         public string Password { get; set; }
-        public int Id {  get; set; }
-        public List<Account> Accounts { get; set; }
+        public int Id { get; set; }
+        public double TotalBalance { get; set; }
 
+        public List<double> UserLoans = new List<double>();
+
+        public List<Account> Accounts { get; set; }       
         public User(string userName, string password,int id) 
         { 
             UserName = userName;
@@ -24,7 +27,6 @@ namespace GroupProject_Wookie_Warriors
         public void AddAccount(Account account)
         {
             Accounts.Add(account); 
-        }
-        
+        }  
     }
 }

@@ -16,6 +16,7 @@ namespace GroupProject_Wookie_Warriors
         {
             users["Filip"].AddAccount(new Account("SavingsAccount", 100, "Sek"));
             users["Filip"].AddAccount(new Account("Hej", 100, "Sek"));
+            users["Filip"].AddAccount(new Account("La", 453, "Sek"));
             users["Sim"].AddAccount(new Account("PensionAccount", 100, "Euro"));
 
             int failedAttempts = 0;
