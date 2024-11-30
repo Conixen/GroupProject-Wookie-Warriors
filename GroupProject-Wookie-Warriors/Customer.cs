@@ -11,10 +11,10 @@ namespace GroupProject_Wookie_Warriors
             Console.WriteLine(user.Accounts);
             
        }
-       // Method to transfer between your accounts
-       static void TransferToAccount(User user) 
+       
+       static void TransferToAccount(User user) // Method to transfer between your accounts
        {
-            Console.WriteLine("Your accounts:");
+            Console.WriteLine("Your accounts:");    // Show thier accounts
             for (int i = 0; i < user.Accounts.Count; i++) 
             {
                 Console.WriteLine($"{user.Accounts[i] }");
@@ -24,46 +24,44 @@ namespace GroupProject_Wookie_Warriors
             int toAccountIndex;
             double transferAmount;
 
-            Console.WriteLine("Choose which account you wanna transfer from:");
+            Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
             if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
             }
             var fromAccount = user.Accounts[fromAccountIndex - 1];
 
-            Console.Write("Choose which account you wanna transfer to: ");
+            Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
             if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
             }
             var toAccount = user.Accounts[toAccountIndex - 1];
 
-            if (fromAccount == toAccount)
+            if (fromAccount == toAccount)   // if they pick the same account
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Wrong Answear"); // if user trying to scam bank
                 return;
             }
             Console.WriteLine("How much do you wanna transfer over:");
 
             if (!double.TryParse(Console.ReadLine(), out transferAmount) || transferAmount <= 0)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Wrong Answear"); // if amount is negativ
                 return;
             }
             if (fromAccount.Balance < transferAmount)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Wrong Answear"); // if amount is more than what they have
                 return;
             }
-
+            // succesful transfer very nice
             fromAccount.Balance -= transferAmount;
             toAccount.Balance += transferAmount;
 
             Console.WriteLine($"Transfer complete :) \n{transferAmount} {fromAccount.Currency} has transfered from {fromAccount.AccountType} to {toAccount.AccountType}.");
-            Console.WriteLine($"New balance: {fromAccount.AccountType}: {fromAccount.Balance} {fromAccount.Currency}");
-            Console.WriteLine($"New balance: {toAccount.AccountType}: {toAccount.Balance} {toAccount.Currency}");
 
        }
 
