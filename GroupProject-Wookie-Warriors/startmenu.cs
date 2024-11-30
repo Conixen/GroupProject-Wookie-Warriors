@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,12 +46,12 @@ namespace GroupProject_Wookie_Warriors
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("==== Huvudmeny ====");
-                Console.WriteLine("1. Visa saldo");
-                Console.WriteLine("2. Gör en insättning");
-                Console.WriteLine("3. Gör ett uttag");
-                Console.WriteLine("4. Logga ut");
-                Console.Write("Välj ett alternativ: ");
+                Console.WriteLine("==== Main Menu - Customer ====");
+                Console.WriteLine("1. Show Balance");
+                Console.WriteLine("2. Deposit");
+                Console.WriteLine("3. Transfer");
+                Console.WriteLine("4. Log out");
+                Console.WriteLine("\nChoose one of the following options...");
 
                 string choice = Console.ReadLine();
 
@@ -74,14 +75,43 @@ namespace GroupProject_Wookie_Warriors
                         Console.WriteLine("Ogiltigt val, försök igen.");
                         break;
                 }
-                Console.WriteLine("Tryck på valfri tangent för att fortsätta...");
+                Console.WriteLine("Press any key to countine...");
                 Console.ReadKey();
             }
         }
         // Admin menu 
-        public void AdminMenu()
+        public void AdminMenu(Admin admin, Account account)
         {
+            while (true) 
+            {
+                Console.Clear();
+                Console.WriteLine("==== Main Menu - Admin ====");
+                Console.WriteLine("1. Create new account");
+                Console.WriteLine("2. Currency");
+                Console.WriteLine("3. Log out");
+                Console.WriteLine("\nChoose one of the following options...");
 
+                string adminChoice = Console.ReadLine();
+
+                switch (adminChoice) 
+                {
+                    case "1":
+                        // admin.CreateUser();
+                        break;
+                    case "2":
+                        // admin.ChnageCurrecy();
+                        break;
+                    case "3":
+                        Console.WriteLine("Logging out...");
+                        return;
+                    default:
+
+                        Console.WriteLine("Wrong answear, try again");
+                        break;         
+                }
+                Console.WriteLine("Press any key to countine...");
+                Console.ReadKey();
+            }
         }
     }
 }

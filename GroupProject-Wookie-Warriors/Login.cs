@@ -51,11 +51,10 @@ namespace GroupProject_Wookie_Warriors
 
             return false;  
         }
-
-        // Admin login
        
         public bool LoginAdmin()
         {
+
             return false; 
         }
     }
