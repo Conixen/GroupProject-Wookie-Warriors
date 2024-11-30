@@ -10,13 +10,13 @@ namespace GroupProject_Wookie_Warriors
     {
         private List<string> Permissions {  get; set; }
 
-        public Admin(string username, string password, List<string> permissions)
-            :base(username, password)
+        public Admin(string username, string password, int id, List<string> permissions)
+            :base(username, password, id)
         {
             Permissions = permissions;
         }
 
-        public User CreateUser(string username, string password)
+        public User CreateUser(string username, string password, int id)
         {
             if (!HasPermission("Create User"))
             {
@@ -24,9 +24,13 @@ namespace GroupProject_Wookie_Warriors
                 return null;
             }
 
-            User newUser = new User(username, password);
+            User newUser = new User(username, password, id);
             Console.WriteLine($"User {username} created successfully by {UserName}");
             return newUser;
+        }
+        public void ChnageCurrecy() 
+        { 
+            
         }
 
         public bool HasPermission(string permission)
