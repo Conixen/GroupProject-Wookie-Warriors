@@ -43,6 +43,7 @@ namespace GroupProject_Wookie_Warriors
         // User menu
         public void UserMenu(User user)
         {
+            var a = new Customer();
             while (true)
             {
                 Console.Clear();
@@ -57,20 +58,20 @@ namespace GroupProject_Wookie_Warriors
 
                 switch (choice)
                 {
-                    case "1":
-                        Console.WriteLine("Ditt saldo är: 10,000 SEK");
-                        var a = new Customer();
+                    case "1":                                             
                         a.CustomerAccounts(user); 
                         break;
                     case "2":
                         Console.WriteLine("Insättning gjord.");
+                        a.LoanAndInterest(user);
                         break;
                     case "3":
                         Console.WriteLine("Uttag gjort.");
                         break;
                     case "4":
                         Console.WriteLine("Du har loggat ut.");
-                        return;
+                        Menu();
+                        break;
                     default:
                         Console.WriteLine("Ogiltigt val, försök igen.");
                         break;
