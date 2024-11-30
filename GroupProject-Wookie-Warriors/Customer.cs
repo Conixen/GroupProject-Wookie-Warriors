@@ -14,7 +14,7 @@
        {
          // överföring mellan två konton   
        }
-        /*
+        
         public bool Withdraw(User user,double amount)
         {
             if (amount < 0)
@@ -58,7 +58,7 @@
 
 
            
-       }*/
+       }
 
        static void TransferLog()
        {
