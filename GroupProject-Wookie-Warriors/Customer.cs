@@ -4,9 +4,16 @@ namespace GroupProject_Wookie_Warriors
 {
     public class Customer : Login
     {
-        
+        public string Name { get; set; }
+        private List<string> transferLogs = new List<string>(); //List for logs
 
-       public void CustomerAccounts(User user)
+        public Customer(string name, string accountType, double Balance, string Currency) : base(accountType, Balance, Currency)
+        {
+            Name = name;
+        }
+
+
+        public void CustomerAccounts(User user)
        {
             Console.WriteLine(user.Accounts);
             
@@ -65,15 +72,17 @@ namespace GroupProject_Wookie_Warriors
 
        }
         
-        public bool Withdraw(User user,double amount)
+        public bool Withdraw(User user, double amount)
         {
+            int userChoice = int.Parse(Console.ReadLine());
+
             if (amount < 0)
             {
                 Console.WriteLine("Withdrawal amount must be greater than 0.");
                 return false;
             }
             
-            if (amount > Balance)
+            if (amount > user.Accounts[userChoice].Balance)
             {
                 Console.WriteLine("Not enough balance or invalid amount.");
                 return false;
@@ -86,36 +95,45 @@ namespace GroupProject_Wookie_Warriors
 
         public bool TransferToOtherCustomer1(Account targetAccount, double amount)
         {
-            if(amount <= 0)
+            if(amount <= 0 || amount > Balance)
             {  
-                Console.WriteLine("The transfer amount must be greater than 0.");
+                Console.WriteLine("Transfer failed. Invalid amount or insufficient balance.");
                 return false;
             }
+
+            this.Withdraw(amount);
+            targetAccount.Deposit(amount);
+
+
+            this.TransferLog1(amount, this.AccountType, targetAccount.AccountType);
+            targetAccount.TransferLog1(amount, this.AccountType, targetAccount.AccountType);
+
+            Console.WriteLine($"Transferred {amount} {Currency} from {AccountType} to {targetAccount.AccountType}.");
+             return true;
             
-            if (this.Withdraw(amount))
-            {
-                targetAccount.Deposit(amount);
-                Console.WriteLine($"Transferred {amount} {Currency} from {AccountType} to {targetAccount.AccountType}.");
-                return true;
-            }
-            return false;
+            
 
         }
-       static void TransferToOtherCustomer(decimal[][] accounts, int userIndex)
-       {
-            Console.WriteLine("Överföring mellan användare.");
-            Console.WriteLine("Till vilken användare vill du föra över pengar till?");
+
+        public void TransferLog1(double amount, string fromAccount, string toAccount)
+        {
+            string log = $"{DateTime.Now}: {amount} {Currency} transferred from {fromAccount}";
+            transferLogs.Add(log);
+        }
+
+        public void PrintTransferLogs()
+        {
+            Console.WriteLine($"Transfer history for {Name}");
+            foreach (var log in transferLogs)
+            {
+                Console.WriteLine(log);
+            }
+        }
 
 
-           
-       }
 
-       static void TransferLog()
-       {
-         // logg på alla överföringar mm.... 
-       }
 
-       static void AddNewAccount()
+        static void AddNewAccount()
        {
          // öppna nya konton   
        }
