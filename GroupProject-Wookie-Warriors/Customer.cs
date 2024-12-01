@@ -130,58 +130,40 @@ namespace GroupProject_Wookie_Warriors
             }
         }
 
+        public void LoanAndInterest(User user)
+        {
 
-
-
-        static void AddNewAccount()
-       {
-         // öppna nya konton   
-       }
-
-       static void AccountInOtherCurrency()
-       {
-          // konto i annan valuta  
-       }
-        
-       static void OpenSavingAccounts()
-       {
-          //  öppna sparkonto och se ränta på insättning
-       }
-
-       public void LoanAndInterest(User user)
-       {
-            
             //Rent and Interest.           
             double userloan;
             double rate = 0.05;
             string time;
             double interest;
-            
+
             foreach (var acc in user.Accounts)
             {
-                user.TotalBalance += acc.Balance;   
+                user.TotalBalance += acc.Balance;
             }
 
-            if(user.UserLoans.Count > 0)
+            if (user.UserLoans.Count > 0)
             {
-                Console.WriteLine("You already have an active loan");               
-                user.TotalBalance = 0; 
+                Console.WriteLine("You already have an active loan");
+                user.TotalBalance = 0;
                 return;
             }
-                    
+
             Console.WriteLine($"You have a total of: {user.TotalBalance} Sek\n" +
                 "Interest rate: 5%\n" +
                 "How much do you want to loan?");
 
-           
-                      
+
+
             string number = Console.ReadLine();
             Console.WriteLine("How many years?");
             time = Console.ReadLine();
 
 
-            if (double.TryParse(number,out double loan) && double.TryParse(time, out double year))
-            {             
+            if (double.TryParse(number, out double loan) && double.TryParse(time, out double year))
+            {
                 Console.Clear();
 
                 if (loan > user.TotalBalance * 5)
@@ -210,10 +192,27 @@ namespace GroupProject_Wookie_Warriors
                     }
 
                 }
-            }             
-            user.TotalBalance = 0;            
-        } 
+            }
+            user.TotalBalance = 0;
+        }
+
+
+        static void AddNewAccount()
+       {
+         // öppna nya konton   
+       }
+
+       static void AccountInOtherCurrency()
+       {
+          // konto i annan valuta  
+       }
         
+
+       // static void OpenSavingAccounts()
+       //{
+          //  öppna sparkonto och se ränta på insättning
+       //}
+
 
     }
 }
