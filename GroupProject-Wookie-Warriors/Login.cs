@@ -1,34 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
 namespace GroupProject_Wookie_Warriors
 {
     public class Login
     {
-        // User/customer login 
-        public Dictionary<string, User> users = new Dictionary<string, User>
-        {
-                {"Filip", new User ("Filip","123",1) },
-                {"Simon", new User ("Simon","124",2) },
-                {"Shokran", new User("Shokran", "321", 3) },
-                {"Tim", new User("Tim", "432", 4) },
-                {"Leon", new User("Leon", "543", 5) }
-        };
+        public Dictionary<string, User> users;
+        public Dictionary<string, Admin> admins;
+
+        // Load data and default users/admins. 
+        public Login()
+        {           
+            users = DataManage.LoadData();
+            DataManage.DefaultUsers(users);
+
+            admins = DataManage.LoadAdminData();
+            DataManage.AdminUsers(admins);
+
+        }
+        /*
         // Our beloved Admins and thier log ins
         public Dictionary<string, Admin> admins = new Dictionary<string, Admin>
         {
             {"Johan", new Admin("Johan", "HejaAIK", 1, new List<string> { "Create User", "Change Currency" })},
             {"Petter", new Admin("Petter", "Startrek4life", 2, new List<string> { "Create User", "Change Currency" })}
-        };
+        };*/
 
-        public bool LoginUser() // user/customer log in
-        {   // Acoounts for the user/customer
-            users["Filip"].AddAccount(new Account("SavingsAccount", 100, "Sek"));
-            users["Filip"].AddAccount(new Account("Hej", 100, "Sek"));
-            users["Filip"].AddAccount(new Account("La", 453, "Sek"));
-            users["Simon"].AddAccount(new Account("PensionAccount", 100, "Euro"));
-
+        public bool LoginUser() 
+        {   
+           
             // login attempts variables 
             int failedAttempts = 0;
             const int maxAttempts = 3;
@@ -47,8 +49,8 @@ namespace GroupProject_Wookie_Warriors
                 {   // sucecfull log in
                     Console.Clear();
                     Console.WriteLine($"Welcome, {username}!");
-                    var usermenu = new Startmenu(); // creates a customer log in menu
-                    usermenu.UserMenu(user);
+                    var usermenu = new Menus(); // creates a customer log in menu
+                    usermenu.UserMenu(user,users);
                     return true;
                 }
                 else // Wrong username or password and increse number of attempts
@@ -81,8 +83,8 @@ namespace GroupProject_Wookie_Warriors
                 {   // succecful login 
                     Console.Clear();
                     Console.WriteLine($"Welcome {adminUser}");
-                    var adminmenu = new Startmenu();    // create the admin menu
-                    adminmenu.UserMenu(admin);
+                    var adminmenu = new Menus();    // create the admin menu
+                    adminmenu.AdminMenu(admin,admins);
                     return true;
                 }
                 else // Wrong username or password and increse number of attempts

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class Startmenu
+    public class Menus
     {
         public void Menu()
         {
@@ -41,7 +41,7 @@ namespace GroupProject_Wookie_Warriors
         }
         
         // User menu
-        public void UserMenu(User user)
+        public void UserMenu(User user, Dictionary<string, User> users)
         {
             var a = new Customer();
             while (true)
@@ -70,6 +70,7 @@ namespace GroupProject_Wookie_Warriors
                         break;
                     case "4":
                         Console.WriteLine("Du har loggat ut.");
+                        DataManage.SaveData(users);
                         Menu();
                         break;
                     default:
@@ -81,7 +82,7 @@ namespace GroupProject_Wookie_Warriors
             }
         }
         // Admin menu 
-        public void AdminMenu(Admin admin, Account account)
+        public void AdminMenu(User user, Dictionary<string, Admin> admins)
         {
             while (true) 
             {
@@ -104,6 +105,8 @@ namespace GroupProject_Wookie_Warriors
                         break;
                     case "3":
                         Console.WriteLine("Logging out...");
+                        DataManage.SaveAdminData(admins);
+                        Menu();
                         return;
                     default:
 

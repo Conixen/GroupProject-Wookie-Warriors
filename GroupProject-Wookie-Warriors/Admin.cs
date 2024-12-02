@@ -10,10 +10,11 @@ namespace GroupProject_Wookie_Warriors
     {
         private List<string> Permissions {  get; set; }
 
-        public Admin(string username, string password, int id, List<string> permissions)
-            :base(username, password, id)
+        public Admin(string username, string password, int id) :base(username, password, id)
         {
-            Permissions = permissions;
+            UserName = username;
+            Password = password;
+            Id = id;
         }
 
         public User CreateUser(string username, string password, int id)
