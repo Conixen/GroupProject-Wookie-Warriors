@@ -8,11 +8,11 @@ namespace GroupProject_Wookie_Warriors
         private Account account;
         private List<string> transferLogs = new List<string>(); //List for logs
 
-        public Customer(string name, Account account, string accountType, double Balance, string Currency)
+       /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
         {
             Name = name;
             this.account = account;
-        }
+        }*/
 
 
         public void CustomerAccounts(User user)
@@ -162,6 +162,7 @@ namespace GroupProject_Wookie_Warriors
                         user.Accounts[0].Balance += loan;
                         Console.WriteLine($"This will be your total loan {userloan} Sek");
                         user.UserLoans.Add(userloan);
+                        DataManage.SaveData(users);
                     }
 
                 }

@@ -31,7 +31,7 @@ namespace GroupProject_Wookie_Warriors
             //Som bankägare vill jag att appen ser snygg ut med tydliga menyer, färgsättning och en snygg logga i ASCII-art som syns när användaren loggar in
             //Som bankägare vill jag inte att transaktioner sker direkt när användarna lägger in dem utan istället var 15e minut så att vi har kontroll på när de sker
             //
-            var programOn = new Startmenu();
+            var programOn = new Menus();
             programOn.Menu();
         }
     }
