@@ -21,4 +21,18 @@ For users:
 3. Transfers
  * Transfer money between your own accounts.
  * Send money to other customers within the bank.
- * Currency exchange is handled automatically for transfers between accounts with different currencies. 
+ * Currency exchange is handled automatically for transfers between accounts with different currencies.
+
+4. Transaction History
+ * View a detailed log af all transactions and activities on your accounts.
+
+5. Loans
+ * Apply for loans and instantly view the interest rate.
+
+For Administrators
+
+1. User Management
+ * Create new users in the system.
+
+2. Currency Exchange Rates
+ * Update daily axchange rates for currency conversions.
