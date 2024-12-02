@@ -20,14 +20,7 @@ namespace GroupProject_Wookie_Warriors
             DataManage.AdminUsers(admins);
 
         }
-        /*
-        // Our beloved Admins and thier log ins
-        public Dictionary<string, Admin> admins = new Dictionary<string, Admin>
-        {
-            {"Johan", new Admin("Johan", "HejaAIK", 1, new List<string> { "Create User", "Change Currency" })},
-            {"Petter", new Admin("Petter", "Startrek4life", 2, new List<string> { "Create User", "Change Currency" })}
-        };*/
-
+       
         public bool LoginUser() 
         {   
            
