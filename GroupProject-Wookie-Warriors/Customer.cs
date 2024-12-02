@@ -5,11 +5,13 @@ namespace GroupProject_Wookie_Warriors
     public class Customer : Login
     {
         public string Name { get; set; }
+        private Account account;
         private List<string> transferLogs = new List<string>(); //List for logs
 
-        public Customer(string name, string accountType, double Balance, string Currency) : base(accountType, Balance, Currency)
+        public Customer(string name, Account account, string accountType, double Balance, string Currency)
         {
             Name = name;
+            this.account = account;
         }
 
 
@@ -71,53 +73,24 @@ namespace GroupProject_Wookie_Warriors
             Console.WriteLine($"Transfer complete :) \n{transferAmount} {fromAccount.Currency} has transfered from {fromAccount.AccountType} to {toAccount.AccountType}.");
 
        }
-        
-        public bool Withdraw(User user, double amount)
+
+        public void TransferToOtherCustomer1(Customer targetAccount, double amount)
         {
-            int userChoice = int.Parse(Console.ReadLine());
-
-            if (amount < 0)
+            if (account.Withdraw(amount))
             {
-                Console.WriteLine("Withdrawal amount must be greater than 0.");
-                return false;
+                targetAccount.account.Deposit(amount);
+                Console.WriteLine($"{Name} transferred {amount} {account.Currency} to {targetAccount.Name}.");
             }
-            
-            if (amount > user.Accounts[userChoice].Balance)
+            else
             {
-                Console.WriteLine("Not enough balance or invalid amount.");
-                return false;
+                Console.WriteLine("Transfer failed.");
             }
-
-            Balance -= amount;
-            Console.WriteLine($"Withdrew {amount} {Currency} New balance: {Balance}");
-            return true;
-        }
-
-        public bool TransferToOtherCustomer1(Account targetAccount, double amount)
-        {
-            if(amount <= 0 || amount > Balance)
-            {  
-                Console.WriteLine("Transfer failed. Invalid amount or insufficient balance.");
-                return false;
-            }
-
-            this.Withdraw(amount);
-            targetAccount.Deposit(amount);
-
-
-            this.TransferLog1(amount, this.AccountType, targetAccount.AccountType);
-            targetAccount.TransferLog1(amount, this.AccountType, targetAccount.AccountType);
-
-            Console.WriteLine($"Transferred {amount} {Currency} from {AccountType} to {targetAccount.AccountType}.");
-             return true;
-            
-            
 
         }
 
         public void TransferLog1(double amount, string fromAccount, string toAccount)
         {
-            string log = $"{DateTime.Now}: {amount} {Currency} transferred from {fromAccount}";
+            string log = $"{DateTime.Now}: {amount} {account.Currency} transferred from {fromAccount}";
             transferLogs.Add(log);
         }
 
