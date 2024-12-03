@@ -77,8 +77,23 @@ namespace GroupProject_Wookie_Warriors
 
        }
 
-        public void TransferToOtherCustomer1(Customer targetAccount, double amount)
+        public void TransferToOtherCustomer1(User user, Customer targetAccount, double amount)
         {
+            Console.WriteLine("Your accounts: ");
+            for (int i = 0; i > user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{user.Accounts[i]}");
+            }
+
+            int fromAccountIndex;
+
+            Console.WriteLine("Choose wich account you whant to transfer from:");
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            {
+                Console.WriteLine("Wrong Answear");
+                return;
+            }
+
             if (account.Withdraw(amount))
             {
                 targetAccount.account.Deposit(amount);
