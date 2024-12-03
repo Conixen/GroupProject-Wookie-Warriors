@@ -9,7 +9,7 @@ namespace GroupProject_Wookie_Warriors
 {
     public class Menus
     {
-        public void Menu()
+        public static void Menu()
         {
             //Startmenu when program starts.
             var login = new Login();           
