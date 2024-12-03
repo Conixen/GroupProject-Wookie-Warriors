@@ -17,7 +17,7 @@ namespace GroupProject_Wookie_Warriors
             Console.WriteLine("Welcome to the login menu!\n" +
                 "\n1. Login as customer\n" +
                 "2. Login as admin\n" + "\n3. Exit Program" +
-                "-------------------------");
+                "\n-------------------------");
 
             string userInput = Console.ReadLine();
 
@@ -33,8 +33,10 @@ namespace GroupProject_Wookie_Warriors
                     login.LoginAdmin();
                     break;
                 case "3":
+                    Console.Clear();
                     Console.WriteLine("Thank you for using Wookie Warriors program" +
-                        "\n\n\nAnd not using the ShitLords program");
+                        "\n\n\n\nAnd not using the ShitLords program");
+                    Environment.Exit(0);
                     break;
 
                 default:
