@@ -308,7 +308,7 @@ namespace GroupProject_Wookie_Warriors
                 user.Accounts.Add(newSavingAccount);
                 newSavingAccount.Balance += interest;
 
-                Console.WriteLine($"Your saving account has been created with deposit {depositAmount} SEK and with balance {newSavingAccount.Balance} SEK after the interest.");
+                Console.WriteLine($"Your saving account has been created with deposit {depositAmount} SEK.");
             }
             else
             {
