@@ -16,7 +16,7 @@ namespace GroupProject_Wookie_Warriors
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Welcome to the login menu!\n" +
                 "\n1. Login as customer\n" +
-                "2. Login as admin\n" +
+                "2. Login as admin\n" + "\n3. Exit Program" +
                 "-------------------------");
 
             string userInput = Console.ReadLine();
@@ -31,6 +31,10 @@ namespace GroupProject_Wookie_Warriors
                 case "2":
                     Console.Clear();
                     login.LoginAdmin();
+                    break;
+                case "3":
+                    Console.WriteLine("Thank you for using Wookie Warriors program" +
+                        "\n\n\nAnd not using the ShitLords program");
                     break;
 
                 default:
@@ -106,6 +110,7 @@ namespace GroupProject_Wookie_Warriors
                     case "3":
                         Console.WriteLine("Logging out...");
                         DataManage.SaveAdminData(admins);
+                        Console.Clear();
                         Menu();
                         return;
                     default:
