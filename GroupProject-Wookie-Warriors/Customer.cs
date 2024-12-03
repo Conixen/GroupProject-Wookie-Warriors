@@ -7,6 +7,7 @@ namespace GroupProject_Wookie_Warriors
         public string Name { get; set; }
         private Account account;
         private List<string> transferLogs = new List<string>(); //List for logs
+        private List<Account> accounts = new List<Account>(); //List for accounts
 
        /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
         {
@@ -171,21 +172,147 @@ namespace GroupProject_Wookie_Warriors
         }
 
 
-        static void AddNewAccount()
-       {
-         // öppna nya konton   
-       }
+        public void AddNewAccount()
+        {
+           
+            Console.WriteLine("type of account in your choice? (Savings/Salary)");
+            string AccountType = Console.ReadLine();
 
-       static void AccountInOtherCurrency()
-       {
-          // konto i annan valuta  
-       }
-        
+            double Balance = 0;
+            bool rightBalance = false;
+            while (!rightBalance)
+            {
+                Console.WriteLine("How much money do you want to start with? (3000?) ");
 
-       // static void OpenSavingAccounts()
-       //{
-          //  öppna sparkonto och se ränta på insättning
-       //}
+                if (double.TryParse(Console.ReadLine(), out Balance) && Balance >= 0)
+                {
+                    rightBalance = true;
+                }
+                else
+                {
+                    Console.WriteLine("wrong sum, sorry could not make a new account");
+                }
+            }
+            Console.WriteLine("Your currency will be in SEK ");
+            string Currency = "SEK";
+
+            Account newAccount = new Account(AccountType, Balance, Currency);
+            accounts.Add(newAccount);
+            Console.WriteLine($"New {AccountType} account with {Balance} {Currency} have been added");
+        }
+
+
+        public void AccountInOtherCurrency()
+        {
+            if (accounts.Count == 0)
+            {
+                Console.WriteLine("You have no accounts! ");
+            }
+
+            Console.WriteLine("Choose the account you want to convert: ");
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {accounts[i]}");
+            }
+            int Customerindex = -1;
+            bool rightAccountChoice = false;
+            while (!rightAccountChoice)
+            {
+                if (int.TryParse(Console.ReadLine(), out Customerindex) && Customerindex >= 1 && Customerindex <= accounts.Count)
+                {
+                    rightAccountChoice = true;
+                }
+                else
+                {
+                    Console.WriteLine("Choose an acccount that exists! ");
+                }
+            }
+            Account customerAccountChoice = accounts[Customerindex - 1];
+
+
+            string currencyChoice = "";
+            while (currencyChoice.Length == 0)
+            {
+                Console.WriteLine("Convert to currency: ");
+                currencyChoice = Console.ReadLine();
+
+                if (currencyChoice.Length == 0)
+                {
+                    Console.WriteLine("Write a currency.");
+                }
+            }
+
+            double exchangeRateChoice = 0;
+            bool rightExchangeRate = false;
+            while (!rightExchangeRate)
+            {
+                Console.WriteLine("Enter exchange rate in your choice: ex.(1 SEK= 0,10 USD)");
+                if (double.TryParse(Console.ReadLine(), out exchangeRateChoice) && exchangeRateChoice > 0)
+                {
+                    rightExchangeRate = true;
+                }
+                else
+                {
+                    Console.WriteLine("Enter a valid exchange rate.");
+                }
+            }
+            customerAccountChoice.Balance *= exchangeRateChoice;
+            customerAccountChoice.Currency = currencyChoice;
+
+            Console.WriteLine($"Successfully converted, Your new balance: {customerAccountChoice.Balance} {customerAccountChoice.Currency}");
+        }
+
+
+        static void OpenSavingAccounts(User user)
+        {
+            double rate = 0.05;
+
+            double totalBalance = 0;
+            foreach (var acc in user.Accounts)
+            {
+                totalBalance += acc.Balance;      
+            }
+            Console.WriteLine($"You have a total balance of: {totalBalance} SEK");
+            Console.WriteLine("Interest rate: 5%\n");
+
+            double depositAmount = 0;
+            bool validDepositAmount = false;
+            while (!validDepositAmount)
+            {
+                Console.WriteLine("Ammount you want to deposit? min 1 Sek");
+                if (double.TryParse(Console.ReadLine(), out depositAmount) && depositAmount >= 1)
+                {
+                    validDepositAmount = true;
+                }
+                else
+                {
+                    Console.WriteLine("wrong amount, enter minimum 1 Sek.");
+                }
+            }
+            double interest = depositAmount * rate;
+            double cFinalBalance = depositAmount * interest;
+
+            Console.WriteLine("your new saving account:");
+            Console.WriteLine($" Deposit: {depositAmount} SEK" +
+                $" Our interest Rate: {rate * 100}%" +
+                $"earned with interest: {interest:F2} SEK" +
+                $"Final Balance with interest rate: {cFinalBalance:F2}");
+
+            Console.WriteLine("would you like to open your saving account? (yes/no)");
+            string CustomerChoice = Console.ReadLine();
+            if(CustomerChoice == "yes")
+            {
+                Account newSavingAccount = new Account("Savings", depositAmount, "SEK");
+                user.Accounts.Add(newSavingAccount);
+                newSavingAccount.Balance += interest;
+
+                Console.WriteLine($"Your saving account has been created with deposit {depositAmount} SEK and with balance {newSavingAccount.Balance} SEK after the interest.");
+            }
+            else
+            {
+                Console.WriteLine("No new saving account was created.");
+            }
+        }
 
 
     }
