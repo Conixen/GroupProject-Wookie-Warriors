@@ -35,14 +35,6 @@ namespace GroupProject_Wookie_Warriors
             }
         }
 
-        public bool Withdraw(double amount)
-        {    
-            if (amount < 0 && amount <= Balance)
-            {
-                Balance -= amount;
-                return true;
-            }
-            return false;
-        }
+       
     }
 }
