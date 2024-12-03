@@ -18,12 +18,10 @@ namespace GroupProject_Wookie_Warriors
 
             admins = DataManage.LoadAdminData();
             DataManage.AdminUsers(admins);
-
         }
        
         public bool LoginUser() 
         {   
-           
             // login attempts variables 
             int failedAttempts = 0;
             const int maxAttempts = 3;

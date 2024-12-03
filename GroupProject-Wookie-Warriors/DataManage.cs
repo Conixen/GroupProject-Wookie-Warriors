@@ -43,11 +43,20 @@ namespace GroupProject_Wookie_Warriors
                 users["Leon"] = new User("Leon", "543", 5);
             
                 // Adding default accounts
-                users["Filip"].AddAccount(new Account("SavingsAccount", 100, "Sek"));
-                users["Tim"].AddAccount(new Account("PensionAccount", 200, "Euro"));
-                users["Simon"].AddAccount(new Account("SavingsAccount", 500, "Sek"));
+                users["Filip"].AddAccount(new Account("SavingsAccount", 12000, "Sek"));
+                users["Filip"].AddAccount(new Account("VacationAccount", 7500, "Sek"));
+                users["Tim"].AddAccount(new Account("PensionAccount", 2200, "Euro"));
+                users["Tim"].AddAccount(new Account("SavingsAccount", 5000, "Euro"));
+                users["Simon"].AddAccount(new Account("SavingsAccount", 17000, "Sek"));
+                users["Simon"].AddAccount(new Account("SnusAccount", 500, "Sek"));
+                users["Simon"].AddAccount(new Account("SalaryAccount", 7500, "Sek"));
                 users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "Sek"));
-                users["Leon"].AddAccount(new Account("PensionAccount", 200, "Euro"));
+                users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "Sek"));
+                users["Leon"].AddAccount(new Account("SalaryAccount", 1000, "Euro"));
+                users["Leon"].AddAccount(new Account("PensionAccount", 12000, "Euro"));
+                users["Leon"].AddAccount(new Account("SnusAccount", 50, "Euro"));
+
+
 
                 SaveData(users); // Save default users to file
             }

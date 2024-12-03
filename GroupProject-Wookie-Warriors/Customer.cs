@@ -16,10 +16,12 @@ namespace GroupProject_Wookie_Warriors
 
 
         public void CustomerAccounts(User user)
-       {
-            Console.WriteLine(user.Accounts);
-            
-       }
+        {
+            foreach (var account in user.Accounts) 
+            { 
+                Console.WriteLine(account);
+            }
+        }
        
        static void TransferToAccount(User user) // Method to transfer between your accounts
        {
