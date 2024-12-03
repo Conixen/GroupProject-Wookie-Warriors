@@ -106,6 +106,26 @@ namespace GroupProject_Wookie_Warriors
 
         }
 
+        public bool Withdraw(User user)
+        {
+
+            int fromAccount = int.Parse(Console.ReadLine());
+            double amount = double.Parse(Console.ReadLine());
+
+            if(amount > user.Accounts[fromAccount].Balance)
+            {
+                Console.WriteLine("High account");
+            }
+            /*
+            if (amount < 0 && amount <= Balance)
+            {
+                Balance -= amount;
+                return true;
+            }
+            return false;
+            */
+        }
+
         public void TransferLog1(double amount, string fromAccount, string toAccount)
         {
             string log = $"{DateTime.Now}: {amount} {account.Currency} transferred from {fromAccount}";
