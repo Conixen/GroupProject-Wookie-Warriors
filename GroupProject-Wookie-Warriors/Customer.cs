@@ -94,15 +94,15 @@ namespace GroupProject_Wookie_Warriors
                 return;
             }
 
-            if (account.Withdraw(amount))
-            {
-                targetAccount.account.Deposit(amount);
-                Console.WriteLine($"{Name} transferred {amount} {account.Currency} to {targetAccount.Name}.");
-            }
-            else
-            {
-                Console.WriteLine("Transfer failed.");
-            }
+            //if (account.Withdraw(amount))
+            //{
+            //    targetAccount.account.Deposit(amount);
+            //    Console.WriteLine($"{Name} transferred {amount} {account.Currency} to {targetAccount.Name}.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Transfer failed.");
+            //}
 
         }
 
@@ -115,6 +115,17 @@ namespace GroupProject_Wookie_Warriors
             if(amount > user.Accounts[fromAccount].Balance)
             {
                 Console.WriteLine("High account");
+                return false;
+            }
+            if(amount < 0)
+            {
+                Console.WriteLine("Invalid choice.");
+                return false;
+            }
+            else
+            {
+                user.Accounts[fromAccount].Balance -= amount;
+                return true;
             }
             /*
             if (amount < 0 && amount <= Balance)
