@@ -24,7 +24,7 @@ namespace GroupProject_Wookie_Warriors
             }
         }
        
-       static void TransferToAccount(User user) // Method to transfer between your accounts
+       public void TransferToAccount(User user) // Method to transfer between your accounts
        {
             Console.WriteLine("Your accounts:");    // Show thier accounts
             for (int i = 0; i < user.Accounts.Count; i++) 
@@ -300,7 +300,7 @@ namespace GroupProject_Wookie_Warriors
         }
 
 
-        static void OpenSavingAccounts(User user)
+        public void OpenSavingAccounts(User user)
         {
             double rate = 0.05;
 
@@ -349,7 +349,7 @@ namespace GroupProject_Wookie_Warriors
             {
                 Console.WriteLine("No new saving account was created.");
             }
-        }
+        }   
 
 
     }
