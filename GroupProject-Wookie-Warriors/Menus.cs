@@ -72,6 +72,7 @@ namespace GroupProject_Wookie_Warriors
                         a.LoanAndInterest(user);
                         break;
                     case "3":
+                        a.TransferToOtherCustomer1(user);
                         Console.WriteLine("Uttag gjort.");
                         break;
                     case "4":

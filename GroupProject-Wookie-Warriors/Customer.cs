@@ -77,23 +77,55 @@ namespace GroupProject_Wookie_Warriors
 
        }
 
-        public void TransferToOtherCustomer1(User user, Customer targetAccount, double amount)
+        public void TransferToOtherCustomer1(User user)
         {
             Console.WriteLine("Your accounts: ");
-            for (int i = 0; i > user.Accounts.Count; i++)
+            for (int i = 0; i < user.Accounts.Count; i++)
             {
                 Console.WriteLine($"{user.Accounts[i]}");
             }
 
-            int fromAccountIndex;
+            int fromAccountIndex = user.Accounts.Count - 1;
+            double amount; /*= double.Parse(Console.ReadLine());*/
 
             Console.WriteLine("Choose wich account you whant to transfer from:");
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 0 || fromAccountIndex > user.Accounts.Count)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Invalid choice, try again.");
                 return;
             }
+            Console.WriteLine("How much do you want to transfer?");
+            
 
+            if(!double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            {
+                Console.WriteLine("Invalid choice, try again.");
+            }
+
+            if(user.Accounts[fromAccountIndex].Balance < amount)
+            {
+                Console.WriteLine("Invalid amount, try again.");
+                return;
+            }
+            user.Accounts[fromAccountIndex].Balance -= amount;
+            Console.WriteLine($"{amount} \nWich customer do you whant to send money to? \nWrite down the name of the customer:");
+
+            foreach(var users in users.Keys)
+            {
+                Console.WriteLine(users);
+            }
+            string chooseCustomer = Console.ReadLine();
+
+            if (users.ContainsKey(chooseCustomer))
+            {
+                Console.WriteLine();
+                users[chooseCustomer].Accounts[0].Balance += amount;
+            }
+            
+
+            Console.WriteLine(amount);
+            Console.WriteLine(users[chooseCustomer].Accounts[0].Balance);
+            
             //if (account.Withdraw(amount))
             //{
             //    targetAccount.account.Deposit(amount);
