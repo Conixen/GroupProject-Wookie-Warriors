@@ -47,7 +47,7 @@ namespace GroupProject_Wookie_Warriors
         }
         
         // User menu
-        public void UserMenu(User user, Dictionary<string, User> users, Account account)
+        public void UserMenu(User user, Dictionary<string, User> users)
         {
             var a = new Customer();
             while (true)
@@ -56,7 +56,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("==== Main Menu - Customer ====");
                 Console.WriteLine("1. Show Your Balance");
                 Console.WriteLine("2. Add New Account"); // AddNewAccount, OpenSavingAccounts
-                Console.WriteLine("3. Deposit");
+                Console.WriteLine("3. Deposit - work in progress");
                 Console.WriteLine("4. Transfer"); // TransferToAccount, TransferToOtherCustomer1
                 Console.WriteLine("5. Loan & intrest");
                 Console.WriteLine("6. Account in other Currency");
@@ -83,13 +83,14 @@ namespace GroupProject_Wookie_Warriors
                             a.AddNewAccount();
                         }
                         if (accountChoice == "2") 
-                        { 
+                        {
                             a.OpenSavingAccounts(user);
                         }
                         break;
                     case "3":
 
-                        a.TransferToOtherCustomer1(user);
+                        //a.Deposit();
+                        Console.WriteLine("Nothing here yet...");
                
                         break;
                     case "4":
@@ -102,7 +103,7 @@ namespace GroupProject_Wookie_Warriors
                         }
                         if (transferChoice == "1") 
                         {
-                            a.TransferToOtherCustomer1(user, targetAccount, amount);
+                            a.TransferToOtherCustomer1(user);
                         }
                         else
                             Console.WriteLine("Stop being a silly goose");
