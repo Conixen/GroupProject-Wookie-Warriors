@@ -88,7 +88,9 @@ namespace GroupProject_Wookie_Warriors
                         }
                         break;
                     case "3":
-                        a.Deposit();
+
+                        a.TransferToOtherCustomer1(user);
+               
                         break;
                     case "4":
                         Console.WriteLine("Wanna transfer to your accounts - Type: 0");
