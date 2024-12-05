@@ -9,7 +9,7 @@ namespace GroupProject_Wookie_Warriors
         private List<string> transferLogs = new List<string>(); //List for logs
         private List<Account> accounts = new List<Account>(); //List for accounts
 
-       /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
+        /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
         {
             Name = name;
             this.account = account;
@@ -18,14 +18,16 @@ namespace GroupProject_Wookie_Warriors
 
         public void CustomerAccounts(User user)
         {
+            Console.Clear();
             foreach (var account in user.Accounts) 
             { 
                 Console.WriteLine(account);
             }
-        }
+        }   // Shows your accounts
        
-       public void TransferToAccount(User user) // Method to transfer between your accounts
+        public void TransferToAccount(User user) // Method to transfer between your accounts
        {
+            Console.Clear();
             Console.WriteLine("Your accounts:");    // Show thier accounts
             for (int i = 0; i < user.Accounts.Count; i++) 
             {
@@ -37,7 +39,7 @@ namespace GroupProject_Wookie_Warriors
             double transferAmount;
 
             Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 0 || fromAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
@@ -45,7 +47,7 @@ namespace GroupProject_Wookie_Warriors
             var fromAccount = user.Accounts[fromAccountIndex - 1];
 
             Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
-            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 0 || toAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
@@ -79,6 +81,7 @@ namespace GroupProject_Wookie_Warriors
 
         public void TransferToOtherCustomer1(User user)
         {
+            Console.Clear();
             Console.WriteLine("Your accounts: ");
             for (int i = 0; i < user.Accounts.Count; i++)
             {
@@ -136,17 +139,28 @@ namespace GroupProject_Wookie_Warriors
             //    Console.WriteLine("Transfer failed.");
             //}
 
-        }
+        }   // Transfer to other customer
 
         public bool Withdraw(User user)
         {
+            Console.Clear();
+            Console.WriteLine("Which account you wanna withdraw from:");
+
+            Console.WriteLine("\nYour accounts:");    // Show thier accounts
+            for (int i = 0; i < user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{user.Accounts[i]}");
+            }
 
             int fromAccount = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("How much you wanna withdraw?");
+
             double amount = double.Parse(Console.ReadLine());
 
             if(amount > user.Accounts[fromAccount].Balance)
             {
-                Console.WriteLine("High account");
+                Console.WriteLine("You cant take out more money than the max amount in your account");
                 return false;
             }
             if(amount < 0)
@@ -157,17 +171,10 @@ namespace GroupProject_Wookie_Warriors
             else
             {
                 user.Accounts[fromAccount].Balance -= amount;
+                Console.WriteLine("Succecful Withdraw");
                 return true;
             }
-            /*
-            if (amount < 0 && amount <= Balance)
-            {
-                Balance -= amount;
-                return true;
-            }
-            return false;
-            */
-        }
+        }   // Method to take out money
 
         public void TransferLog1(double amount, string fromAccount, string toAccount)
         {
@@ -177,15 +184,18 @@ namespace GroupProject_Wookie_Warriors
 
         public void PrintTransferLogs()
         {
+            Console.Clear();
             Console.WriteLine($"Transfer history for {Name}");
             foreach (var log in transferLogs)
             {
                 Console.WriteLine(log);
             }
         }
-        //Rent and Interest.
-        public void LoanAndInterest(User user,Dictionary<string, User> users)
-        {            
+
+        public void LoanAndInterest(User user,Dictionary<string,User> users)
+        {
+
+            //Rent and Interest.           
             double payBack;
             double rate = 0.05;
             string time;
@@ -313,7 +323,7 @@ namespace GroupProject_Wookie_Warriors
 
         public void AddNewAccount()
         {
-           
+            Console.Clear();
             Console.WriteLine("type of account in your choice? (Savings/Salary)");
             string AccountType = Console.ReadLine();
 
@@ -338,11 +348,11 @@ namespace GroupProject_Wookie_Warriors
             Account newAccount = new Account(AccountType, Balance, Currency);
             accounts.Add(newAccount);
             Console.WriteLine($"New {AccountType} account with {Balance} {Currency} have been added");
-        }
-
+        }   // Method to add new accounts
 
         public void AccountInOtherCurrency()
         {
+            Console.Clear();
             if (accounts.Count == 0)
             {
                 Console.WriteLine("You have no accounts! ");
@@ -399,11 +409,11 @@ namespace GroupProject_Wookie_Warriors
             customerAccountChoice.Currency = currencyChoice;
 
             Console.WriteLine($"Successfully converted, Your new balance: {customerAccountChoice.Balance} {customerAccountChoice.Currency}");
-        }
-
+        }   // Create a new account in a other currency
 
         public void OpenSavingAccounts(User user)
         {
+            Console.Clear();
             double rate = 0.05;
 
             double totalBalance = 0;
@@ -451,8 +461,40 @@ namespace GroupProject_Wookie_Warriors
             {
                 Console.WriteLine("No new saving account was created.");
             }
-        }   
+        }   // Open a savings account with intrest
 
+        public void Deposit(User user)
+        {
+            Console.Clear();
+            Console.WriteLine("Choose which account you wanna deposit to");// Asks which account to deposit to
+
+            Console.WriteLine("\nYour accounts:");    // Show thier accounts
+            for (int i = 0; i < user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{user.Accounts[i]}");
+            }
+            int indexDeposit;
+
+            if (!int.TryParse(Console.ReadLine(), out indexDeposit) || indexDeposit < 0 || indexDeposit > user.Accounts.Count)
+            {
+                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
+                return;
+            }
+
+            Account account = user.Accounts[indexDeposit];   
+
+            Console.WriteLine("How much do you wanna deposit?");
+            double amount;
+
+            if (!double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            {
+                Console.WriteLine("Invalid amount, try again.");
+                return;
+            }
+            account.Balance += amount; 
+            Console.WriteLine($"Deposited {amount} {account.Currency}. New balance: {account.Balance}");
+
+        }   // Put in money in your account
 
     }
 }
