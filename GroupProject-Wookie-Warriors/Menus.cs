@@ -16,7 +16,7 @@ namespace GroupProject_Wookie_Warriors
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Welcome to the login menu!\n" +
                 "\n1. Login as customer\n" +
-                "2. Login as admin\n" + "\n3. Exit Program" +
+                "2. Login as admin\n" + "\n0. Exit Program" +
                 "\n-------------------------");
 
             string userInput = Console.ReadLine();
@@ -32,7 +32,7 @@ namespace GroupProject_Wookie_Warriors
                     Console.Clear();
                     login.LoginAdmin();
                     break;
-                case "3":
+                case "0":
                     Console.Clear();
                     Console.WriteLine("Thank you for using Wookie Warriors program" +
                         "\n\n\n\nAnd not using the ShitLords program");
@@ -56,7 +56,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("==== Main Menu - Customer ====");
                 Console.WriteLine("1. Show Your Balance");
                 Console.WriteLine("2. Add New Account"); // AddNewAccount, OpenSavingAccounts
-                Console.WriteLine("3. Deposit - work in progress");
+                Console.WriteLine("3. Deposit/Witdraw"); // Deposit, Withdraw
                 Console.WriteLine("4. Transfer"); // TransferToAccount, TransferToOtherCustomer1
                 Console.WriteLine("5. Loan & intrest");
                 Console.WriteLine("6. Account in other Currency");
@@ -68,9 +68,7 @@ namespace GroupProject_Wookie_Warriors
                 string choice = Console.ReadLine();
 
                 switch (choice)
-                {
-                                    
-
+                {             
                     case "1":                                             
                         a.CustomerAccounts(user); 
                         break;
@@ -78,6 +76,7 @@ namespace GroupProject_Wookie_Warriors
                         Console.WriteLine("Wanna open a new account or a savingsaccount" +
                             "\nType: 1 for New Account\nType 2 for Savingsaccount");
                         string accountChoice = Console.ReadLine();
+
                         if (accountChoice == "1") 
                         {
                             a.AddNewAccount();
@@ -88,10 +87,17 @@ namespace GroupProject_Wookie_Warriors
                         }
                         break;
                     case "3":
-
-                        //a.Deposit();
-                        Console.WriteLine("Nothing here yet...");
-               
+                        Console.WriteLine("Wanna Deposit type: 1" +
+                            "\nWanna Withdraw type: 2 ");
+                        string withdrawDeposit = Console.ReadLine();
+                        if (withdrawDeposit == "1") 
+                        { 
+                            a.Deposit(user);
+                        }
+                        if (withdrawDeposit == "2") 
+                        { 
+                            a.Withdraw(user);
+                        }
                         break;
                     case "4":
                         Console.WriteLine("Wanna transfer to your accounts - Type: 0");
@@ -107,7 +113,6 @@ namespace GroupProject_Wookie_Warriors
                         }
                         else
                             Console.WriteLine("Stop being a silly goose");
-                        
                         break;
                     case "5":
                         a.LoanAndInterest(user);
@@ -141,7 +146,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("==== Main Menu - Admin ====");
                 Console.WriteLine("1. Create new account");
                 Console.WriteLine("2. Currency");
-                Console.WriteLine("3. Log out");
+                Console.WriteLine("0. Log out");
                 Console.WriteLine("\nChoose one of the following options...");
 
                 string adminChoice = Console.ReadLine();
@@ -154,7 +159,7 @@ namespace GroupProject_Wookie_Warriors
                     case "2":
                         // admin.ChnageCurrecy();
                         break;
-                    case "3":
+                    case "0":
                         Console.WriteLine("Logging out...");
                         DataManage.SaveAdminData(admins);
                         Console.Clear();
