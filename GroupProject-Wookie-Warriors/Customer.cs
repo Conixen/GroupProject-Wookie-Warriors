@@ -39,7 +39,7 @@ namespace GroupProject_Wookie_Warriors
             double transferAmount;
 
             Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 0 || fromAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
@@ -47,7 +47,7 @@ namespace GroupProject_Wookie_Warriors
             var fromAccount = user.Accounts[fromAccountIndex - 1];
 
             Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
-            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 0 || toAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;

@@ -60,7 +60,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("4. Transfer"); // TransferToAccount, TransferToOtherCustomer1
                 Console.WriteLine("5. Loan & intrest");
                 Console.WriteLine("6. Account in other Currency");
-                Console.WriteLine("8. TransferLog ");
+                Console.WriteLine("7. TransferLog ");
 
                 Console.WriteLine("0. Log out");
                 Console.WriteLine("\nChoose one of the following options...");
