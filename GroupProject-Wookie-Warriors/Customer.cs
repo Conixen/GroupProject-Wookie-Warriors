@@ -183,72 +183,131 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine(log);
             }
         }
-
-        public void LoanAndInterest(User user)
-        {
-
-            //Rent and Interest.           
-            double userloan;
+        //Rent and Interest.
+        public void LoanAndInterest(User user,Dictionary<string, User> users)
+        {            
+            double payBack;
             double rate = 0.05;
             string time;
             double interest;
+            double totalBalance = 0;
+            Console.Clear();
 
-            foreach (var acc in user.Accounts)
-            {
-                user.TotalBalance += acc.Balance;
-            }
-
+            //Checks if user have active loan and if user wants to payback
             if (user.UserLoans.Count > 0)
             {
-                Console.WriteLine("You already have an active loan");
-                user.TotalBalance = 0;
+                Console.WriteLine("You already have an active loan\n" +
+                    "1. Payback loan\n" +
+                    "2. Exit");
+
+                string choose = Console.ReadLine();
+                if(choose == "1")
+                {
+                    Console.Clear();
+                    PayBackLoan(user, users);
+                }                
                 return;
             }
 
-            Console.WriteLine($"You have a total of: {user.TotalBalance} Sek\n" +
+            //Converts Euro currency to Sek within the user accounts     
+            foreach (var acc in user.Accounts)
+            {
+                //Euro to Sek               
+                if(acc.Currency != "Sek")
+                {
+                    acc.Balance *= 11.564;
+                    acc.Currency = "Sek";                                  
+                }       
+                    totalBalance += acc.Balance;                              
+            }           
+
+            Console.WriteLine($"You have a total of: {totalBalance} Sek\n" +
                 "Interest rate: 5%\n" +
                 "How much do you want to loan?");
-
 
 
             string number = Console.ReadLine();
             Console.WriteLine("How many years?");
             time = Console.ReadLine();
 
-
+            //Checks if loan is valid
             if (double.TryParse(number, out double loan) && double.TryParse(time, out double year))
-            {
+            {                
                 Console.Clear();
 
-                if (loan > user.TotalBalance * 5)
+                if (loan <= 0 || year <= 0 || year > 30)
+                {
+                    Console.WriteLine("Invalid");
+                    return;
+                }
+
+                if (loan > totalBalance * 5)
                 {
                     Console.WriteLine("Cant take such high loan");
+                    return;
                 }
                 else
-                {
+                {   //If valid loan will be proccessed. 
                     Console.WriteLine("Loan info:");
                     interest = (loan * rate * year);
-                    userloan = loan + interest;
-                    Console.WriteLine($"Loan: {loan}\n" +
-                        $"Interest: {interest}\n" +
-                        $"Total: {userloan}");
+                    payBack = loan + interest;
+                    Console.WriteLine($"Loan: {loan} Sek\n" +
+                        $"Payback interest: {interest} Sek in {year} years");
 
                     Console.WriteLine("\nDo you want to take this loan?\n" +
                         "1. Type yes\n" +
-                        "2. Press Enter");
+                        "2. Press enter");
                     string takeLoan = Console.ReadLine();
+                    Console.Clear();
 
-                    if (takeLoan == "yes")
+                    if (takeLoan == "yes") //User gets loan 
                     {
-                        user.Accounts[0].Balance += loan;
-                        Console.WriteLine($"This will be your total loan {userloan} Sek");
-                        user.UserLoans.Add(userloan);
+                        user.Accounts[0].Balance += loan;                        
+                        user.UserLoans.Add(payBack);
+                        Console.WriteLine($"Loan successful");
                         DataManage.SaveData(users);
                     }
-
                 }
             }
-            user.TotalBalance = 0;
+            else
+            {
+                Console.WriteLine("Wrong input");
+            }
+            DataManage.SaveData(users);
+            totalBalance = 0;
+        }
+
+        public void PayBackLoan(User user,Dictionary<string,User> users)
+        {
+            Console.WriteLine("You can payback your loan here\n" +
+                    "Choose an account to payback with must be in Sek!");
+                      
+            int userAccount = user.Accounts.Count - 1; //Checks if input is not valid 
+            if(!int.TryParse(Console.ReadLine(), out userAccount) || userAccount > user.Accounts.Count || userAccount < 0 || user.Accounts[userAccount].Currency != "Sek")
+            {
+                Console.WriteLine("Account doesnt exist or invalid currency");
+                return;
+            }
+            Console.Clear();
+
+            Console.WriteLine("Enter the exact amount as your current loan");
+            Console.WriteLine($"Current loan: {user.UserLoans[0]} Sek");           
+            double amount;
+
+            //If amount is not valid
+            if (!double.TryParse(Console.ReadLine(), out amount) || amount > user.Accounts[userAccount].Balance || amount > user.UserLoans[0] || amount < user.UserLoans[0])
+            {
+                Console.WriteLine("The amount is to high or low");               
+            }
+           
+            else if (amount == user.UserLoans[0])  //Payment goes through and loan is removed
+            {
+                user.Accounts[userAccount].Balance -= amount;
+                amount = 0;               
+                user.UserLoans.RemoveAt(0);
+                Console.WriteLine("Payment successful");
+            }
+            DataManage.SaveData(users);
         }
 
 

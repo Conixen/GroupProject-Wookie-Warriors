@@ -110,7 +110,7 @@ namespace GroupProject_Wookie_Warriors
                         
                         break;
                     case "5":
-                        a.LoanAndInterest(user);
+                        a.LoanAndInterest(user,users);
                         break;
                     case "6":
                         a.AccountInOtherCurrency();

@@ -11,9 +11,8 @@ namespace GroupProject_Wookie_Warriors
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Id { get; set; }
-        public double TotalBalance { get; set; }
-
-        public List<double> UserLoans = new List<double>();
+       
+        public List<double> UserLoans { get; set; }
 
         public List<Account> Accounts { get; set; }       
         public User(string userName, string password,int id) 
@@ -22,6 +21,7 @@ namespace GroupProject_Wookie_Warriors
             Password = password;
             Id = id;
             Accounts = new List<Account>();
+            UserLoans = new List<double>();
         }
    
         public void AddAccount(Account account)
