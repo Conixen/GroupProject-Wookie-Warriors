@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroupProject_Wookie_Warriors
+/*namespace GroupProject_Wookie_Warriors
 {
     public class CreateAccount : Login
     { 
@@ -41,4 +41,4 @@ namespace GroupProject_Wookie_Warriors
             }
         }
     }
-}
+}*/

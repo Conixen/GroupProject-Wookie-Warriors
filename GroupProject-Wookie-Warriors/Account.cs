@@ -13,8 +13,7 @@ namespace GroupProject_Wookie_Warriors
 
         // Take on later
         public string Currency { get; set; }    // ex. Sek, pund
-
-       
+        
         public Account(string accountType, double balance, string currency) 
         { 
             AccountType = accountType;
@@ -35,5 +34,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine($"Deposited {amount} {Currency} New balance: {Balance}");
             }
         }
+
+       
     }
 }
