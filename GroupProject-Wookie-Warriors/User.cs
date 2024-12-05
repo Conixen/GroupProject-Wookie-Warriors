@@ -8,6 +8,7 @@ namespace GroupProject_Wookie_Warriors
 {
     public class User
     {
+        //Properties for user
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Id { get; set; }
@@ -15,7 +16,7 @@ namespace GroupProject_Wookie_Warriors
         public List<double> UserLoans { get; set; }
 
         public List<Account> Accounts { get; set; }       
-        public User(string userName, string password,int id) 
+        public User(string userName, string password,int id) //Constructor so each user have their own accounts for example
         { 
             UserName = userName;
             Password = password;
@@ -24,7 +25,7 @@ namespace GroupProject_Wookie_Warriors
             UserLoans = new List<double>();
         }
    
-        public void AddAccount(Account account)
+        public void AddAccount(Account account) //Add new accounts for user example savingsAccount
         {
             Accounts.Add(account); 
         }  
