@@ -115,7 +115,7 @@ namespace GroupProject_Wookie_Warriors
                             Console.WriteLine("Stop being a silly goose");
                         break;
                     case "5":
-                        a.LoanAndInterest(user);
+                        a.LoanAndInterest(user,users);
                         break;
                     case "6":
                         a.AccountInOtherCurrency();

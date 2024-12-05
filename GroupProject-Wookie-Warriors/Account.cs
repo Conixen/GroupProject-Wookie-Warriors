@@ -11,6 +11,7 @@ namespace GroupProject_Wookie_Warriors
         public string AccountType { get; set; } // Savings, Salary, Intrest accounts
         public double Balance { get; set; }     // Money in account
 
+        // Take on later
         public string Currency { get; set; }    // ex. Sek, pund
         
         public Account(string accountType, double balance, string currency) 
@@ -23,6 +24,6 @@ namespace GroupProject_Wookie_Warriors
         public override string ToString()
         {
             return $"{AccountType} {Balance} {Currency}";
-        }       
+        }           
     }
 }
