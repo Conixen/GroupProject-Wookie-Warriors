@@ -29,10 +29,40 @@ For users:
 5. Loans
  * Apply for loans and instantly view the interest rate.
 
-For Administrators
+For Administrators:
 
 1. User Management
  * Create new users in the system.
 
 2. Currency Exchange Rates
  * Update daily axchange rates for currency conversions.
+
+For Bank Owners:
+1. Loan Limits
+ * Set loab limits to ensure customers can borrow up to a maximum of five times the total funds they currently hold in the bank.
+
+How to Use:
+
+1. Login
+ * Use your unique username and password to log in to the system. If you fail three times, your account will be locked.
+   
+2. Manage Accounts
+ * Navigate to the "Show Balance" section to veiw your balances, open new accounts, or create savings accounts.
+   
+3. Make Transfers
+ * Use the "Transfer" feature to move founds between your accounts or send money to other customers. Currency conversions happen automatically if needed.
+
+4. Track Transactions
+ * Access your transaction log under "History" to see all account activities.
+
+5. Apply for Loans
+ * Go to the "Loans" section to request a loan and view interest details.
+
+6. For Admins
+* Use the admin panel to manage users and update daily exchange rates.
+   
+   
+Technical Details
+ * Security: User accounts are secured with unique credentials and account lockouts after failed login attempts.
+ * Currency Support: Built-in support for multi-currency accounts and daily exchange rate updates.
+ * Scalability: Designed to support an expanding user base and additional features in the future.

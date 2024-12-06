@@ -9,7 +9,7 @@ namespace GroupProject_Wookie_Warriors
         private List<string> transferLogs = new List<string>(); //List for logs
         private List<Account> accounts = new List<Account>(); //List for accounts
 
-       /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
+        /* public Customer(string name, Account account, string accountType, double Balance, string Currency)
         {
             Name = name;
             this.account = account;
@@ -18,14 +18,16 @@ namespace GroupProject_Wookie_Warriors
 
         public void CustomerAccounts(User user)
         {
+            Console.Clear();
             foreach (var account in user.Accounts) 
             { 
                 Console.WriteLine(account);
             }
-        }
+        }   // Shows your accounts
        
-       static void TransferToAccount(User user) // Method to transfer between your accounts
+        public void TransferToAccount(User user) // Method to transfer between your accounts
        {
+            Console.Clear();
             Console.WriteLine("Your accounts:");    // Show thier accounts
             for (int i = 0; i < user.Accounts.Count; i++) 
             {
@@ -37,7 +39,7 @@ namespace GroupProject_Wookie_Warriors
             double transferAmount;
 
             Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 0 || fromAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
@@ -45,7 +47,7 @@ namespace GroupProject_Wookie_Warriors
             var fromAccount = user.Accounts[fromAccountIndex - 1];
 
             Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
-            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 0 || toAccountIndex > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
@@ -77,122 +79,295 @@ namespace GroupProject_Wookie_Warriors
 
        }
 
-        public void TransferToOtherCustomer1(User user, Customer targetAccount, double amount)
+        public void TransferToOtherCustomer1(User user, Dictionary<string, User> users)
         {
+            Console.Clear();
             Console.WriteLine("Your accounts: ");
-            for (int i = 0; i > user.Accounts.Count; i++)
+            for (int i = 0; i < user.Accounts.Count; i++)
             {
                 Console.WriteLine($"{user.Accounts[i]}");
             }
 
-            int fromAccountIndex;
+            int fromAccountIndex = user.Accounts.Count - 1;
+            double amount; /*= double.Parse(Console.ReadLine());*/
 
             Console.WriteLine("Choose wich account you whant to transfer from:");
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 0 || fromAccountIndex > user.Accounts.Count)
             {
-                Console.WriteLine("Wrong Answear");
+                Console.WriteLine("Invalid choice, try again.");
                 return;
             }
+            Console.WriteLine("How much do you want to transfer?");
 
-            if (account.Withdraw(amount))
+            string wichAccount = user.Accounts[fromAccountIndex].AccountType;
+            string currency = user.Accounts[fromAccountIndex].Currency;
+
+            if(!double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
             {
-                targetAccount.account.Deposit(amount);
-                Console.WriteLine($"{Name} transferred {amount} {account.Currency} to {targetAccount.Name}.");
+                Console.WriteLine("Invalid choice, try again.");
+            }
+
+            if(user.Accounts[fromAccountIndex].Balance < amount)
+            {
+                Console.WriteLine("Invalid amount, try again.");
+                return;
+            }
+            user.Accounts[fromAccountIndex].Balance -= amount;
+            Console.WriteLine($"{amount} \nWich customer do you whant to send money to? \nWrite down the name of the customer:");
+
+            foreach(var users1 in users.Keys)
+            {
+                Console.WriteLine(users1);
+            }
+            string chooseCustomer = Console.ReadLine();
+
+            if (users.ContainsKey(chooseCustomer))
+            {
+                Console.WriteLine();
+                users[chooseCustomer].Accounts[0].Balance += amount;
+            }
+            
+
+            Console.WriteLine(amount);
+            Console.WriteLine(users[chooseCustomer].Accounts[0].Balance);
+
+            amount =- amount;
+            user.Logss.Add(new Logs(wichAccount, amount, currency));
+
+            amount =- amount;
+            user.Logss.Add(new Logs(chooseCustomer, amount, currency));
+
+            DataManage.SaveData(users);
+            
+            
+            
+            
+            //if (account.Withdraw(amount))
+            //{
+            //    targetAccount.account.Deposit(amount);
+            //    Console.WriteLine($"{Name} transferred {amount} {account.Currency} to {targetAccount.Name}.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Transfer failed.");
+            //}
+
+        }   // Transfer to other customer
+
+        public bool Withdraw(User user)
+        {
+            Console.Clear();
+            Console.WriteLine("Which account you wanna withdraw from:");
+
+            Console.WriteLine("\nYour accounts:");    // Show thier accounts
+            for (int i = 0; i < user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{user.Accounts[i]}");
+            }
+
+            int fromAccount = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("How much you wanna withdraw?");
+
+            double amount = double.Parse(Console.ReadLine());
+
+            if(amount > user.Accounts[fromAccount].Balance)
+            {
+                Console.WriteLine("You cant take out more money than the max amount in your account");
+                return false;
+            }
+            if(amount < 0)
+            {
+                Console.WriteLine("Invalid choice.");
+                return false;
             }
             else
             {
-                Console.WriteLine("Transfer failed.");
+                user.Accounts[fromAccount].Balance -= amount;
+                Console.WriteLine("Succecful Withdraw");
+                return true;
             }
+        }   // Method to take out money
 
-        }
 
-        public void TransferLog1(double amount, string fromAccount, string toAccount)
+
+        private Dictionary<int, List<string>> userTransferLogs = new Dictionary<int, List<string>>();
+        public void TransferLog1(User user, double amount, string currency, string fromAccount, string toAccount, Dictionary<string, User> users)
         {
-            string log = $"{DateTime.Now}: {amount} {account.Currency} transferred from {fromAccount}";
-            transferLogs.Add(log);
-        }
-
-        public void PrintTransferLogs()
-        {
-            Console.WriteLine($"Transfer history for {Name}");
-            foreach (var log in transferLogs)
+            foreach (var a in user.Logss)
             {
-                Console.WriteLine(log);
+                Console.WriteLine(a);
             }
+
+            if (!userTransferLogs.ContainsKey(user.Id))
+            {
+                userTransferLogs[user.Id] = new List<string>();
+            }
+                string log = $"{DateTime.Now}: {amount} {currency} transferred from {fromAccount} to {toAccount}.";
+                userTransferLogs[user.Id].Add(log);
+            
+            DataManage.SaveData(users);
         }
 
-        public void LoanAndInterest(User user)
+        //public void PrintTransferLogs(User user, Dictionary<string, User> users)
+        //{
+
+           
+        //    if (userTransferLogs.ContainsKey(user.Id))
+
+        //    {
+        //      Console.Clear();
+        //      Console.WriteLine($"Transfer history for {user.UserName}");
+        //        foreach (var log in transferLogs)
+        //        {
+                
+        //            Console.WriteLine(log);
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("No transfer logs found.");
+        //    }
+
+        //}
+            
+
+        public void LoanAndInterest(User user,Dictionary<string,User> users)
         {
 
             //Rent and Interest.           
-            double userloan;
+            double payBack;
             double rate = 0.05;
             string time;
             double interest;
+            double totalBalance = 0;
+            Console.Clear();
 
-            foreach (var acc in user.Accounts)
-            {
-                user.TotalBalance += acc.Balance;
-            }
-
+            //Checks if user have active loan and if user wants to payback
             if (user.UserLoans.Count > 0)
             {
-                Console.WriteLine("You already have an active loan");
-                user.TotalBalance = 0;
+                Console.WriteLine("You already have an active loan\n" +
+                    "1. Payback loan\n" +
+                    "2. Exit");
+
+                string choose = Console.ReadLine();
+                if(choose == "1")
+                {
+                    Console.Clear();
+                    PayBackLoan(user, users);
+                }                
                 return;
             }
 
-            Console.WriteLine($"You have a total of: {user.TotalBalance} Sek\n" +
+            //Converts Euro currency to Sek within the user accounts     
+            foreach (var acc in user.Accounts)
+            {
+                //Euro to Sek               
+                if(acc.Currency != "Sek")
+                {
+                    acc.Balance *= 11.564;
+                    acc.Currency = "Sek";                                  
+                }       
+                    totalBalance += acc.Balance;                              
+            }           
+
+            Console.WriteLine($"You have a total of: {totalBalance} Sek\n" +
                 "Interest rate: 5%\n" +
                 "How much do you want to loan?");
-
 
 
             string number = Console.ReadLine();
             Console.WriteLine("How many years?");
             time = Console.ReadLine();
 
-
+            //Checks if loan is valid
             if (double.TryParse(number, out double loan) && double.TryParse(time, out double year))
-            {
+            {                
                 Console.Clear();
 
-                if (loan > user.TotalBalance * 5)
+                if (loan <= 0 || year <= 0 || year > 30)
+                {
+                    Console.WriteLine("Invalid");
+                    return;
+                }
+
+                if (loan > totalBalance * 5)
                 {
                     Console.WriteLine("Cant take such high loan");
+                    return;
                 }
                 else
-                {
+                {   //If valid loan will be proccessed. 
                     Console.WriteLine("Loan info:");
                     interest = (loan * rate * year);
-                    userloan = loan + interest;
-                    Console.WriteLine($"Loan: {loan}\n" +
-                        $"Interest: {interest}\n" +
-                        $"Total: {userloan}");
+                    payBack = loan + interest;
+                    Console.WriteLine($"Loan: {loan} Sek\n" +
+                        $"Payback interest: {interest} Sek in {year} years");
 
                     Console.WriteLine("\nDo you want to take this loan?\n" +
                         "1. Type yes\n" +
-                        "2. Press Enter");
+                        "2. Press enter");
                     string takeLoan = Console.ReadLine();
+                    Console.Clear();
 
-                    if (takeLoan == "yes")
+                    if (takeLoan == "yes") //User gets loan 
                     {
-                        user.Accounts[0].Balance += loan;
-                        Console.WriteLine($"This will be your total loan {userloan} Sek");
-                        user.UserLoans.Add(userloan);
+                        user.Accounts[0].Balance += loan;                        
+                        user.UserLoans.Add(payBack);
+                        Console.WriteLine($"Loan successful");
                         DataManage.SaveData(users);
                     }
-
                 }
             }
-            user.TotalBalance = 0;
+            else
+            {
+                Console.WriteLine("Wrong input");
+            }
+            DataManage.SaveData(users);
+            totalBalance = 0;
+        }
+
+        public void PayBackLoan(User user,Dictionary<string,User> users)
+        {
+            Console.WriteLine("You can payback your loan here\n" +
+                    "Choose an account to payback with must be in Sek!");
+                      
+            int userAccount = user.Accounts.Count - 1; //Checks if input is not valid 
+            if(!int.TryParse(Console.ReadLine(), out userAccount) || userAccount > user.Accounts.Count || userAccount < 0 || user.Accounts[userAccount].Currency != "Sek")
+            {
+                Console.WriteLine("Account doesnt exist or invalid currency");
+                return;
+            }
+            Console.Clear();
+
+            Console.WriteLine("Enter the exact amount as your current loan");
+            Console.WriteLine($"Current loan: {user.UserLoans[0]} Sek");           
+            double amount;
+
+            //If amount is not valid
+            if (!double.TryParse(Console.ReadLine(), out amount) || amount > user.Accounts[userAccount].Balance || amount > user.UserLoans[0] || amount < user.UserLoans[0])
+            {
+                Console.WriteLine("The amount is to high or low");               
+            }
+           
+            else if (amount == user.UserLoans[0])  //Payment goes through and loan is removed
+            {
+                user.Accounts[userAccount].Balance -= amount;
+                amount = 0;               
+                user.UserLoans.RemoveAt(0);
+                Console.WriteLine("Payment successful");
+            }
+            DataManage.SaveData(users);
         }
 
 
         public void AddNewAccount(User user)
         {
-           
-            Console.WriteLine("type account in your choice? (Savings/Salary)");
+
+            Console.Clear();
+            Console.WriteLine("type of account in your choice? (Savings/Salary)");
+
             string AccountType = Console.ReadLine();
 
             Console.WriteLine("We have decided that your balance will be 0 and your currency SEK. ");
@@ -202,6 +377,7 @@ namespace GroupProject_Wookie_Warriors
             Account newAccount = new Account(AccountType, Balance, Currency);
             user.Accounts.Add(newAccount);
             Console.WriteLine($"New {AccountType} account with {Balance} {Currency} have been added");
+
             
             DataManage.SaveData(users);
         }
@@ -209,7 +385,10 @@ namespace GroupProject_Wookie_Warriors
 
         public void AccountInOtherCurrency(User user)
         {
-            if (user.Accounts.Count == 0)
+
+            Console.Clear();
+            if (accounts.Count == 0)
+
             {
                 Console.WriteLine("You have no accounts! ");
                 return;
@@ -311,14 +490,17 @@ namespace GroupProject_Wookie_Warriors
             accountChoice.Balance *= exchangeRate;
             accountChoice.Currency = currencyChoice;
 
+
             Console.WriteLine($"Successfully converted, Your new balance: {accountChoice.Balance} {accountChoice.Currency}");
         }
 
 
         public void OpenSavingAccounts(User user)
         {
+            Console.Clear();
             string currency = user.Accounts[0].Currency; // currency choice 
             double rate = 0.03; // 3% exchange rate
+
 
             double totalBalance = 0;
             foreach (var acc in user.Accounts)
@@ -371,8 +553,40 @@ namespace GroupProject_Wookie_Warriors
             {
                 Console.WriteLine("No new saving account was created.");
             }
-        }
+        }   // Open a savings account with intrest
 
+        public void Deposit(User user)
+        {
+            Console.Clear();
+            Console.WriteLine("Choose which account you wanna deposit to");// Asks which account to deposit to
+
+            Console.WriteLine("\nYour accounts:");    // Show thier accounts
+            for (int i = 0; i < user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{user.Accounts[i]}");
+            }
+            int indexDeposit;
+
+            if (!int.TryParse(Console.ReadLine(), out indexDeposit) || indexDeposit < 0 || indexDeposit > user.Accounts.Count)
+            {
+                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
+                return;
+            }
+
+            Account account = user.Accounts[indexDeposit];   
+
+            Console.WriteLine("How much do you wanna deposit?");
+            double amount;
+
+            if (!double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            {
+                Console.WriteLine("Invalid amount, try again.");
+                return;
+            }
+            account.Balance += amount; 
+            Console.WriteLine($"Deposited {amount} {account.Currency}. New balance: {account.Balance}");
+
+        }   // Put in money in your account
 
     }
 }

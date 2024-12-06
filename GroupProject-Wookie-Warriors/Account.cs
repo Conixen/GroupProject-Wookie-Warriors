@@ -24,25 +24,6 @@ namespace GroupProject_Wookie_Warriors
         public override string ToString()
         {
             return $"{AccountType} {Balance} {Currency}";
-        }
-
-        public void Deposit(double amount)
-        {
-            if (amount > 0)
-            {
-                Balance += amount;
-                Console.WriteLine($"Deposited {amount} {Currency} New balance: {Balance}");
-            }
-        }
-
-        public bool Withdraw(double amount)
-        {    
-            if (amount < 0 && amount <= Balance)
-            {
-                Balance -= amount;
-                return true;
-            }
-            return false;
-        }
+        }           
     }
 }
