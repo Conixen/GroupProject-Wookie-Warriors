@@ -9,6 +9,10 @@ namespace GroupProject_Wookie_Warriors
 {
     public class Menus
     {
+        double Amount;
+        string Currency;
+        string FromAccount;
+        string ToAccount;
         public static void Menu()
         {
             //Startmenu when program starts.
@@ -66,6 +70,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("\nChoose one of the following options...");
 
                 string choice = Console.ReadLine();
+                
 
                 switch (choice)
                 {             
@@ -121,7 +126,8 @@ namespace GroupProject_Wookie_Warriors
                         a.AccountInOtherCurrency();
                         break;
                     case "7":
-                        a.PrintTransferLogs();
+                        a.TransferLog1(user, Amount, Currency, FromAccount, ToAccount);
+                        a.PrintTransferLogs(user);
                         break;
                     case "0":
                         Console.WriteLine($"You are now logging out {a}.");
