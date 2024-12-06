@@ -79,7 +79,7 @@ namespace GroupProject_Wookie_Warriors
 
        }
 
-        public void TransferToOtherCustomer1(User user)
+        public void TransferToOtherCustomer1(User user, Dictionary<string, User> users)
         {
             Console.Clear();
             Console.WriteLine("Your accounts: ");
@@ -98,7 +98,9 @@ namespace GroupProject_Wookie_Warriors
                 return;
             }
             Console.WriteLine("How much do you want to transfer?");
-            
+
+            string wichAccount = user.Accounts[fromAccountIndex].AccountType;
+            string currency = user.Accounts[fromAccountIndex].Currency;
 
             if(!double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
             {
@@ -113,9 +115,9 @@ namespace GroupProject_Wookie_Warriors
             user.Accounts[fromAccountIndex].Balance -= amount;
             Console.WriteLine($"{amount} \nWich customer do you whant to send money to? \nWrite down the name of the customer:");
 
-            foreach(var users in users.Keys)
+            foreach(var users1 in users.Keys)
             {
-                Console.WriteLine(users);
+                Console.WriteLine(users1);
             }
             string chooseCustomer = Console.ReadLine();
 
@@ -129,6 +131,14 @@ namespace GroupProject_Wookie_Warriors
             Console.WriteLine(amount);
             Console.WriteLine(users[chooseCustomer].Accounts[0].Balance);
 
+            amount =- amount;
+            user.Logss.Add(new Logs(wichAccount, amount, currency));
+
+            amount =- amount;
+            user.Logss.Add(new Logs(chooseCustomer, amount, currency));
+
+            DataManage.SaveData(users);
+            
             
             
             
@@ -179,40 +189,49 @@ namespace GroupProject_Wookie_Warriors
             }
         }   // Method to take out money
 
+
+
         private Dictionary<int, List<string>> userTransferLogs = new Dictionary<int, List<string>>();
-        public void TransferLog1(User user, double amount, string currency, string fromAccount, string toAccount)
+        public void TransferLog1(User user, double amount, string currency, string fromAccount, string toAccount, Dictionary<string, User> users)
         {
+            foreach (var a in user.Logss)
+            {
+                Console.WriteLine(a);
+            }
+
             if (!userTransferLogs.ContainsKey(user.Id))
             {
                 userTransferLogs[user.Id] = new List<string>();
             }
                 string log = $"{DateTime.Now}: {amount} {currency} transferred from {fromAccount} to {toAccount}.";
                 userTransferLogs[user.Id].Add(log);
+            
+            DataManage.SaveData(users);
         }
 
-        public void PrintTransferLogs(User user)
-        {
+        //public void PrintTransferLogs(User user, Dictionary<string, User> users)
+        //{
 
            
-            if (userTransferLogs.ContainsKey(user.Id))
+        //    if (userTransferLogs.ContainsKey(user.Id))
 
-            Console.Clear();
-            Console.WriteLine($"Transfer history for {Name}");
-            foreach (var log in transferLogs)
+        //    {
+        //      Console.Clear();
+        //      Console.WriteLine($"Transfer history for {user.UserName}");
+        //        foreach (var log in transferLogs)
+        //        {
+                
+        //            Console.WriteLine(log);
 
-            {
-                Console.WriteLine($"Transfer history for {user.Id}");
-                foreach (var log in userTransferLogs[user.Id])
-                {
-                    Console.WriteLine(log);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No transfer logs found.");
-            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("No transfer logs found.");
+        //    }
 
-        }
+        //}
+            
 
         public void LoanAndInterest(User user,Dictionary<string,User> users)
         {

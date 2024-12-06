@@ -114,7 +114,7 @@ namespace GroupProject_Wookie_Warriors
                         }
                         if (transferChoice == "1") 
                         {
-                            a.TransferToOtherCustomer1(user);
+                            a.TransferToOtherCustomer1(user, users);
                         }
                         else
                             Console.WriteLine("Stop being a silly goose");
@@ -126,8 +126,8 @@ namespace GroupProject_Wookie_Warriors
                         a.AccountInOtherCurrency();
                         break;
                     case "7":
-                        a.TransferLog1(user, Amount, Currency, FromAccount, ToAccount);
-                        a.PrintTransferLogs(user);
+                        a.TransferLog1(user, Amount, Currency, FromAccount, ToAccount, users);
+                        //a.PrintTransferLogs(user, users);
                         break;
                     case "0":
                         Console.WriteLine($"You are now logging out {a}.");
