@@ -125,6 +125,9 @@ namespace GroupProject_Wookie_Warriors
 
             Console.WriteLine(amount);
             Console.WriteLine(users[chooseCustomer].Accounts[0].Balance);
+
+            
+            
             
             //if (account.Withdraw(amount))
             //{
@@ -169,19 +172,33 @@ namespace GroupProject_Wookie_Warriors
             */
         }
 
-        public void TransferLog1(double amount, string fromAccount, string toAccount)
+        private Dictionary<int, List<string>> userTransferLogs = new Dictionary<int, List<string>>();
+        public void TransferLog1(User user, double amount, string currency, string fromAccount, string toAccount)
         {
-            string log = $"{DateTime.Now}: {amount} {account.Currency} transferred from {fromAccount}";
-            transferLogs.Add(log);
+            if (!userTransferLogs.ContainsKey(user.Id))
+            {
+                userTransferLogs[user.Id] = new List<string>();
+            }
+                string log = $"{DateTime.Now}: {amount} {currency} transferred from {fromAccount} to {toAccount}.";
+                userTransferLogs[user.Id].Add(log);
         }
 
-        public void PrintTransferLogs()
+        public void PrintTransferLogs(User user)
         {
-            Console.WriteLine($"Transfer history for {Name}");
-            foreach (var log in transferLogs)
+           
+            if (userTransferLogs.ContainsKey(user.Id))
             {
-                Console.WriteLine(log);
+                Console.WriteLine($"Transfer history for {user.Id}");
+                foreach (var log in userTransferLogs[user.Id])
+                {
+                    Console.WriteLine(log);
+                }
             }
+            else
+            {
+                Console.WriteLine("No transfer logs found.");
+            }
+
         }
 
         public void LoanAndInterest(User user)
