@@ -8,9 +8,9 @@ namespace GroupProject_Wookie_Warriors
         
         static void Main(string[] args)
         {
-           
-            
-                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
                 string asciiArt =
                     "           ⠀⠀⠀⠀ ⣀⣤⣤⣴⣶⣶⣶⣦⣤⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
                     "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +

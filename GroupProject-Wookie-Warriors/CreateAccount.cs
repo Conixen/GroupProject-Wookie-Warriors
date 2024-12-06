@@ -1,44 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-/*namespace GroupProject_Wookie_Warriors
+namespace GroupProject_Wookie_Warriors
 {
     public class CreateAccount : Login
-    { 
-        //Initiera konton ock skapa konton
-        static void CreateAccounts(string username, decimal[] accounts)
+    {
+
+            // Method to create a new user and add them to the users dictionary
+            public void CreateNewUser(string username, string password, int id)
         {
-            switch (username)
+            if (users.ContainsKey(username))
             {
-                case "Filip":
-                    accounts[0] = 300.30m;
-                    accounts[1] = 100.25m;
-                    break;
-                case "Simon":
-                    accounts[0] = 20.24m;
-                    break;
-                case "Tim":
-                    accounts[0] = 200.10m;
-                    accounts[1] = 60.65m;
-                    break;
-                case "Shokran":
-                    accounts[0] = 10000.53m;
-                    accounts[1] = 21645.65m;
-                    break;
-                case "Leon":
-                    accounts[0] = 2346.54m;
-                    accounts[1] = 23.65m;
-                    break;
-                default:
-                    for (int i = 0; i < accounts.Length; i++)
-                    {
-                        accounts[i] = 0;
-                    }
-                    break;
+                Console.WriteLine("Username already exists. Please choose another.");
+                return;
             }
+
+            var newUser = new User(username, password, id); // Create a new User object
+            users[username] = newUser; // Add the user to the dictionary
+
+            Console.WriteLine($"User '{username}' created successfully!");
         }
+
+        // Method to set up accounts for a user
+        public void SetupDefaultAccounts(string username)
+        {
+            if (!users.TryGetValue(username, out User user))
+            {
+                Console.WriteLine($"User '{username}' does not exist.");
+                return;
+            }
+            // Add default accounts for the user
+            var savingsAccount = new Account("Savings Account", 1000.00, "SEK");
+            var salaryAccount = new Account("Salary Account", 5000.00, "SEK");
+
+            user.AddAccount(savingsAccount);
+            user.AddAccount(salaryAccount);
+
+            Console.WriteLine($"Default accounts created for user '{username}':");
+            foreach (var account in user.Accounts)
+            {
+                Console.WriteLine($"- {account}");
+            }
+
+        }
+
+        public void DisplayCreateAccountMenu(string username)
+        {
+            if (!users.TryGetValue(username, out User admins))
+            {
+                Console.WriteLine($"User '{username}' does not exist.");
+                return;
+            }
+
+            Console.WriteLine($"Welcome, {username}! Let's create a new account.");
+            Console.Write("Enter account type (e.g., Savings, Salary, Investment): ");
+            string accountType = Console.ReadLine();
+
+            Console.Write("Enter initial balance: ");
+            if (!double.TryParse(Console.ReadLine(), out double initialBalance))
+            {
+                Console.WriteLine("Invalid balance. Please enter a numeric value.");
+                return;
+            }
+
+            Console.Write("Enter currency (e.g., SEK, USD, EUR): ");
+            string currency = Console.ReadLine();
+
+            var customAccount = new Account(accountType, initialBalance, currency);
+            admins.AddAccount(customAccount);
+
+            Console.WriteLine($"Custom account '{accountType}' created successfully for user '{username}'!");
+            Console.WriteLine($"Account Details: {customAccount}");
+        }
+
+
     }
-}*/
+}
+
+
+

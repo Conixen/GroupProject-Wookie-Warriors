@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class Menus
+    public class Menus : CreateAccount
     {
         double Amount;
         string Currency;
@@ -146,6 +146,7 @@ namespace GroupProject_Wookie_Warriors
         // Admin menu 
         public void AdminMenu(User user, Dictionary<string, Admin> admins)
         {
+            var accountManager = new CreateAccount();
             while (true) 
             {
                 Console.Clear();
@@ -160,7 +161,12 @@ namespace GroupProject_Wookie_Warriors
                 switch (adminChoice) 
                 {
                     case "1":
-                        // admin.CreateUser();
+                        Console.Write("Enter your username: ");
+                        string username = Console.ReadLine();
+
+                        accountManager.DisplayCreateAccountMenu(username); // Now it has access to the method
+                        Console.WriteLine("Press any key to return to the menu...");
+                        Console.ReadKey();
                         break;
                     case "2":
                         // admin.ChnageCurrecy();
