@@ -160,13 +160,22 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine($"{user.Accounts[i]}");
             }
 
-            int fromAccount = int.Parse(Console.ReadLine());
-
+            int fromAccount;
+            if(!int.TryParse(Console.ReadLine(), out fromAccount) || fromAccount > user.Accounts.Count || fromAccount < 1)
+            {
+                Console.WriteLine("Account doesnt exist");
+                return false;
+            }
+           
             Console.WriteLine("How much you wanna withdraw?");
+            decimal amount;
+            if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > user.Accounts[fromAccount - 1].Balance || amount <= 0)
+            {
+                Console.WriteLine("The amount is to high or low or check your account money");
+                return false;
+            }
 
-            decimal amount = decimal.Parse(Console.ReadLine());
-
-            if(amount > user.Accounts[fromAccount].Balance)
+            if (amount > user.Accounts[fromAccount - 1].Balance)
             {
                 Console.WriteLine("You cant take out more money than the max amount in your account");
                 return false;
@@ -178,7 +187,7 @@ namespace GroupProject_Wookie_Warriors
             }
             else
             {
-                user.Accounts[fromAccount].Balance -= amount;
+                user.Accounts[fromAccount - 1].Balance -= amount;
                 Console.WriteLine("Succecful Withdraw");
                 DataManage.SaveData(users);
                 return true;
@@ -283,8 +292,7 @@ namespace GroupProject_Wookie_Warriors
                             Console.WriteLine("Account needs to be in SEK or Account doesnt exist");
                             return;
                         }
-                        var userInput = user.Accounts.Count - 1;
-
+                       
                         user.Accounts[chooseAccount - 1].Balance += loan;
                         user.UserLoans.Add(payBack);
                         Console.WriteLine($"Loan successful");
@@ -311,8 +319,7 @@ namespace GroupProject_Wookie_Warriors
             {
                 Console.WriteLine("Account doesnt exist or invalid currency");
                 return;
-            }
-            var userInput = user.Accounts.Count - 1;
+            }        
             Console.Clear();
 
             Console.WriteLine("Enter the exact amount as your current loan");
@@ -483,14 +490,14 @@ namespace GroupProject_Wookie_Warriors
             Console.Clear();
             string currency = "SEK"; // currency choice 
             decimal rate = 0.03m; // 3% exchange rate
-            foreach(var sameAccount in user.Accounts)
+            int savingAccount = user.Accounts.Count(account => account.AccountType== "SavingsAccount");
+            //Checks if user have more than 2 or equal SavingsAccounts. 
+            if(savingAccount >= 2)
             {
-                if (sameAccount.AccountType == "SavingsAccount")
-                {
-                    Console.WriteLine("Max limit!");
-                    return;
-                }
+                Console.WriteLine("Max limit");
+                return;
             }
+
             decimal totalBalance = 0;
             foreach (var acc in user.Accounts)
             {
@@ -505,14 +512,13 @@ namespace GroupProject_Wookie_Warriors
 
             int chooseAccount;
             Console.WriteLine("Choose an account to take money from");
-            if (!int.TryParse(Console.ReadLine(), out chooseAccount) || chooseAccount < 1 || chooseAccount >= user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out chooseAccount) || chooseAccount < 1 || chooseAccount > user.Accounts.Count)
             {
                 Console.WriteLine("Account doesnt exist!, Enter right account number");
                 return;
             }
-            var accs = user.Accounts[chooseAccount - 1];
-           
-            if (user.Accounts[chooseAccount].Currency != "SEK")
+                      
+            if (user.Accounts[chooseAccount - 1].Currency != "SEK")
             {
                 Console.WriteLine("Choose an account in SEK");
                 return;
@@ -554,7 +560,7 @@ namespace GroupProject_Wookie_Warriors
                 Account newSavingAccount = new Account("SavingsAccount", finalBalance, currency);
                 user.Accounts.Add(newSavingAccount);             
                 Console.WriteLine($"Your saving account has been created with the amount {finalBalance} {currency}.");              
-                user.Accounts[chooseAccount].Balance -= depositAmount;                     
+                user.Accounts[chooseAccount - 1].Balance -= depositAmount;                     
             }
             else
             {
@@ -575,13 +581,13 @@ namespace GroupProject_Wookie_Warriors
             }
             int indexDeposit;
 
-            if (!int.TryParse(Console.ReadLine(), out indexDeposit) || indexDeposit < 0 || indexDeposit >= user.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out indexDeposit) || indexDeposit < 1 || indexDeposit > user.Accounts.Count)
             {
                 Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
                 return;
             }
 
-            Account account = user.Accounts[indexDeposit];   
+            Account account = user.Accounts[indexDeposit - 1];   
 
             Console.WriteLine("How much do you wanna deposit?");
             decimal amount;
