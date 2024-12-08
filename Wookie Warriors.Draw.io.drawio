@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1434" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-4" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="160" y="165" width="160" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-5" value="+ UserName : string&lt;div&gt;+ Password : string&lt;/div&gt;&lt;div&gt;+ Id : Int&lt;/div&gt;&lt;div&gt;- UserLoans: List&amp;lt;double&amp;gt;&lt;/div&gt;&lt;div&gt;- Logss: List&amp;lt;Logs&amp;gt;&lt;/div&gt;&lt;div&gt;- Accounts: List&amp;lt;Account&amp;gt;&amp;nbsp;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-4">
+          <mxGeometry y="26" width="160" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-4">
+          <mxGeometry y="130" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-7" value="+ User(userName: string, &lt;div&gt;password: string,&amp;nbsp;id: int)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ AddLogs(log: Logs): void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ AddAccount(account: Account): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-4">
+          <mxGeometry y="138" width="160" height="122" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-12" value="Admin" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="360" y="160" width="160" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-13" value="- Permissions: List&amp;lt;string&amp;gt;  " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-12">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-12">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-15" value="+ Admin(username: string,&lt;div&gt;password: string, id: int)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ CreateUser(username: string,&amp;nbsp;password: string, id: int): User&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ ChnageCurrecy(): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-12">
+          <mxGeometry y="60" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-17" value="Customer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="160" y="445" width="250" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-18" value="+ Name: string&lt;div&gt;&lt;div&gt;- account: Account&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- transferLogs: List&amp;lt;string&amp;gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- accounts: List&amp;lt;Account&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- userTransferLogs: Dictionary&amp;lt;int, List&amp;lt;string&amp;gt;&amp;gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-17">
+          <mxGeometry y="26" width="250" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-19" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-17">
+          <mxGeometry y="130" width="250" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-20" value="+ CustomerAccounts(user: User): void&amp;nbsp;&lt;br&gt;+ TransferToAccount(user: User): void&amp;nbsp;&lt;br&gt;+ TransferToOtherCustomer1(user: User,&amp;nbsp;&lt;br&gt;users: Dictionary&amp;lt;string, User&amp;gt;): void&amp;nbsp;&lt;br&gt;+ Withdraw(user: User): bool&amp;nbsp;&lt;br&gt;+ TransferLog1(user: User, amount: double,&amp;nbsp;&lt;br&gt;currency: string, fromAccount: string,&amp;nbsp;&lt;br&gt;toAccount: string, users: Dictionary&amp;lt;string, User&amp;gt;): void&amp;nbsp;&lt;br&gt;+ LoanAndInterest(user: User,&amp;nbsp;&lt;br&gt;users: Dictionary&amp;lt;string, User&amp;gt;): void&amp;nbsp;&lt;br&gt;+ PayBackLoan(user: User,&amp;nbsp;&lt;br&gt;users: Dictionary&amp;lt;string, User&amp;gt;): void&amp;nbsp;&lt;br&gt;+ AddNewAccount(user: User): void&amp;nbsp;&lt;br&gt;+ AccountInOtherCurrency(user: User): void&amp;nbsp;&lt;br&gt;+ OpenSavingAccounts(user: User): void&amp;nbsp;&lt;br&gt;+ Deposit(user: User): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-17">
+          <mxGeometry y="138" width="250" height="262" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-21" value="Login" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="475" y="390" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-22" value="- users: Dictionary&amp;lt;&lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, User&amp;gt;&amp;nbsp;&lt;br&gt;- admins: Dictionary&amp;lt;&lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, Admin&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-21">
+          <mxGeometry y="26" width="210" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-23" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-21">
+          <mxGeometry y="70" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-24" value="+ Login()&amp;nbsp;&lt;br&gt;+ LoginUser(): bool&amp;nbsp;&lt;br&gt;+ LoginAdmin(): bool " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-21">
+          <mxGeometry y="78" width="210" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.133;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="CV_EJBjaIKGbfY2fs_Ev-18" target="CV_EJBjaIKGbfY2fs_Ev-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-26" value="Account" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="550" y="160" width="160" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-27" value="- AccountType: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;&amp;nbsp;&lt;br&gt;- Balance: &lt;span class=&quot;hljs-keyword&quot;&gt;double&lt;/span&gt;&amp;nbsp;&lt;br&gt;- Currency: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-26">
+          <mxGeometry y="26" width="160" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-26">
+          <mxGeometry y="90" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-29" value="+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;Account&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;accountType&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;,&amp;nbsp;&lt;br&gt;&lt;span class=&quot;hljs-attr&quot;&gt;balance&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;double&lt;/span&gt;,&amp;nbsp;&lt;br&gt;&lt;span class=&quot;hljs-attr&quot;&gt;currency&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;)&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;ToString&lt;/span&gt;(): &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-26">
+          <mxGeometry y="98" width="160" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-43" value="&lt;b&gt;Menus&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="490" y="575" width="140" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-44" value="&lt;span class=&quot;hljs-operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; Menu(): void&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-43">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-45" value="&lt;span class=&quot;hljs-operator&quot;&gt;+&lt;/span&gt; UserMenu(&lt;span class=&quot;hljs-keyword&quot;&gt;user&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;User&lt;/span&gt;,&amp;nbsp;users: Dictionary&lt;span class=&quot;hljs-operator&quot;&gt;&amp;lt;&lt;/span&gt;string, &lt;span class=&quot;hljs-keyword&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;hljs-operator&quot;&gt;&amp;gt;&lt;/span&gt;)&amp;nbsp;&lt;br&gt;&lt;span class=&quot;hljs-operator&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;hljs-operator&quot;&gt;+&lt;/span&gt; AdminMenu(&lt;span class=&quot;hljs-keyword&quot;&gt;user&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;User&lt;/span&gt;,&amp;nbsp;&lt;br&gt;admins: Dictionary&lt;span class=&quot;hljs-operator&quot;&gt;&amp;lt;&lt;/span&gt;string,&amp;nbsp;&lt;br&gt;Admin&lt;span class=&quot;hljs-operator&quot;&gt;&amp;gt;&lt;/span&gt;)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-43">
+          <mxGeometry y="52" width="140" height="158" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-47" value="&lt;span&gt;CreateAccount&lt;/span&gt;" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="770" y="445" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-48" value="+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;CreateNewUser&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;username&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;,&lt;br&gt;&lt;span class=&quot;hljs-attr&quot;&gt;password&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;hljs-attr&quot;&gt;id&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;int&lt;/span&gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;SetupDefaultAccounts&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;username&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;DisplayCreateAccountMenu&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;username&lt;/span&gt;: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-47">
+          <mxGeometry y="26" width="230" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-52" value="DataManage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="710" y="605" width="260" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-53" value="- DataFilePath: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;&amp;nbsp;&lt;br&gt;- DataFilePathAdmin: &lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-52">
+          <mxGeometry y="26" width="260" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-54" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-52">
+          <mxGeometry y="70" width="260" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-55" value="+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;LoadData&lt;/span&gt;(): Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, User&amp;gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;SaveData&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;users&lt;/span&gt;: Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, User&amp;gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;DefaultUsers&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;users&lt;/span&gt;: Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, User&amp;gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;LoadAdminData&lt;/span&gt;(): Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, Admin&amp;gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;SaveAdminData&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;admins&lt;/span&gt;: Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, Admin&amp;gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;&lt;br&gt;+ &lt;span class=&quot;hljs-title function_ invoke__&quot;&gt;AdminUsers&lt;/span&gt;(&lt;span class=&quot;hljs-attr&quot;&gt;admins&lt;/span&gt;: Dictionary&amp;lt;&lt;span class=&quot;hljs-keyword&quot;&gt;string&lt;/span&gt;, Admin&amp;gt;): &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt;&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-52">
+          <mxGeometry y="78" width="260" height="192" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-56" value="ExchangeRates                      " style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="760" y="305" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-57" value="+ ExchangeRateToSek: Dictionary&amp;lt;&lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;hljs-built_in&quot;&gt;decimal&lt;/span&gt;&amp;gt;&lt;div&gt;+ ExchangeRateToEuro: Dictionary&amp;lt;&lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;hljs-built_in&quot;&gt;decimal&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div&gt;+ ExchangeRateToUsd: Dictionary&amp;lt;&lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;hljs-built_in&quot;&gt;decimal&lt;/span&gt;&amp;gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-56">
+          <mxGeometry y="26" width="250" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-61" value="Logs" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="760" y="165" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-62" value="- Date: DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-61">
+          <mxGeometry y="26" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-63" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-61">
+          <mxGeometry y="52" width="280" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-64" value="+ Logs(accountType: &lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;, balance: decimal, currency: &lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;) |&lt;br/&gt;| + ToString(): &lt;span class=&quot;hljs-built_in&quot;&gt;string&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CV_EJBjaIKGbfY2fs_Ev-61">
+          <mxGeometry y="60" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.988;entryY=0.056;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="CV_EJBjaIKGbfY2fs_Ev-62" target="CV_EJBjaIKGbfY2fs_Ev-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.988;entryY=0.05;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="CV_EJBjaIKGbfY2fs_Ev-13" target="CV_EJBjaIKGbfY2fs_Ev-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.99;entryY=0.093;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="CV_EJBjaIKGbfY2fs_Ev-48" target="CV_EJBjaIKGbfY2fs_Ev-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CV_EJBjaIKGbfY2fs_Ev-68" value="Wookie Warriors UML&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;shadow=1;fontStyle=1;fontSize=36;textShadow=1;labelBorderColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="370" y="30" width="380" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
