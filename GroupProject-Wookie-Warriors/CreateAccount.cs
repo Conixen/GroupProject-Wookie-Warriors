@@ -24,7 +24,7 @@ namespace GroupProject_Wookie_Warriors
         // Method to set up accounts for a user
         public void SetupDefaultAccounts(string username)
         {
-            if (!users.TryGetValue(username, out User user))
+            if (!admins.TryGetValue(username, out Admin admin))
             {
                 Console.WriteLine($"User '{username}' does not exist.");
                 return;
@@ -33,11 +33,11 @@ namespace GroupProject_Wookie_Warriors
             var savingsAccount = new Account("Savings Account", 1000.00, "SEK");
             var salaryAccount = new Account("Salary Account", 5000.00, "SEK");
 
-            user.AddAccount(savingsAccount);
-            user.AddAccount(salaryAccount);
+            admin.AddAccount(savingsAccount);
+            admin.AddAccount(salaryAccount);
 
             Console.WriteLine($"Default accounts created for user '{username}':");
-            foreach (var account in user.Accounts)
+            foreach (var account in admin.Accounts)
             {
                 Console.WriteLine($"- {account}");
             }
@@ -46,7 +46,7 @@ namespace GroupProject_Wookie_Warriors
 
         public void DisplayCreateAccountMenu(string username)
         {
-            if (!users.TryGetValue(username, out User admins))
+            if (!admins.TryGetValue(username, out Admin admin))
             {
                 Console.WriteLine($"User '{username}' does not exist.");
                 return;
@@ -67,13 +67,13 @@ namespace GroupProject_Wookie_Warriors
             string currency = Console.ReadLine();
 
             var customAccount = new Account(accountType, initialBalance, currency);
-            admins.AddAccount(customAccount);
+            admin.AddAccount(customAccount);
 
             Console.WriteLine($"Custom account '{accountType}' created successfully for user '{username}'!");
             Console.WriteLine($"Account Details: {customAccount}");
         }
 
-
+ 
     }
 }
 
