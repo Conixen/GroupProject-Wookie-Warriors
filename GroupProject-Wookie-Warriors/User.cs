@@ -13,9 +13,9 @@ namespace GroupProject_Wookie_Warriors
         public string Password { get; set; }
         public int Id { get; set; }
        
-        public List<double> UserLoans { get; set; }
+        public List<decimal> UserLoans { get; set; }
 
-        public List<Logs> Logss { get; set; }
+        public List<Logs> Logs { get; set; }
 
         public List<Account> Accounts { get; set; }       
         public User(string userName, string password,int id) //Constructor so each user have their own accounts for example
@@ -24,13 +24,13 @@ namespace GroupProject_Wookie_Warriors
             Password = password;
             Id = id;
             Accounts = new List<Account>();
-            UserLoans = new List<double>();
-            Logss = new List<Logs>();
+            UserLoans = new List<decimal>();
+            Logs = new List<Logs>();
         }
 
         public void AddLogs(Logs log)
         {
-            Logss.Add(log);
+            Logs.Add(log);          
         }
    
         public void AddAccount(Account account) //Add new accounts for user example savingsAccount

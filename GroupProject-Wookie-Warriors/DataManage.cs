@@ -43,22 +43,22 @@ namespace GroupProject_Wookie_Warriors
                 users["Leon"] = new User("Leon", "543", 5);
             
                 // Adding default accounts
-                users["Filip"].AddAccount(new Account("SavingsAccount", 12000, "Sek"));
-                users["Filip"].AddAccount(new Account("VacationAccount", 7500, "Sek"));
+                users["Filip"].AddAccount(new Account("SavingsAccount", 12000, "SEK"));
+                users["Filip"].AddAccount(new Account("VacationAccount", 7500, "SEK"));
 
-                users["Tim"].AddAccount(new Account("PensionAccount", 2200, "Euro"));
-                users["Tim"].AddAccount(new Account("SavingsAccount", 5000, "Euro"));
+                users["Tim"].AddAccount(new Account("PensionAccount", 2200, "EUR"));
+                users["Tim"].AddAccount(new Account("SavingsAccount", 5000, "EUR"));
 
-                users["Simon"].AddAccount(new Account("SavingsAccount", 17000, "Sek"));
-                users["Simon"].AddAccount(new Account("SnusAccount", 500, "Sek"));
-                users["Simon"].AddAccount(new Account("SalaryAccount", 7500, "Sek"));
+                users["Simon"].AddAccount(new Account("SavingsAccount", 17000, "SEK"));
+                users["Simon"].AddAccount(new Account("SnusAccount", 500, "SEK"));
+                users["Simon"].AddAccount(new Account("SalaryAccount", 7500, "SEK"));
 
-                users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "Sek"));
-                users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "Sek"));
+                users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "SEK"));
+                users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "SEK"));
 
-                users["Leon"].AddAccount(new Account("SalaryAccount", 1000, "Euro"));
-                users["Leon"].AddAccount(new Account("PensionAccount", 12000, "Euro"));
-                users["Leon"].AddAccount(new Account("SnusAccount", 50, "Euro"));
+                users["Leon"].AddAccount(new Account("SalaryAccount", 1000, "EUR"));
+                users["Leon"].AddAccount(new Account("PensionAccount", 12000, "EUR"));
+                users["Leon"].AddAccount(new Account("SnusAccount", 50, "EUR"));
 
 
 
