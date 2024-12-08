@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace GroupProject_Wookie_Warriors
 {
-    public class Menus : CreateAccount
-    {
-        double Amount;
-        string Currency;
-        string FromAccount;
-        string ToAccount;
+    public class Menus
+    {      
         public static void Menu()
         {
             //Startmenu when program starts.
@@ -53,7 +49,7 @@ namespace GroupProject_Wookie_Warriors
         // User menu
         public void UserMenu(User user, Dictionary<string, User> users)
         {
-            var a = new Customer();
+            var customer = new Customer();
             while (true)
             {
                 Console.Clear();
@@ -75,7 +71,7 @@ namespace GroupProject_Wookie_Warriors
                 switch (choice)
                 {             
                     case "1":                                             
-                        a.CustomerAccounts(user); 
+                        customer.CustomerAccounts(user); 
                         break;
                     case "2":
                         Console.WriteLine("Wanna open a new account or a savingsaccount" +
@@ -84,11 +80,11 @@ namespace GroupProject_Wookie_Warriors
 
                         if (accountChoice == "1") 
                         {
-                            a.AddNewAccount();
+                            customer.AddNewAccount(user,users);
                         }
                         if (accountChoice == "2") 
                         {
-                            a.OpenSavingAccounts(user);
+                            customer.OpenSavingAccounts(user,users);
                         }
                         break;
                     case "3":
@@ -96,41 +92,40 @@ namespace GroupProject_Wookie_Warriors
                             "\nWanna Withdraw type: 2 ");
                         string withdrawDeposit = Console.ReadLine();
                         if (withdrawDeposit == "1") 
-                        { 
-                            a.Deposit(user);
+                        {
+                            customer.Deposit(user,users);
                         }
                         if (withdrawDeposit == "2") 
-                        { 
-                            a.Withdraw(user);
+                        {
+                            customer.Withdraw(user,users);
                         }
                         break;
                     case "4":
-                        Console.WriteLine("Wanna transfer to your accounts - Type: 0");
-                        Console.WriteLine("Wanna transfer to other customer - Type: 1");
+                        Console.WriteLine("Wanna transfer to your accounts - Type: 1");
+                        Console.WriteLine("Wanna transfer to other customer - Type: 2");
                         string transferChoice = Console.ReadLine();
-                        if (transferChoice == "0")
+                        if (transferChoice == "1")
                         {
-                            a.TransferToAccount(user);
+                            customer.TransferToAccount(user,users);
                         }
-                        if (transferChoice == "1") 
+                        if (transferChoice == "2") 
                         {
-                            a.TransferToOtherCustomer1(user, users);
+                            customer.TransferToOtherCustomer1(user, users);
                         }
                         else
                             Console.WriteLine("Stop being a silly goose");
                         break;
                     case "5":
-                        a.LoanAndInterest(user,users);
+                        customer.LoanAndInterest(user,users);
                         break;
                     case "6":
-                        a.AccountInOtherCurrency();
+                        customer.AccountInOtherCurrency(user,users);
                         break;
                     case "7":
-                        a.TransferLog1(user, Amount, Currency, FromAccount, ToAccount, users);
-                        //a.PrintTransferLogs(user, users);
+                        customer.TransferLog(user, users);                        
                         break;
                     case "0":
-                        Console.WriteLine($"You are now logging out {a}.");
+                        Console.WriteLine($"You are now logging out {customer}.");
                         Console.Clear();
                         DataManage.SaveData(users);
                         Menu();

@@ -77,14 +77,7 @@ namespace GroupProject_Wookie_Warriors
             //Som användare vill jag kunna se en logg på alla överföringar m.m som skett på mina konton
             //Som bankägare vill jag att appen ser snygg ut med tydliga menyer, färgsättning och en snygg logga i ASCII-art som syns när användaren loggar in
             //Som bankägare vill jag inte att transaktioner sker direkt när användarna lägger in dem utan istället var 15e minut så att vi har kontroll på när de sker
-
-
-            
-
-            Menus.Menu();
-
-
-
+          
 
            Menus.Menu();
         }

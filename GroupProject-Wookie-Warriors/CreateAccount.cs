@@ -30,8 +30,8 @@ namespace GroupProject_Wookie_Warriors
                 return;
             }
             // Add default accounts for the user
-            var savingsAccount = new Account("Savings Account", 1000.00, "SEK");
-            var salaryAccount = new Account("Salary Account", 5000.00, "SEK");
+            var savingsAccount = new Account("Savings Account", 1000.00m, "SEK");
+            var salaryAccount = new Account("Salary Account", 5000.00m, "SEK");
 
             user.AddAccount(savingsAccount);
             user.AddAccount(salaryAccount);
@@ -57,7 +57,7 @@ namespace GroupProject_Wookie_Warriors
             string accountType = Console.ReadLine();
 
             Console.Write("Enter initial balance: ");
-            if (!double.TryParse(Console.ReadLine(), out double initialBalance))
+            if (!decimal.TryParse(Console.ReadLine(), out decimal initialBalance))
             {
                 Console.WriteLine("Invalid balance. Please enter a numeric value.");
                 return;

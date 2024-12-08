@@ -9,12 +9,12 @@ namespace GroupProject_Wookie_Warriors
     public class Account
     {
         public string AccountType { get; set; } // Savings, Salary, Intrest accounts
-        public double Balance { get; set; }     // Money in account
+        public decimal Balance { get; set; }     // Money in account
 
         // Take on later
         public string Currency { get; set; }    // ex. Sek, pund
         
-        public Account(string accountType, double balance, string currency) 
+        public Account(string accountType, decimal balance, string currency) 
         { 
             AccountType = accountType;
             Balance = balance;
