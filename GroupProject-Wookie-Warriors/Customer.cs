@@ -7,9 +7,13 @@ namespace GroupProject_Wookie_Warriors
         public void CustomerAccounts(User user)
         {
             Console.Clear();
+            Console.WriteLine("Your accounts:");
+            Console.WriteLine("\n-----------------------------------");
             foreach (var account in user.Accounts) 
             { 
                 Console.WriteLine(account);
+                Console.WriteLine("-----------------------------------");
+
             }
         }   // Shows your accounts
        

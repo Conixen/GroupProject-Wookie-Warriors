@@ -134,7 +134,7 @@ namespace GroupProject_Wookie_Warriors
                         Console.WriteLine("Ogiltigt val, försök igen.");
                         break;
                 }
-                Console.WriteLine("Press any key to countine...");
+                Console.WriteLine("\nPress any key to countine...");
                 Console.ReadKey();
             }
         }
