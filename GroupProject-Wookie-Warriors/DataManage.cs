@@ -46,8 +46,8 @@ namespace GroupProject_Wookie_Warriors
                 users["Filip"].AddAccount(new Account("SavingsAccount", 12000, "SEK"));
                 users["Filip"].AddAccount(new Account("VacationAccount", 7500, "SEK"));
 
-                users["Tim"].AddAccount(new Account("PensionAccount", 2200, "EUR"));
-                users["Tim"].AddAccount(new Account("SavingsAccount", 5000, "EUR"));
+                users["Tim"].AddAccount(new Account("PensionAccount", 2200, "SEK"));
+                users["Tim"].AddAccount(new Account("SavingsAccount", 5000, "SEK"));
 
                 users["Simon"].AddAccount(new Account("SavingsAccount", 17000, "SEK"));
                 users["Simon"].AddAccount(new Account("SnusAccount", 500, "SEK"));
@@ -56,11 +56,9 @@ namespace GroupProject_Wookie_Warriors
                 users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "SEK"));
                 users["Shokran"].AddAccount(new Account("SavingsAccount", 200, "SEK"));
 
-                users["Leon"].AddAccount(new Account("SalaryAccount", 1000, "EUR"));
-                users["Leon"].AddAccount(new Account("PensionAccount", 12000, "EUR"));
-                users["Leon"].AddAccount(new Account("SnusAccount", 50, "EUR"));
-
-
+                users["Leon"].AddAccount(new Account("SalaryAccount", 1000, "SEK"));
+                users["Leon"].AddAccount(new Account("PensionAccount", 12000, "SEK"));
+                users["Leon"].AddAccount(new Account("SnusAccount", 50, "SEK"));
 
                 SaveData(users); // Save default users to file
             }
