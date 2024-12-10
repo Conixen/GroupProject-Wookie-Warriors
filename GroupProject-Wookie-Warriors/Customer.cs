@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System.Net;
+using System.Security.Principal;
 
 namespace GroupProject_Wookie_Warriors
 {
@@ -269,6 +270,7 @@ namespace GroupProject_Wookie_Warriors
                     totalBalance += acc.Balance;
                 }
             }
+            CustomerAccounts(user);
 
             Console.WriteLine($"You have a total of: {totalBalance} SEK\n" +
                               "Interest rate: 5%\n" +
@@ -350,7 +352,8 @@ namespace GroupProject_Wookie_Warriors
         {
             Console.WriteLine("You can payback your loan here\n" +
                     "Choose an account to payback with must be in Sek!");
-                      
+            Console.ReadKey();
+
             int userAccount; //Checks if input is not valid 
             if(!int.TryParse(Console.ReadLine(), out userAccount) || userAccount >= user.Accounts.Count || userAccount < 1 || user.Accounts[userAccount - 1].Currency != "SEK")
             {
@@ -563,6 +566,7 @@ namespace GroupProject_Wookie_Warriors
             if(savingAccount >= 2)
             {
                 Console.WriteLine("Max limit");
+                Console.ReadKey();
                 return;
             }
 
@@ -583,12 +587,14 @@ namespace GroupProject_Wookie_Warriors
             if (!int.TryParse(Console.ReadLine(), out chooseAccount) || chooseAccount < 1 || chooseAccount > user.Accounts.Count)
             {
                 Console.WriteLine("Account doesnt exist!, Enter right account number");
+                Console.ReadKey();
                 return;
             }
                       
             if (user.Accounts[chooseAccount - 1].Currency != "SEK")
             {
                 Console.WriteLine("Choose an account in SEK");
+                Console.ReadKey();
                 return;
             }
               
@@ -600,10 +606,12 @@ namespace GroupProject_Wookie_Warriors
                 if (decimal.TryParse(Console.ReadLine(), out depositAmount) && depositAmount >= 1 && depositAmount <= totalBalance)
                 {
                     validDepositAmount = true;
+                    Console.ReadKey();
                 }
                 else
                 {
                     Console.WriteLine("Wrong amount, enter right amount.");
+                    Console.ReadKey();
                 }
             }
             decimal interest = depositAmount * rate;
