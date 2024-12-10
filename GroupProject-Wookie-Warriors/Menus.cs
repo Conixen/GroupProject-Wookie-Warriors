@@ -187,6 +187,7 @@ namespace GroupProject_Wookie_Warriors
             string[] adminMenuItems = {
             "Create New Account",
             "Currency",
+            "See exchange rates",
             "Log out"
             };
 
@@ -228,7 +229,12 @@ namespace GroupProject_Wookie_Warriors
                         converter.ChangeCurrency();
                         
                         break;
-                    case 2:
+                    case 2: 
+                    {
+                            converter.SeeRates();
+                            break;    
+                    }
+                    case 3:
                         Console.WriteLine($"You are now logging out {user.UserName}.");
                         Console.ReadKey();
                         DataManage.SaveAdminData(admins);
