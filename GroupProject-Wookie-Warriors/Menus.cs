@@ -177,9 +177,15 @@ namespace GroupProject_Wookie_Warriors
                 
             }
         }
+
         public void AdminMenu(User user, Dictionary<string, Admin> admins)
+
         {
+            
             var accountManager = new CreateAccount();
+            var converter = new ConvertCurrency();
+            while (true) 
+
             string[] adminMenuItems = {
             "Create New Account",
             "Currency",
@@ -187,6 +193,7 @@ namespace GroupProject_Wookie_Warriors
             };
 
             while (true)
+
             {
                 int selectedIndex = NavigateMenu(adminMenuItems, "==== Main Menu - Admin ====");
 
@@ -204,8 +211,11 @@ namespace GroupProject_Wookie_Warriors
                         Console.WriteLine("Press any key to return to the menu...");
                         Console.ReadKey();
                         break;
-                    case 1:
-                        Console.WriteLine("Currency options coming soon...");
+
+                    case "2":
+                        converter.ChangeCurrency();
+                        
+
                         break;
                     case 2:
                         Console.WriteLine($"You are now logging out {user.UserName}.");
