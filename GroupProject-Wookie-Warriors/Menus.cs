@@ -158,7 +158,7 @@ namespace GroupProject_Wookie_Warriors
                     case "1":
                         Console.Write("Enter your username: ");
                         string username = Console.ReadLine();
-
+                     
                         accountManager.DisplayCreateAccountMenu(username); // Now it has access to the method
                         Console.WriteLine("Press any key to return to the menu...");
                         Console.ReadKey();

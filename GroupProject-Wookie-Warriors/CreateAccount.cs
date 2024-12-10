@@ -8,7 +8,7 @@ namespace GroupProject_Wookie_Warriors
 
             // Method to create a new user and add them to the users dictionary
             public void CreateNewUser(string username, string password, int id)
-        {
+            {
             if (users.ContainsKey(username))
             {
                 Console.WriteLine("Username already exists. Please choose another.");

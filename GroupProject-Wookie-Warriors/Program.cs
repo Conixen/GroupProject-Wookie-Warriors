@@ -1,15 +1,14 @@
 ﻿using System.Runtime.ConstrainedExecution;
-
+using System.Media;
 namespace GroupProject_Wookie_Warriors
 {
     internal class Program
     {
 
-        
+
         static void Main(string[] args)
         {
-
-
+            PlaySound("C:\\Users\\jenni\\source\\repos\\GroupProject-Wookie-Warriors\\GroupProject-Wookie-Warriors\\Chewbacca Sound Effect.wav");
             Console.OutputEncoding = System.Text.Encoding.UTF8;
                 string asciiArt =
                     "           ⠀⠀⠀⠀ ⣀⣤⣤⣴⣶⣶⣶⣦⣤⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
@@ -49,7 +48,7 @@ namespace GroupProject_Wookie_Warriors
                     "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⢿⢳⢱⡇⢻⡏⣼⢱⢠⠀⢂⡟⣿⣿⣆⡆⢻⢷⡄⠹⣿⣦⠘⣧⠸⡘⠹⡏⠀⠀⢹⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
                     "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠈⠌⡆⢷⠀⢣⠹⡆⢻⡀⠀⢧⠇⢇⠈⢿⠈⠈⠻⢦⡙⣏⢆⠹⡄⠱⡀⠙⠄⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
                     "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠈⢧⠀⠀⠑⠀⠁⠀⠸⠀⠈⠀⠀⠃⠀⠀⠀⠈⢮⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-
+             
                 PrintAsciArtInBrown(asciiArt);
                 Console.ReadKey();
 
@@ -90,8 +89,19 @@ namespace GroupProject_Wookie_Warriors
             Console.ResetColor();
         }
 
-            
+        public static void PlaySound(string filepath)
+        {
+            //SoundPlayer player = new SoundPlayer(@"C:\Users\jenni\OneDrive\Skrivbord\Programmering\Chewbacca Sound Effect.waw");
+            //player.Load();
+            //player.Play();
 
-        
+            SoundPlayer musicPlayer = new SoundPlayer();
+            musicPlayer.SoundLocation = filepath;
+            musicPlayer.Play();
+
+
+        }
+
+
     }
 }
