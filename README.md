@@ -21,7 +21,7 @@ For users:
 3. Transfers
  * Transfer money between your own accounts.
  * Send money to other customers within the bank.
- * Currency exchange is handled automatically for transfers between accounts with different currencies.
+ 
 
 4. Transaction History
  * View a detailed log af all transactions and activities on your accounts.
@@ -39,7 +39,7 @@ For Administrators:
 
 For Bank Owners:
 1. Loan Limits
- * Set loab limits to ensure customers can borrow up to a maximum of five times the total funds they currently hold in the bank.
+ * Set loan limits to ensure customers can borrow up to a maximum of five times the total funds they currently hold in the bank.
 
 How to Use:
 
@@ -50,7 +50,7 @@ How to Use:
  * Navigate to the "Show Balance" section to veiw your balances, open new accounts, or create savings accounts.
    
 3. Make Transfers
- * Use the "Transfer" feature to move founds between your accounts or send money to other customers. Currency conversions happen automatically if needed.
+ * Use the "Transfer" feature to move founds between your accounts or send money to other customers.
 
 4. Track Transactions
  * Access your transaction log under "History" to see all account activities.

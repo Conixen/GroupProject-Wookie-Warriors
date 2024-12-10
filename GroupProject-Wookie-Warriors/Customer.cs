@@ -15,6 +15,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("-----------------------------------");
 
             }
+            Console.ReadKey();
         }   // Shows your accounts
        
         public void TransferToAccount(User user, Dictionary<string, User> users) // Method to transfer between your accounts
@@ -349,9 +350,8 @@ namespace GroupProject_Wookie_Warriors
 
         public void AddNewAccount(User user, Dictionary<string, User> users)
         {
-
             Console.Clear();
-            Console.WriteLine("Type of account in your choice? (Savings/Salary)");
+            Console.WriteLine("Name of the account:)");
 
             string accountType = Console.ReadLine();
 
@@ -367,12 +367,13 @@ namespace GroupProject_Wookie_Warriors
             Console.WriteLine("We have decided that your balance will be 0 and your currency SEK. ");
             decimal Balance = 0;
             string Currency = "SEK";
-
+            Console.ReadKey();
             Account newAccount = new Account(accountType, Balance, Currency);
             user.Accounts.Add(newAccount);
             Console.WriteLine($"New {accountType} account with {Balance} {Currency} have been added");
-           
+
             DataManage.SaveData(users);
+            Console.ReadKey();
         }
 
 
