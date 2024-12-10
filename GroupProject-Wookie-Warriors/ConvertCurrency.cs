@@ -48,9 +48,37 @@ namespace GroupProject_Wookie_Warriors
             {
                 exchangeRates.ExchangeRateToUsd = newRates;
             }
+            Console.ReadKey();
 
             Console.WriteLine("Exchange rates updated successfully!");
- 
+
+            foreach (var c in newRates) 
+            {
+                Console.WriteLine(c);
+            }
+            Console.ReadKey();
+        }
+        public void SeeRates() 
+        {
+            Console.WriteLine("SEK");
+            foreach (var s in exchangeRates.ExchangeRateToSek) 
+            {
+                Console.WriteLine(s);
+            }
+            Console.ReadKey();
+            Console.WriteLine("EUR");
+            foreach(var e in exchangeRates.ExchangeRateToEuro) 
+            {
+                Console.WriteLine(e);
+            }
+            Console.ReadKey();
+            Console.WriteLine("USD");
+            foreach(var u in exchangeRates.ExchangeRateToUsd) 
+            {
+                Console.WriteLine(u);
+            }
+            Console.ReadKey();
+            
         }
 
         public decimal ConvertToCurrency(decimal amount, string fromCurrency, string toCurrency)
