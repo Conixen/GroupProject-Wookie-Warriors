@@ -31,7 +31,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.Clear();
                 Console.WriteLine("==== Login menu - Customer ====");
                 Console.Write("Username: ");
-                string username = Console.ReadLine();
+                string username = Console.ReadLine()?.ToLower();
 
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
@@ -75,7 +75,7 @@ namespace GroupProject_Wookie_Warriors
                     Console.Clear();
                     Console.WriteLine($"Welcome {adminUser}");
                     var adminmenu = new Menus();    // create the admin menu
-                    adminmenu.AdminMenu(admin,admins);
+                    adminmenu.AdminMenu(admin,admins, this);
                     return true;
                 }
                 else // Wrong username or password and increse number of attempts
