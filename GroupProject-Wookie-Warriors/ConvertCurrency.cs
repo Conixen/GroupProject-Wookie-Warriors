@@ -50,6 +50,7 @@ namespace GroupProject_Wookie_Warriors
             }
 
             Console.WriteLine("Exchange rates updated successfully!");
+ 
         }
 
         public decimal ConvertToCurrency(decimal amount, string fromCurrency, string toCurrency)

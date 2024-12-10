@@ -178,10 +178,9 @@ namespace GroupProject_Wookie_Warriors
             }
         }
 
-        public void AdminMenu(User user, Dictionary<string, Admin> admins)
+        public void AdminMenu(User user, Dictionary<string, Admin> admins, Login login)
         {
-            
-            var accountManager = new CreateAccount();
+            var accountManager = new CreateAccount(login);
             var converter = new ConvertCurrency();
 
             string[] adminMenuItems = {
@@ -199,14 +198,29 @@ namespace GroupProject_Wookie_Warriors
                 switch (selectedIndex)
                 {
                     case 0:
-                        Console.Write("Enter your username: ");
+                        Console.Write("Enter new username: ");
                         string username = Console.ReadLine();
 
-                     
-                        accountManager.DisplayCreateAccountMenu(username); // Now it has access to the method
+                        Console.Write("Enter new user password: ");
+                        string password = Console.ReadLine();
 
-                        Console.WriteLine("Press any key to return to the menu...");
-                        Console.ReadKey();
+                        Console.Write("Enter user ID: ");
+                        if (int.TryParse(Console.ReadLine(), out int id))
+                        {
+                            Console.Write("Enter initial balance for the user: ");
+                            if (decimal.TryParse(Console.ReadLine(), out decimal initialBalance))
+                            {
+                                accountManager.CreateUserWithAccounts(username, password, id, initialBalance);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid balance. Returning to menu...");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid ID. Returning to menu...");
+                        }
                         break;
 
                     case 1:

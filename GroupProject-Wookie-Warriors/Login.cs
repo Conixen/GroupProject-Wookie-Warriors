@@ -59,6 +59,7 @@ namespace GroupProject_Wookie_Warriors
             // login attempts variables 
             int failedAttempts = 0;
             const int maxAttempts = 3;
+            
 
             while (failedAttempts < maxAttempts) // Loop whit 3 attempts
             {
@@ -75,7 +76,7 @@ namespace GroupProject_Wookie_Warriors
                     Console.Clear();
                     Console.WriteLine($"Welcome {adminUser}");
                     var adminmenu = new Menus();    // create the admin menu
-                    adminmenu.AdminMenu(admin,admins);
+                    adminmenu.AdminMenu(admin,admins, this);
                     return true;
                 }
                 else // Wrong username or password and increse number of attempts
