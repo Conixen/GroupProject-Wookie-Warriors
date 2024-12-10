@@ -8,4 +8,14 @@
     
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Extensions" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Chewbacca Sound Effect.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
