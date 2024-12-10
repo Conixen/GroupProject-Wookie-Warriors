@@ -47,7 +47,7 @@ namespace GroupProject_Wookie_Warriors
                 else // Wrong username or password and increse number of attempts
                 {
                     failedAttempts++;
-                    Console.WriteLine($"Wrong username or password! \nTries left: {maxAttempts - failedAttempts}");
+                    Console.WriteLine($"Wrong username or password! \nTries left: {maxAttempts - failedAttempts}");                  
                     Console.WriteLine("Press any key to countinue...");
                     Console.ReadKey();
                 }
