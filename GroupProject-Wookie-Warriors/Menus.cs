@@ -139,9 +139,11 @@ namespace GroupProject_Wookie_Warriors
             }
         }
         // Admin menu 
-        public void AdminMenu(User user, Dictionary<string, Admin> admins)
+        public void AdminMenu(Admin admin, Dictionary<string, Admin> admins)
         {
+            
             var accountManager = new CreateAccount();
+            var converter = new ConvertCurrency();
             while (true) 
             {
                 Console.Clear();
@@ -164,7 +166,8 @@ namespace GroupProject_Wookie_Warriors
                         Console.ReadKey();
                         break;
                     case "2":
-                        // admin.ChnageCurrecy();
+                        converter.ChangeCurrency();
+                        
                         break;
                     case "0":
                         Console.WriteLine("Logging out...");
