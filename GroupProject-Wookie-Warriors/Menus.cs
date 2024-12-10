@@ -57,7 +57,7 @@ namespace GroupProject_Wookie_Warriors
             }
         }
         public static void Menu()
-        {
+        {            
             var login = new Login();
             string[] mainMenu = { "Login as customer", "Login as admin", "Exit Program" };
 
