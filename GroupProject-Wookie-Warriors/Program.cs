@@ -1,6 +1,5 @@
 ﻿using System.Runtime.ConstrainedExecution;
 using System.Media;
-using System.Net;
 namespace GroupProject_Wookie_Warriors
 {
     internal class Program
@@ -9,49 +8,7 @@ namespace GroupProject_Wookie_Warriors
 
         static void Main(string[] args)
         {
-            PlaySound("C:\\Users\\Leon\\Desktop\\GroupProject-Wookie-Warriors\\GroupProject-Wookie-Warriors\\Chewbacca Sound Effect.wav");
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            string asciiArt =
-                    "           ⠀⠀⠀⠀ ⣀⣤⣤⣴⣶⣶⣶⣦⣤⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠁⠟⢿⢿⠇⠉⡿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⢠⣴⣿⣿⣿⣿⣿⣿⢻⢸⣿⣿⣿⣿⠁⠀⠀⠀⠈⠀⠀⠀⠘⠿⢿⣿⢿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⡿⠟⢹⠈⠀⣿⣿⢿⡟⠀⢀⠆⢀⠀⠀⠀⡀⠀⢀⡼⠃⠟⢻⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⢰⣿⣿⣿⣿⣿⢿⢷⠀⠈⠀⠀⢸⠏⢸⠁⠀⡾⢠⡇⢀⣠⣾⡿⠀⠞⠁⠀⡴⢋⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⣾⣿⣿⣿⣿⣿⣦⡁⠁⠀⠀⠀⠀⠀⠀⠀⢰⠇⠛⠀⠜⠟⠉⠃⠀⠀⡠⠊⠀⣈⣽⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠠⣿⣿⣿⣿⡿⣿⣿⠛⠢⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢞⡽⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⣿⣿⣿⡇⠑⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢊⠕⡵⢟⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⣿⣿⠏⠁⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⣤⣄⣤⣤⣀⣀⣀⢀⠀⠀⠀⠀⠀⠨⠟⠉⠁⠀⠙⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⣿⣿⡄⠀⠀⣶⣶⣾⣿⣿⣿⣿⣷⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣀⣀⡀⠀⠀⠀⠠⣾⣦⠄⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⣿⣿⣿⠀⠼⣿⣿⣿⣿⡿⢿⣿⣷⣶⣌⠛⠿⠿⢛⣟⣙⣹⡿⣿⣯⡉⠁⠀⠀⢀⡀⣲⣿⣿⣷⡀⠉⡙⠻⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⢹⣿⡅⠀⠀⠛⠛⠛⢛⣾⡏⠉⢀⣤⣿⣷⡄⠀⠀⠀⠀⠀⠀⠈⠉⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⢿⣶⣤⣙⣾⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⢸⣿⡄⡀⣀⠄⠀⠀⠘⠛⠓⠘⠋⠉⠉⠉⠉⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣰⣶⣶⣿⣿⣿⠋⠀⢀⣙⠻⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⢸⣿⣿⠞⠡⣶⡿⠋⢤⡔⠀⠀⠤⢶⣶⣤⣤⣤⣄⣀⠀⠒⠛⠒⠀⠀⠙⠻⣿⣿⣿⣿⣿⣿⡆⠀⠀⠙⢷⣮⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⢸⣿⣯⠀⠀⢿⡿⢂⣉⣀⠀⠀⠀⣀⣉⣉⣉⡙⠻⣿⣿⣿⣶⣤⣄⣀⡀⣀⣼⣿⣿⣿⣿⣿⡇⠀⠀⢀⢘⣿⣿⣿⣿⣷⣄⣀⣀⡀⠀⠀" +
-                    "\r\n⠀⠀⠀⢸⣿⣿⡆⠀⣿⡇⢿⠁⣠⡄⢤⣴⣶⣿⡅⢹⣉⣂⡈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠁⠀⠀⢈⣿⣿⣿⣿⣿⣿⣧⡄⠈⠛⣳⡀" +
-                    "\r\n⠀⠀⠀⢾⣿⣿⣷⠀⣿⡇⠘⣴⣿⣿⡄⠙⠋⠙⡷⢺⡿⠿⠿⠦⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠃⠀⢠⡷⣾⣿⣿⣿⣿⣿⣿⣿⡿⠂⠘⠷⡅" +
-                    "\r\n⠀⠀⠀⠈⣿⣿⣿⠀⢸⡇⢀⡙⡁⠁⠀⠀⠠⠤⠄⠀⠐⠒⠒⢂⣡⠔⠁⢰⣆⠙⠛⠟⠉⠉⠂⠀⠀⠀⠘⣿⣜⢿⣿⣿⣿⣿⠇⠀⣠⡴⠚⠉⠉" +
-                    "\r\n⠀⠀⢰⡇⢻⣿⣿⠀⠈⢠⣴⣯⠁⡀⠀⢀⣠⣴⣶⣾⣾⠏⠉⡁⠀⣠⣤⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣷⠀⠙⢿⠃⡰⠚⠉⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⣾⠀⢸⣿⡏⠀⠀⠸⣿⣿⣤⣿⣴⣿⣿⡿⠿⠛⠋⠀⠀⠙⣿⣿⣿⣿⣿⣿⡄⠀⡆⠀⠀⠀⣄⠀⠀⠀⠀⢻⣿⣄⡄⠀⡁⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⢠⣿⠀⠘⠇⣇⠀⠀⠀⠙⠘⣿⣿⣿⠻⠍⠑⠀⠀⠀⠀⠱⣶⣍⣻⣿⣿⣿⣿⣧⠘⠇⠀⠀⠀⢹⡄⠀⠀⠀⠀⢻⣿⣾⡀⠁⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⢸⣿⡀⠀⠀⢸⣦⣦⡆⠀⠀⠸⢿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠈⠉⢻⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠸⣿⣦⠀⠀⢀⢸⣿⣿⢁⠃⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⢰⣿⠀⠀⠀⠈⣿⣿⣿⣧⡇⠀⠀⠹⣿⣦⠀⠘⢾⣾⣶⣶⣶⠀⣘⣿⣿⣿⠿⡄⠀⠀⠀⠀⠀⠀⠹⣿⠗⠀⠘⠛⣿⠇⢈⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⣾⣿⠄⠀⠀⠀⠉⠻⣿⣿⣧⠀⢾⣷⣿⣿⣷⣀⣀⢹⣿⣿⣧⣴⣿⣿⣿⣿⠀⠈⠀⠠⡀⢳⡄⠈⢄⠙⠀⠀⠀⣤⣿⠈⠈⠄⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⢰⢻⡟⡀⣀⠀⠀⠀⣴⠀⠀⠈⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠻⡀⠀⠀⢠⣧⡀⠱⠀⢮⡆⠀⣇⠀⢹⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⢸⣿⣿⠇⢀⡌⡀⢹⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠀⠀⠁⠀⠀⠈⣿⣷⡄⠀⠘⡟⠀⣧⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠘⣿⡏⣴⣿⣼⢁⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⠟⠋⠹⣿⠙⢿⡆⠀⠀⠀⠀⠀⠀⠸⣿⢿⠀⠀⠈⠈⣿⡆⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⡟⣷⣿⣿⣧⡇⠀⠀⠀⠀⣠⠀⠀⠈⠟⠏⡟⠇⠀⠀⠀⠃⠀⡈⠑⠀⠀⢀⠀⠀⠀⠀⢿⠈⠀⠀⢰⠀⢸⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⣷⡏⣿⣿⣿⣵⢼⠃⠀⢸⣷⣤⠀⠀⠀⢀⢁⡀⣄⠀⠀⠀⣾⣿⡄⠀⡄⢈⣆⠀⠀⠀⠈⠀⠀⡄⢸⢧⠸⣹⡌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⡿⠇⣿⣿⡟⠏⡜⠀⡀⢸⣿⣿⠀⠀⠀⢸⣿⡟⠛⠀⠀⠀⢻⣿⣿⣧⡇⠈⣿⠀⢀⠀⠀⡆⠀⣷⣸⠘⡆⡏⢻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⣿⣿⠀⠀⣷⢰⡇⢸⣿⣿⠀⡜⢰⡌⢿⢀⠀⠀⠀⢄⠀⠇⢿⣿⡇⠀⢻⠀⣿⣧⢀⣷⡀⢃⠹⡆⣇⡇⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠙⠹⠀⠀⣿⡸⡇⣿⣿⣿⢀⡇⠈⢣⢸⣦⡆⣇⠀⠈⣆⠀⠈⣿⣧⠀⢸⡀⡿⣿⣸⡿⠟⢞⡄⠀⠸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⢿⢳⢱⡇⢻⡏⣼⢱⢠⠀⢂⡟⣿⣿⣆⡆⢻⢷⡄⠹⣿⣦⠘⣧⠸⡘⠹⡏⠀⠀⢹⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠈⠌⡆⢷⠀⢣⠹⡆⢻⡀⠀⢧⠇⢇⠈⢿⠈⠈⠻⢦⡙⣏⢆⠹⡄⠱⡀⠙⠄⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" +
-                    "\r\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠈⢧⠀⠀⠑⠀⠁⠀⠸⠀⠈⠀⠀⠃⠀⠀⠀⠈⢮⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-             
-                PrintAsciArtInBrown(asciiArt);
-                Console.ReadKey();
+
 
             // Group project - Wookie Warriors - SUT24
             // Filip, Leon, Tim, Shokran, Simon
@@ -77,31 +34,12 @@ namespace GroupProject_Wookie_Warriors
             //Som användare vill jag kunna se en logg på alla överföringar m.m som skett på mina konton
             //Som bankägare vill jag att appen ser snygg ut med tydliga menyer, färgsättning och en snygg logga i ASCII-art som syns när användaren loggar in
             //Som bankägare vill jag inte att transaktioner sker direkt när användarna lägger in dem utan istället var 15e minut så att vi har kontroll på när de sker
-          
 
+           Ascii_Art.Ascii();
            Menus.Menu();
-        }
-        static void PrintAsciArtInBrown(string asciiArt)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-            Console.WriteLine(asciiArt);
-
-            Console.ResetColor();
-        }
-
-        public static void PlaySound(string filepath)
-        {
-            //SoundPlayer player = new SoundPlayer(@"C:\Users\jenni\OneDrive\Skrivbord\Programmering\Chewbacca Sound Effect.waw");
-            //player.Load();
-            //player.Play();
-
-            SoundPlayer musicPlayer = new SoundPlayer();
-            musicPlayer.SoundLocation = filepath;
-            musicPlayer.Play();
-
 
         }
+        
 
 
     }
