@@ -8,177 +8,210 @@ using System.Threading.Tasks;
 namespace GroupProject_Wookie_Warriors
 {
     public class Menus
-    {      
-        public static void Menu()
+    {
+        public static int NavigateMenu(string[] menuItems, string menuTitle)
         {
-            //Startmenu when program starts.
-            var login = new Login();           
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Welcome to the login menu!\n" +
-                "\n1. Login as customer\n" +
-                "2. Login as admin\n" + "\n0. Exit Program" +
-                "\n-------------------------");
+            int selectedIndex = 0; // The meny choice
 
-            string userInput = Console.ReadLine();
-
-            switch (userInput)
-            {
-                case "1":
-                    Console.Clear();
-                    login.LoginUser();
-                    break;
-
-                case "2":
-                    Console.Clear();
-                    login.LoginAdmin();
-                    break;
-                case "0":
-                    Console.Clear();
-                    Console.WriteLine("Thank you for using Wookie Warriors program" +
-                        "\n\n\n\nAnd not using the ShitLords program");
-                    Environment.Exit(0);
-                    break;
-
-                default:
-                    Console.Clear();
-                    Menu();
-                    break;
-            }
-        }
-        
-        // User menu
-        public void UserMenu(User user, Dictionary<string, User> users)
-        {
-            var customer = new Customer();
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("==== Main Menu - Customer ====");
-                Console.WriteLine("1. Show Your Balance");
-                Console.WriteLine("2. Add New Account"); // AddNewAccount, OpenSavingAccounts
-                Console.WriteLine("3. Deposit/Witdraw"); // Deposit, Withdraw
-                Console.WriteLine("4. Transfer"); // TransferToAccount, TransferToOtherCustomer1
-                Console.WriteLine("5. Loan & intrest");
-                Console.WriteLine("6. Account in other Currency");
-                Console.WriteLine("7. TransferLog ");
+                Console.WriteLine(menuTitle); // Skriver ut menyhuvudet
 
-                Console.WriteLine("0. Log out");
-                Console.WriteLine("\nChoose one of the following options...");
+                // Rita ut menyn
+                for (int i = 0; i < menuItems.Length; i++)
+                {
+                    if (i == selectedIndex) // Markera det valda alternativet
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
 
-                string choice = Console.ReadLine();
-                
-
-                switch (choice)
-                {             
-                    case "1":                                             
-                        customer.CustomerAccounts(user); 
-                        break;
-                    case "2":
-                        Console.WriteLine("Wanna open a new account or a savingsaccount" +
-                            "\nType: 1 for New Account\nType 2 for Savingsaccount");
-                        string accountChoice = Console.ReadLine();
-
-                        if (accountChoice == "1") 
-                        {
-                            customer.AddNewAccount(user,users);
-                        }
-                        if (accountChoice == "2") 
-                        {
-                            customer.OpenSavingAccounts(user,users);
-                        }
-                        break;
-                    case "3":
-                        Console.WriteLine("Wanna Deposit type: 1" +
-                            "\nWanna Withdraw type: 2 ");
-                        string withdrawDeposit = Console.ReadLine();
-                        if (withdrawDeposit == "1") 
-                        {
-                            customer.Deposit(user,users);
-                        }
-                        if (withdrawDeposit == "2") 
-                        {
-                            customer.Withdraw(user,users);
-                        }
-                        break;
-                    case "4":
-                        Console.WriteLine("Wanna transfer to your accounts - Type: 1");
-                        Console.WriteLine("Wanna transfer to other customer - Type: 2");
-                        string transferChoice = Console.ReadLine();
-                        if (transferChoice == "1")
-                        {
-                            customer.TransferToAccount(user,users);
-                        }
-                        if (transferChoice == "2") 
-                        {
-                            customer.TransferToOtherCustomer1(user, users);
-                        }
-                        else
-                            Console.WriteLine("Stop being a silly goose");
-                        break;
-                    case "5":
-                        customer.LoanAndInterest(user,users);
-                        break;
-                    case "6":
-                        customer.AccountInOtherCurrency(user,users);
-                        break;
-                    case "7":
-                        customer.TransferLog(user, users);                        
-                        break;
-                    case "0":
-                        Console.WriteLine($"You are now logging out {customer}.");
-                        Console.Clear();
-                        DataManage.SaveData(users);
-                        Menu();
-                        break;
-                    default:
-                        Console.WriteLine("Ogiltigt val, försök igen.");
-                        break;
+                    Console.WriteLine($"{i + 1}. {menuItems[i]}");
+                    Console.ResetColor();
                 }
-                Console.WriteLine("\nPress any key to countine...");
-                Console.ReadKey();
+
+                // Läs användarens tangenttryckning
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedIndex--;
+                        if (selectedIndex < 0) selectedIndex = menuItems.Length - 1; // Cykla uppåt
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        selectedIndex++;
+                        if (selectedIndex >= menuItems.Length) selectedIndex = 0; // Cykla nedåt
+                        break;
+
+                    case ConsoleKey.Enter:
+                        return selectedIndex; // Returnerar det valda indexet
+                }
             }
         }
-        // Admin menu 
+        public static void Menu()
+        {
+            var login = new Login();
+            string[] mainMenu = { "Login as customer", "Login as admin", "Exit Program" };
+
+            while (true)
+            {
+                int selectedIndex = NavigateMenu(mainMenu, "Welcome to the login menu!");
+
+                Console.Clear();
+
+                switch (selectedIndex)
+                {
+                    case 0: // Login as customer
+                        login.LoginUser();
+                        break;
+                    case 1: // Login as admin
+                        login.LoginAdmin();
+                        break;
+                    case 2: // Exit Program
+                        Console.WriteLine("Thank you for using Wookie Warriors program!\n\n\nAnd not using the ShitLords program.");
+                        Environment.Exit(0);
+                        break;
+                }
+            }
+        }
+        public void UserMenu(User user, Dictionary<string, User> users)
+        {
+            var customer = new Customer();
+            string[] userMenuItems = {
+            "Show Your Balance",
+            "Add New Account",
+            "Deposit/Withdraw",  // Deposit & withdraw
+            "Transfer",      // Transfer to other customer
+            "Loan & Intrest", // and see if u have a loan
+            "Other",         // TransferLog, account in other currency, open savings account
+            "Log Out",
+            };
+
+            while (true)
+            {
+                int selectedIndex = NavigateMenu(userMenuItems,"==== Main Menu - Customer ====\n");
+
+                Console.Clear();
+                
+                switch (selectedIndex)
+                {
+                    case 0:
+                        customer.CustomerAccounts(user);
+                        break;
+                    case 1:
+                        customer.AddNewAccount(user, users);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        string[] dWmenu = { "Deposit", "Withdraw", "Back" };
+                        int dWChoice = NavigateMenu(dWmenu, "==== Deposit/Withdraw ====\n");
+                        switch (dWChoice) 
+                        {
+                            case 0:
+                                customer.Deposit(user, users);
+                                break;
+                            case 1:
+                                customer.Withdraw(user, users);
+                                break;
+                            case 2:
+                                break;
+                        }
+                        break;
+                    case 3:
+                        Console.Clear();
+                        string[] transferMenu = { "Transfer to your accounts", " Transfer to another customer", "Back" };
+                        int transferChoice = NavigateMenu(transferMenu, "==== Deposit/Withdraw ====");
+                        switch (transferChoice) 
+                        {
+                            case 0:
+                                customer.TransferToAccount(user, users);
+                                break;
+                            case 1:
+                                customer.TransferToOtherCustomer1(user, users);
+                                break;
+                            case 2:
+                                break;     
+                        }
+                        break;
+                    case 4:
+                        customer.LoanAndInterest(user, users);
+                        break;
+                    case 5:
+                        Console.Clear();
+                        string[] otherMenu = { "Opening account with intrest", "Account in other Currency", "TransferLog", "Back" };
+                        int otherChoice = NavigateMenu(otherMenu, "==== Other Options ====");
+                        switch (otherChoice) 
+                        {
+                            case 0:
+                                customer.OpenSavingAccounts(user, users);
+                                break;
+                            case 1:
+                                customer.AccountInOtherCurrency(user, users);
+                                break;
+                            case 2:
+                            customer.TransferLog(user, users);
+                                break;
+                            case 3:
+                                break;
+                        }
+                        break;
+                    case 6:
+                        Console.WriteLine($"You are now logging out {user.UserName}.");
+                        Console.ReadKey();
+                        DataManage.SaveData(users);
+                        Menu();
+                        Console.Clear();
+                        break;
+                        
+                }       
+
+                Console.WriteLine("\nPress any key to continue...");
+                
+            }
+        }
         public void AdminMenu(User user, Dictionary<string, Admin> admins)
         {
             var accountManager = new CreateAccount();
-            while (true) 
+            string[] adminMenuItems = {
+            "Create New Account",
+            "Currency",
+            "Log out"
+            };
+
+            while (true)
             {
+                int selectedIndex = NavigateMenu(adminMenuItems, "==== Main Menu - Admin ====");
+
                 Console.Clear();
-                Console.WriteLine("==== Main Menu - Admin ====");
-                Console.WriteLine("1. Create new account");
-                Console.WriteLine("2. Currency");
-                Console.WriteLine("0. Log out");
-                Console.WriteLine("\nChoose one of the following options...");
 
-                string adminChoice = Console.ReadLine();
-
-                switch (adminChoice) 
+                switch (selectedIndex)
                 {
-                    case "1":
+                    case 0:
                         Console.Write("Enter your username: ");
                         string username = Console.ReadLine();
-
-                        accountManager.DisplayCreateAccountMenu(username); // Now it has access to the method
+                        accountManager.DisplayCreateAccountMenu(username);
                         Console.WriteLine("Press any key to return to the menu...");
                         Console.ReadKey();
                         break;
-                    case "2":
-                        // admin.ChnageCurrecy();
+                    case 1:
+                        Console.WriteLine("Currency options coming soon...");
                         break;
-                    case "0":
-                        Console.WriteLine("Logging out...");
+                    case 2:
+                        Console.WriteLine($"You are now logging out {user.UserName}.");
+                        Console.ReadKey();
                         DataManage.SaveAdminData(admins);
-                        Console.Clear();
                         Menu();
+                        Console.Clear();
                         return;
-                    default:
-
-                        Console.WriteLine("Wrong answear, try again");
-                        break;         
                 }
-                Console.WriteLine("Press any key to countine...");
-                Console.ReadKey();
             }
         }
     }
