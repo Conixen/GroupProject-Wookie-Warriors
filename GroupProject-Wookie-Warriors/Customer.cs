@@ -4,6 +4,48 @@ namespace GroupProject_Wookie_Warriors
 {
     public class Customer : Login
     {
+        private int ScrollMenu(List<Account> accounts, string cHeader)
+        {
+            int selectedIndex = 0;
+            ConsoleKey key;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(cHeader);
+                for (int i = 0; i < accounts.Count; i++)
+                {
+                    if (i == selectedIndex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.WriteLine($"-> {i + 1}. {accounts[i].AccountType} - Balance: {accounts[i].Balance} {accounts[i].Currency}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"   {i + 1}. {accounts[i].AccountType} - Balance: {accounts[i].Balance} {accounts[i].Currency}");
+                    }
+                }
+
+                key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedIndex = (selectedIndex == 0) ? accounts.Count - 1 : selectedIndex - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedIndex = (selectedIndex == accounts.Count - 1) ? 0 : selectedIndex + 1;
+                        break;
+                    case ConsoleKey.Escape:
+                        return -1; // Escape cancels the operation
+                }
+
+            } while (key != ConsoleKey.Enter);
+
+            return selectedIndex;
+        }
         public void CustomerAccounts(User user)
         {
             Console.Clear();
@@ -27,25 +69,27 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine($"{user.Accounts[i] }");
             }
 
-            int fromAccountIndex;
-            int toAccountIndex;
+            // int fromAccountIndex;
+            // int toAccountIndex;
             decimal transferAmount;
 
             Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
-            {
-                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
-                return;
-            }
-            var fromAccount = user.Accounts[fromAccountIndex - 1];
+            //if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
+            //{
+            //    Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
+            //    return;
+            //}
+            int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            var fromAccount = user.Accounts[fromAccountIndex];
 
-            Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
-            if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
-            {
-                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
-                return;
-            }
-            var toAccount = user.Accounts[toAccountIndex - 1];
+            //Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
+            //if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
+            //{
+            //    Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
+            //    return;
+            //}
+            int toAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            var toAccount = user.Accounts[toAccountIndex];
 
             if (fromAccount == toAccount)   // if they pick the same account
             {
@@ -69,7 +113,7 @@ namespace GroupProject_Wookie_Warriors
             toAccount.Balance += transferAmount;
 
             Console.WriteLine($"Transfer complete :) \n{transferAmount} {fromAccount.Currency} has transfered from {fromAccount.AccountType} to {toAccount.AccountType}.");
-
+            
             //Logs
             string fromAcc = user.Accounts[fromAccountIndex - 1].AccountType;
             string currency = user.Accounts[fromAccountIndex - 1].Currency;
@@ -77,124 +121,106 @@ namespace GroupProject_Wookie_Warriors
 
             transferAmount =- transferAmount;
             user.Logs.Add(new Logs(fromAcc, transferAmount, currency));
-
             transferAmount =- transferAmount;
             user.Logs.Add(new Logs(toAcc, transferAmount, currency));
             DataManage.SaveData(users);
+            Console.ReadKey();
 
         }
 
         public void TransferToOtherCustomer1(User user, Dictionary<string, User> users)
         {
             Console.Clear();
-            Console.WriteLine("Your accounts: ");
-            for (int i = 0; i < user.Accounts.Count; i++)
-            {
-                Console.WriteLine($"{user.Accounts[i]}");
-            }
 
-            int fromAccountIndex;
-            decimal amount; /*= decimal.Parse(Console.ReadLine());*/
+            Console.WriteLine("Choose which account you want to transfer from:");
+            int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            var fromAccount = user.Accounts[fromAccountIndex];
 
-            Console.WriteLine("Choose wich account you want to transfer from:");
-            if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
-            {
-                Console.WriteLine("Invalid choice, try again.");
-                return;
-            }
-            var fromAccount = user.Accounts[fromAccountIndex -1];
-            Console.WriteLine("How much do you want to transfer?\n" +
-                "Transactions only in same currency!!");
-
-            if(!decimal.TryParse(Console.ReadLine(), out amount) || amount <= 0)
-            {
-                Console.WriteLine("Invalid choice, try again.");
-            }
-
-            if(user.Accounts[fromAccountIndex -1].Balance < amount)
+            Console.WriteLine("How much do you want to transfer?\nTransactions are only allowed in the same currency.");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount, try again.");
                 return;
             }
 
-            Console.Clear();
-            Console.WriteLine($"Wich customer do you whant to send money to? \nWrite down the name of the customer:\n");
-
-            foreach(var users1 in users.Values)
+            if (fromAccount.Balance < amount)
             {
-                Console.WriteLine($"{users1.UserName}'s First account is in {users1.Accounts[0].Currency}");
-            }
-            string chooseCustomer = Console.ReadLine(); 
-
-            if (users.ContainsKey(chooseCustomer) && users[chooseCustomer].Accounts[0].Currency == user.Accounts[fromAccountIndex -1].Currency)
-            {
-                Console.WriteLine();
-                user.Accounts[fromAccountIndex - 1].Balance -= amount;
-                users[chooseCustomer].Accounts[0].Balance += amount;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice");
+                Console.WriteLine("You don't have enough funds, try again.");
                 return;
             }
+
             Console.Clear();
-            Console.WriteLine($"You have sent {amount} {user.Accounts[fromAccountIndex - 1].Currency} to {users[chooseCustomer].UserName}");
+            Console.WriteLine("Which customer do you want to send money to?\nNavigate with the arrow keys and press Enter to select.");
 
-            // Add transaction to logs
-            string whichAccount = user.Accounts[fromAccountIndex - 1].AccountType;
-            string currency = user.Accounts[fromAccountIndex - 1].Currency;
+            List<User> customerList = new List<User>(users.Values);
 
-            amount =- amount;
-            user.Logs.Add(new Logs(whichAccount, amount, currency));
+            int customerIndex = ScrollUserMenu(customerList, "Available Customers:");
+            User targetUser = customerList[customerIndex];
 
-            amount =- amount;
-            user.Logs.Add(new Logs(chooseCustomer, amount, currency));
+            if (targetUser.Accounts[0].Currency != fromAccount.Currency)
+            {
+                Console.WriteLine("Currencies do not match. Transaction cancelled.");
+                return;
+            }
 
-            DataManage.SaveData(users);                 
+            fromAccount.Balance -= amount;
+            targetUser.Accounts[0].Balance += amount;
 
-        }   // Transfer to other customer
+            Console.Clear();
+            Console.WriteLine($"You have successfully sent {amount} {fromAccount.Currency} to {targetUser.UserName}.");
+
+            user.Logs.Add(new Logs(fromAccount.AccountType, -amount, fromAccount.Currency));
+            targetUser.Logs.Add(new Logs(targetUser.Accounts[0].AccountType, amount, fromAccount.Currency));
+
+            DataManage.SaveData(users);
+            Console.ReadKey();
+        } // Transfer to other customer
 
         public bool Withdraw(User user,Dictionary<string, User> users)
         {
             Console.Clear();
             Console.WriteLine("Which account you wanna withdraw from:");
 
-            Console.WriteLine("\nYour accounts:");    // Show thier accounts
-            for (int i = 0; i < user.Accounts.Count; i++)
-            {
-                Console.WriteLine($"{user.Accounts[i]}");
-            }
+            //Console.WriteLine("\nYour accounts:");    // Show thier accounts
+            //for (int i = 0; i < user.Accounts.Count; i++)
+            //{
+            //    Console.WriteLine($"{user.Accounts[i]}");
+            //}
+            int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            var fromAccount = user.Accounts[fromAccountIndex];
 
-            int fromAccount;
-            if(!int.TryParse(Console.ReadLine(), out fromAccount) || fromAccount > user.Accounts.Count || fromAccount < 1)
-            {
-                Console.WriteLine("Account doesnt exist");
-                return false;
-            }
-           
+            //if (!int.TryParse(Console.ReadLine(), out fromAccount) || fromAccount > user.Accounts.Count || fromAccount < 1)
+            //{
+            //    Console.WriteLine("Account doesnt exist");
+            //    return false;
+            //}
+
             Console.WriteLine("How much you wanna withdraw?");
             decimal amount;
-            if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > user.Accounts[fromAccount - 1].Balance || amount <= 0)
+            if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > fromAccount.Balance || amount <= 0)
             {
                 Console.WriteLine("The amount is to high or low or check your account money");
                 return false;
             }
 
-            if (amount > user.Accounts[fromAccount - 1].Balance)
+            if (amount > fromAccount.Balance)
             {
                 Console.WriteLine("You cant take out more money than the max amount in your account");
+                Console.ReadKey();
                 return false;
             }
             if(amount < 0)
             {
                 Console.WriteLine("Invalid choice.");
+                Console.ReadKey();
                 return false;
             }
             else
             {
-                user.Accounts[fromAccount - 1].Balance -= amount;
+                fromAccount.Balance -= amount;
                 Console.WriteLine("Succecful Withdraw");
                 DataManage.SaveData(users);
+                Console.ReadKey();
                 return true;
             }           
         }   // Method to take out money
@@ -206,112 +232,115 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine(logs);
             }    
             DataManage.SaveData(users);
+            Console.ReadKey();
         }
-        
-        public void LoanAndInterest(User user,Dictionary<string,User> users)
-        {
 
-            //Rent and Interest.           
+        public void LoanAndInterest(User user, Dictionary<string, User> users)
+        {
             decimal payBack;
             decimal rate = 0.05m;
-            string time;
             decimal interest;
-            decimal totalBalance = 0;            
+            decimal totalBalance = 0;
             Console.Clear();
 
-            //Checks if user have active loan and if user wants to payback
             if (user.UserLoans.Count > 0)
             {
-                Console.WriteLine("You already have an active loan\n" +
-                    "1. Payback loan\n" +
-                    "2. Exit");
+                Console.WriteLine("You already have an active loan\n");
 
-                string choose = Console.ReadLine();
-                if(choose == "1")
+                List<string> options = new List<string> { "Payback loan", "Exit" };
+                int choice = ScrollOptionsMenu(options, "Select an option:");
+
+                if (choice == 0) 
                 {
                     Console.Clear();
                     PayBackLoan(user, users);
-                }                
+                    Console.Clear();
+                }
                 return;
             }
-                                                                 
+
             foreach (var acc in user.Accounts)
-            {           
-               //Only display accounts in SEK
-                if(acc.Currency == "SEK")
+            {
+                if (acc.Currency == "SEK")
                 {
                     totalBalance += acc.Balance;
-                }                                     
+                }
             }
 
-            Console.WriteLine($"You have a total of: {totalBalance} Sek\n" +
-                "Interest rate: 5%\n" +
-                "How much do you want to loan?");
-
+            Console.WriteLine($"You have a total of: {totalBalance} SEK\n" +
+                              "Interest rate: 5%\n" +
+                              "How much do you want to loan?");
 
             string number = Console.ReadLine();
             Console.WriteLine("How many years?");
-            time = Console.ReadLine();
+            string time = Console.ReadLine();
 
-            //Checks if loan is valid
             if (decimal.TryParse(number, out decimal loan) && decimal.TryParse(time, out decimal year))
-            {                
+            {
                 Console.Clear();
 
                 if (loan <= 0 || year <= 0 || year > 30)
                 {
-                    Console.WriteLine("Invalid");
+                    Console.WriteLine("Invalid input for loan or years.");
+                    Console.ReadKey();
                     return;
                 }
 
                 if (loan > totalBalance * 5)
                 {
-                    Console.WriteLine("Cant take such high loan");
+                    Console.WriteLine("You can't take such a high loan.");
+                    Console.ReadKey();
                     return;
                 }
-                else
-                {   //If valid loan will be proccessed. 
-                    Console.WriteLine("Loan info:");
-                    interest = (loan * rate * year);
-                    payBack = loan + interest;
-                    Console.WriteLine($"Loan: {loan} Sek\n" +
-                        $"Payback interest: {interest} Sek in {year} years");
 
-                    Console.WriteLine("\nDo you want to take this loan?\n" +
-                        "1. Type yes\n" +
-                        "2. Press enter");
-                    string takeLoan = Console.ReadLine();
-                    Console.Clear();
+                interest = loan * rate * year;
+                payBack = loan + interest;
 
-                    if (takeLoan == "yes") //User gets loan 
+                Console.WriteLine("Loan info:");
+                Console.WriteLine($"Loan: {loan} SEK\n" +
+                                  $"Payback interest: {interest} SEK in {year} years");
+
+                Console.WriteLine("\nDo you want to take this loan?\n" +
+                                  "1. Type 'yes'\n" +
+                                  "2. Press enter to cancel");
+                string takeLoan = Console.ReadLine();
+                Console.Clear();
+
+                if (takeLoan.ToLower() == "yes") 
+                {
+                    Console.WriteLine("Choose an account to transfer the loan to (only SEK accounts are valid):");
+
+                    List<Account> sekAccounts = user.Accounts.Where(a => a.Currency == "SEK").ToList();
+
+                    if (sekAccounts.Count == 0)
                     {
-                        Console.WriteLine("YOUR ACCOUNTS:");
-                        foreach(var accounts in user.Accounts)
-                        {
-                            Console.WriteLine(accounts);
-                        }
-                        int chooseAccount;
-                        Console.WriteLine("\nChoose account to transfer to");
-                        if(!int.TryParse(Console.ReadLine(), out chooseAccount) || chooseAccount >= user.Accounts.Count || chooseAccount < 1 || user.Accounts[chooseAccount - 1].Currency != "SEK")
-                        {
-                            Console.WriteLine("Account needs to be in SEK or Account doesnt exist");
-                            return;
-                        }
-                       
-                        user.Accounts[chooseAccount - 1].Balance += loan;
-                        user.UserLoans.Add(payBack);
-                        Console.WriteLine($"Loan successful");
-                                              
-                        DataManage.SaveData(users);
-                    }                    
+                        Console.WriteLine("You don't have any accounts in SEK.");
+                        Console.ReadKey();
+                        return;
+                    }
+
+                    int selectedAccountIndex = ScrollMenu(sekAccounts, "Your SEK Accounts:");
+                    var chosenAccount = sekAccounts[selectedAccountIndex];
+
+                    chosenAccount.Balance += loan;
+                    user.UserLoans.Add(payBack);
+
+                    Console.WriteLine($"Loan successful! {loan} SEK has been added to your account: {chosenAccount.AccountType}");
+
+                    DataManage.SaveData(users);
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Loan cancelled.");
+                    Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("Wrong input");
+                Console.WriteLine("Invalid input. Please try again.");
+                Console.ReadKey();
             }
-            DataManage.SaveData(users);
-            totalBalance = 0;
         }
 
         public void PayBackLoan(User user,Dictionary<string,User> users)
@@ -577,35 +606,115 @@ namespace GroupProject_Wookie_Warriors
         public void Deposit(User user, Dictionary<string, User> users)
         {
             Console.Clear();
-            Console.WriteLine("Choose which account you wanna deposit to");// Asks which account to deposit to
+            Console.WriteLine("Choose which account you want to deposit to:");
 
-            Console.WriteLine("\nYour accounts:");    // Show thier accounts
-            for (int i = 0; i < user.Accounts.Count; i++)
-            {
-                Console.WriteLine($"{user.Accounts[i]}");
-            }
-            int indexDeposit;
+            // Scrollande meny för att välja konto
+            int selectedAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            var selectedAccount = user.Accounts[selectedAccountIndex];
 
-            if (!int.TryParse(Console.ReadLine(), out indexDeposit) || indexDeposit < 1 || indexDeposit > user.Accounts.Count)
+            // Ange belopp att sätta in
+            Console.WriteLine($"How much do you want to deposit to {selectedAccount.AccountType}?");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
-                Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
+                Console.WriteLine("Invalid amount. Please enter a positive number.");
+                Console.ReadKey();
                 return;
             }
 
-            Account account = user.Accounts[indexDeposit - 1];   
-
-            Console.WriteLine("How much do you wanna deposit?");
-            decimal amount;
-
-            if (!decimal.TryParse(Console.ReadLine(), out amount) || amount <= 0)
-            {
-                Console.WriteLine("Invalid amount, try again.");
-                return;
-            }
-            account.Balance += amount; 
-            Console.WriteLine($"Deposited {amount} {account.Currency}. New balance: {account.Balance}");
+            // Utför insättningen
+            selectedAccount.Balance += amount;
+            Console.WriteLine($"Deposited {amount} {selectedAccount.Currency}. New balance: {selectedAccount.Balance}");
+            Console.ReadKey();
+            // Spara data
             DataManage.SaveData(users);
+            
         }   // Put in money in your account
 
+        private int ScrollUserMenu(List<User> users, string title)
+        {
+            int selectedIndex = 0;
+            ConsoleKey key;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(title);
+                for (int i = 0; i < users.Count; i++)
+                {
+                    if (i == selectedIndex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.WriteLine($"-> {users[i].UserName} (First Account Currency: {users[i].Accounts[0].Currency})");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"   {users[i].UserName} (First Account Currency: {users[i].Accounts[0].Currency})");
+                    }
+                }
+
+                key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedIndex = (selectedIndex == 0) ? users.Count - 1 : selectedIndex - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedIndex = (selectedIndex == users.Count - 1) ? 0 : selectedIndex + 1;
+                        break;
+                    case ConsoleKey.Escape:
+                        return -1; 
+                }
+
+            } while (key != ConsoleKey.Enter);
+
+            return selectedIndex;
+        }
+
+        private int ScrollOptionsMenu(List<string> options, string title)
+        {
+            int selectedIndex = 0;
+            ConsoleKey key;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(title + "\n");
+
+                for (int i = 0; i < options.Count; i++)
+                {
+                    if (i == selectedIndex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.WriteLine($"-> {options[i]}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"   {options[i]}");
+                    }
+                }
+
+                key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedIndex = (selectedIndex == 0) ? options.Count - 1 : selectedIndex - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedIndex = (selectedIndex == options.Count - 1) ? 0 : selectedIndex + 1;
+                        break;
+                    case ConsoleKey.Escape:
+                        return -1; // Escape för att avbryta
+                }
+
+            } while (key != ConsoleKey.Enter);
+
+            return selectedIndex;
+        }
     }
 }
