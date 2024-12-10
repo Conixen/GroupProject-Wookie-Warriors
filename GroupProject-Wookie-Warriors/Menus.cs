@@ -16,12 +16,12 @@ namespace GroupProject_Wookie_Warriors
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine(menuTitle); // Skriver ut menyhuvudet
+                Console.WriteLine(menuTitle); 
 
-                // Rita ut menyn
+                
                 for (int i = 0; i < menuItems.Length; i++)
                 {
-                    if (i == selectedIndex) // Markera det valda alternativet
+                    if (i == selectedIndex) 
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -36,23 +36,23 @@ namespace GroupProject_Wookie_Warriors
                     Console.ResetColor();
                 }
 
-                // Läs användarens tangenttryckning
+                
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
 
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
                         selectedIndex--;
-                        if (selectedIndex < 0) selectedIndex = menuItems.Length - 1; // Cykla uppåt
+                        if (selectedIndex < 0) selectedIndex = menuItems.Length - 1; 
                         break;
 
                     case ConsoleKey.DownArrow:
                         selectedIndex++;
-                        if (selectedIndex >= menuItems.Length) selectedIndex = 0; // Cykla nedåt
+                        if (selectedIndex >= menuItems.Length) selectedIndex = 0;
                         break;
 
                     case ConsoleKey.Enter:
-                        return selectedIndex; // Returnerar det valda indexet
+                        return selectedIndex; 
                 }
             }
         }
