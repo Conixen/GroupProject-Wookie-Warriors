@@ -63,7 +63,8 @@ namespace GroupProject_Wookie_Warriors
 
             while (true)
             {
-                int selectedIndex = NavigateMenu(mainMenu, "Welcome to the login menu!");
+                int selectedIndex = NavigateMenu(mainMenu, "Wookie Bank" +
+                    "\nWelcome to the login menu!");
 
                 Console.Clear();
 
@@ -76,7 +77,7 @@ namespace GroupProject_Wookie_Warriors
                         login.LoginAdmin();
                         break;
                     case 2: // Exit Program
-                        Console.WriteLine("Thank you for using Wookie Warriors program!\n\n\nAnd not using the ShitLords program.");
+                        Console.WriteLine("Thank you for using Wookie Warriors program!\n\n\nAnd not using the Shi... sith lords program.");
                         Environment.Exit(0);
                         break;
                 }

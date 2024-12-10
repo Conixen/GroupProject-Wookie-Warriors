@@ -144,12 +144,14 @@ namespace GroupProject_Wookie_Warriors
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount, try again.");
+                Console.ReadKey();
                 return;
             }
 
             if (fromAccount.Balance < amount)
             {
                 Console.WriteLine("You don't have enough funds, try again.");
+                Console.ReadKey();
                 return;
             }
 
@@ -164,6 +166,7 @@ namespace GroupProject_Wookie_Warriors
             if (targetUser.Accounts[0].Currency != fromAccount.Currency)
             {
                 Console.WriteLine("Currencies do not match. Transaction cancelled.");
+                Console.ReadKey();
                 return;
             }
 
@@ -204,6 +207,7 @@ namespace GroupProject_Wookie_Warriors
             if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > fromAccount.Balance || amount <= 0)
             {
                 Console.WriteLine("The amount is to high or low or check your account money");
+                Console.ReadKey();
                 return false;
             }
 
@@ -358,6 +362,7 @@ namespace GroupProject_Wookie_Warriors
             if(!int.TryParse(Console.ReadLine(), out userAccount) || userAccount >= user.Accounts.Count || userAccount < 1 || user.Accounts[userAccount - 1].Currency != "SEK")
             {
                 Console.WriteLine("Account doesnt exist or invalid currency");
+                Console.ReadKey();
                 return;
             }        
             Console.Clear();
@@ -369,7 +374,8 @@ namespace GroupProject_Wookie_Warriors
             //If amount is not valid
             if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > user.Accounts[userAccount - 1].Balance || amount > user.UserLoans[0] || amount < user.UserLoans[0])
             {
-                Console.WriteLine("The amount is to high or low");               
+                Console.WriteLine("The amount is to high or low");
+                Console.ReadKey();
             }
            
             else if (amount == user.UserLoans[0])  //Payment goes through and loan is removed
@@ -378,8 +384,10 @@ namespace GroupProject_Wookie_Warriors
                 amount = 0;               
                 user.UserLoans.RemoveAt(0);
                 Console.WriteLine("Payment successful");
+                Console.ReadKey();
             }
             DataManage.SaveData(users);
+            Console.ReadKey();
         }
 
 
@@ -395,6 +403,7 @@ namespace GroupProject_Wookie_Warriors
                 if(account.AccountType == accountType)
                 {
                     Console.WriteLine("Account already exist!");
+                    Console.ReadKey();
                     return;
                 }
             }
@@ -417,7 +426,6 @@ namespace GroupProject_Wookie_Warriors
             var exchange = new ExchangeRates();
             Console.Clear();
             if (user.Accounts.Count == 0)
-
             {
                 Console.WriteLine("You have no accounts! ");
                 Console.ReadKey();
@@ -436,12 +444,12 @@ namespace GroupProject_Wookie_Warriors
                 if (int.TryParse(Console.ReadLine(), out Customerindex) && Customerindex >= 1 && Customerindex <= user.Accounts.Count)
                 {
                     rightAccountChoice = true;
-
+                    Console.ReadKey();
                 }
                 else
                 {
                     Console.WriteLine("Choose an acccount that exists! ");
-
+                    Console.ReadKey();
                 }
             }
             Account accountChoice = user.Accounts[Customerindex - 1];
@@ -456,8 +464,8 @@ namespace GroupProject_Wookie_Warriors
 
                 if (currencyChoice == "EUR" || currencyChoice == "USD" || currencyChoice == "SEK")
                 {
-                    break;
                     Console.ReadKey();
+                    break;
 
                 }
 
@@ -576,8 +584,9 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine($"- {acc.AccountType} {acc.Balance} {acc.Currency}");
                 if(acc.Currency == "SEK")
                 {
-                    totalBalance += acc.Balance;                   
+                    totalBalance += acc.Balance;
                 }                        
+                    Console.ReadKey();
             }
             Console.WriteLine($"You have a total balance of: {totalBalance} {currency}");
             Console.WriteLine("our Interest rate: 3%\n");
@@ -626,8 +635,8 @@ namespace GroupProject_Wookie_Warriors
             string customerChoice;
             do
             {
-            Console.WriteLine("Would you like to open your saving account? (yes/no)");
-            customerChoice = Console.ReadLine().ToLower();
+                Console.WriteLine("Would you like to open your saving account? (yes/no)");
+                customerChoice = Console.ReadLine().ToLower();
 
             } while (customerChoice != "yes" && customerChoice != "no");
            
