@@ -47,10 +47,22 @@ namespace GroupProject_Wookie_Warriors
                 else // Wrong username or password and increse number of attempts
                 {
                     failedAttempts++;
-                    Console.WriteLine($"Wrong username or password! \nTries left: {maxAttempts - failedAttempts}");                  
+                    Console.WriteLine($"Wrong username or password! \nTries left: {maxAttempts - failedAttempts}");                                       
                     Console.WriteLine("Press any key to countinue...");
-                    Console.ReadKey();
-                }
+                    Console.WriteLine("Exit to menu, Press Escape!");
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    if(keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        Menus.Menu();
+                    }
+
+                    if(failedAttempts == 3)
+                    {
+                        Thread.Sleep(1000000000);
+                        Menus.Menu();
+                    }
+                    
+                }               
             }
             return false;
         }
@@ -83,9 +95,10 @@ namespace GroupProject_Wookie_Warriors
                 {
                     failedAttempts++;
                     Console.WriteLine($"Wrong username or password! \nTries left: {maxAttempts - failedAttempts}");
-                    Console.WriteLine("Press any key to countinue...");
-                    Console.ReadKey();
+                    Console.WriteLine("Press any key to countinue...");                    
+                    Console.ReadKey();                 
                 }
+                Thread.Sleep(200000000);
             }
             return false; 
         }

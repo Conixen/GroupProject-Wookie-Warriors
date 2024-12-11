@@ -29,7 +29,7 @@ namespace GroupProject_Wookie_Warriors
                     else
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.Green;
+                       //Console.ForegroundColor = ConsoleColor.Yellow;                      
                     }
 
                     Console.WriteLine($"{i + 1}. {menuItems[i]}");
@@ -53,6 +53,9 @@ namespace GroupProject_Wookie_Warriors
 
                     case ConsoleKey.Enter:
                         return selectedIndex; 
+
+                    case ConsoleKey.Escape:
+                        return - 1;
                 }
             }
         }
@@ -128,7 +131,7 @@ namespace GroupProject_Wookie_Warriors
                         break;
                     case 3:
                         Console.Clear();
-                        string[] transferMenu = { "Transfer to your accounts", " Transfer to another customer", "Back" };
+                        string[] transferMenu = { "Transfer to your accounts", "Transfer to another customer", "Back" };
                         int transferChoice = NavigateMenu(transferMenu, "==== Deposit/Withdraw ====");
                         switch (transferChoice) 
                         {

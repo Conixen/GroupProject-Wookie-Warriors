@@ -40,7 +40,7 @@ namespace GroupProject_Wookie_Warriors
                         selectedIndex = (selectedIndex == accounts.Count - 1) ? 0 : selectedIndex + 1;
                         break;
                     case ConsoleKey.Escape:
-                        return -1; // Escape cancels the operation
+                        return selectedIndex; // Escape cancels the operation
                 }
 
             } while (key != ConsoleKey.Enter);
@@ -52,12 +52,12 @@ namespace GroupProject_Wookie_Warriors
             Console.Clear();
             Console.WriteLine("Your accounts:");
             Console.WriteLine("\n-----------------------------------");
-            foreach (var account in user.Accounts) 
-            { 
-                Console.WriteLine(account);
+            for (int i = 0; i < user.Accounts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} {user.Accounts[i].AccountType} {user.Accounts[i].Balance} {user.Accounts[i].Currency}");
                 Console.WriteLine("-----------------------------------");
-
             }
+            Console.WriteLine("Press enter to continue");
             Console.ReadKey();
         }   // Shows your accounts
        
@@ -75,21 +75,11 @@ namespace GroupProject_Wookie_Warriors
             decimal transferAmount;
 
             Console.WriteLine("Choose which account you wanna transfer from:"); // Asks which account to take money from
-            //if (!int.TryParse(Console.ReadLine(), out fromAccountIndex) || fromAccountIndex < 1 || fromAccountIndex > user.Accounts.Count)
-            //{
-            //    Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
-            //    return;
-            //}
-            int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+           
+            int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:\nTransfer from");
             var fromAccount = user.Accounts[fromAccountIndex];
-
-            //Console.Write("Choose which account you wanna transfer to: ");  // asks which account they wanna send it to
-            //if (!int.TryParse(Console.ReadLine(), out toAccountIndex) || toAccountIndex < 1 || toAccountIndex > user.Accounts.Count)
-            //{
-            //    Console.WriteLine("Wrong Answear"); // If user is a silly goose (out of range index)
-            //    return;
-            //}
-            int toAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
+            
+            int toAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:\nTransfer to");
             var toAccount = user.Accounts[toAccountIndex];
 
             if (fromAccount == toAccount)   // if they pick the same account
@@ -106,18 +96,45 @@ namespace GroupProject_Wookie_Warriors
                 Console.ReadKey();
                 return;
             }
-            if (fromAccount.Balance < transferAmount || fromAccount.Currency != toAccount.Currency)
+
+            if (fromAccount.Balance < transferAmount)
             {
-                Console.WriteLine("Wrong Answear or Invalid currency3"); // if amount is more than what they have
+                Console.WriteLine("Wrong Answear or insufficient amount of money"); // if amount is more than what they have
                 Console.ReadKey();
                 return;
             }
+
+            decimal convertedAmount = transferAmount;
+            if (fromAccount.Currency != toAccount.Currency)
+            {              
+                var exchange = new ExchangeRates();
+                string fromCurrency = fromAccount.Currency.ToUpper();
+                string toCurrency = toAccount.Currency.ToUpper();
+
+                switch (fromCurrency)
+                {
+                    case "SEK":
+                        convertedAmount = toCurrency == "EUR" ? transferAmount * exchange.ExchangeRateToEuro["SEK"]
+                                        : transferAmount * exchange.ExchangeRateToUsd["SEK"];
+                        break;
+                    case "EUR":
+                        convertedAmount = toCurrency == "SEK" ? transferAmount * exchange.ExchangeRateToSek["EUR"]
+                                        : transferAmount * exchange.ExchangeRateToUsd["EUR"];
+                        break;
+                    case "USD":
+                        convertedAmount = toCurrency == "SEK" ? transferAmount * exchange.ExchangeRateToSek["USD"]
+                                        : transferAmount * exchange.ExchangeRateToEuro["USD"];
+                        break;
+                }
+                Console.WriteLine($"Converted {transferAmount} {fromCurrency} to {convertedAmount} {toCurrency}.");
+            }   
+          
             // succesful transfer very nice
             fromAccount.Balance -= transferAmount;
-            toAccount.Balance += transferAmount;
+            toAccount.Balance += convertedAmount;
 
             Console.WriteLine($"Transfer complete :) \n{transferAmount} {fromAccount.Currency} has transfered from {fromAccount.AccountType} to {toAccount.AccountType}.");
-            
+            Console.WriteLine("Press enter to continue");
             //Logs
             string fromAcc = user.Accounts[fromAccountIndex].AccountType;
             string currency = user.Accounts[fromAccountIndex].Currency;
@@ -140,7 +157,7 @@ namespace GroupProject_Wookie_Warriors
             int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
             var fromAccount = user.Accounts[fromAccountIndex];
 
-            Console.WriteLine("How much do you want to transfer?\nTransactions are only allowed in the same currency.");
+            Console.WriteLine("How much do you want to transfer?.");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount, try again.");
@@ -162,21 +179,39 @@ namespace GroupProject_Wookie_Warriors
 
             int customerIndex = ScrollUserMenu(customerList, "Available Customers:");
             User targetUser = customerList[customerIndex];
-
+            
+            decimal convertedAmount = amount;//Changes currencies first account money will transfer to the other currency example SEK to EUR
             if (targetUser.Accounts[0].Currency != fromAccount.Currency)
             {
-                Console.WriteLine("Currencies do not match. Transaction cancelled.");
-                Console.ReadKey();
-                return;
+                var exchange = new ExchangeRates();
+                string fromCurrency = fromAccount.Currency.ToUpper();
+                string toCurrency = targetUser.Accounts[0].Currency.ToUpper();
+
+                switch (fromCurrency)
+                {
+                    case "SEK":
+                        convertedAmount = toCurrency == "EUR" ? amount * exchange.ExchangeRateToEuro["SEK"]
+                                        : amount * exchange.ExchangeRateToUsd["SEK"];
+                        break;
+                    case "EUR":
+                        convertedAmount = toCurrency == "SEK" ? amount * exchange.ExchangeRateToSek["EUR"]
+                                        : amount * exchange.ExchangeRateToUsd["EUR"];
+                        break;
+                    case "USD":
+                        convertedAmount = toCurrency == "SEK" ? amount * exchange.ExchangeRateToSek["USD"]
+                                        : amount * exchange.ExchangeRateToEuro["USD"];
+                        break;
+                }
+                Console.WriteLine($"Converted {amount} {fromCurrency} to {convertedAmount} {toCurrency}.");            
             }
 
             fromAccount.Balance -= amount;
-            targetUser.Accounts[0].Balance += amount;
-
-            Console.Clear();
+            targetUser.Accounts[0].Balance += convertedAmount;
+           
             Console.WriteLine($"You have successfully sent {amount} {fromAccount.Currency} to {targetUser.UserName}.");
 
             user.Logs.Add(new Logs(fromAccount.AccountType, -amount, fromAccount.Currency));
+            
             targetUser.Logs.Add(new Logs(targetUser.Accounts[0].AccountType, amount, fromAccount.Currency));
 
             DataManage.SaveData(users);
@@ -187,21 +222,10 @@ namespace GroupProject_Wookie_Warriors
         {
             Console.Clear();
             Console.WriteLine("Which account you wanna withdraw from:");
-
-            //Console.WriteLine("\nYour accounts:");    // Show thier accounts
-            //for (int i = 0; i < user.Accounts.Count; i++)
-            //{
-            //    Console.WriteLine($"{user.Accounts[i]}");
-            //}
+          
             int fromAccountIndex = ScrollMenu(user.Accounts, "Your Accounts:");
             var fromAccount = user.Accounts[fromAccountIndex];
-
-            //if (!int.TryParse(Console.ReadLine(), out fromAccount) || fromAccount > user.Accounts.Count || fromAccount < 1)
-            //{
-            //    Console.WriteLine("Account doesnt exist");
-            //    return false;
-            //}
-
+ 
             Console.WriteLine("How much you wanna withdraw?");
             decimal amount;
             if (!decimal.TryParse(Console.ReadLine(), out amount) || amount > fromAccount.Balance || amount <= 0)
@@ -226,13 +250,15 @@ namespace GroupProject_Wookie_Warriors
             else
             {
                 fromAccount.Balance -= amount;
-                Console.WriteLine("Succecful Withdraw");
+                Console.WriteLine($"Sucessful withdraw {amount} {fromAccount.Currency} was removed from {fromAccount.AccountType}");
+                Console.WriteLine("Press enter to continue");
                 DataManage.SaveData(users);
                 Console.ReadKey();
                 return true;
             }           
         }   // Method to take out money
 
+        //Transferlogs 
         public void TransferLog(User user, Dictionary<string, User> users)
         {
             foreach(var logs in user.Logs)
@@ -250,7 +276,7 @@ namespace GroupProject_Wookie_Warriors
             decimal interest;
             decimal totalBalance = 0;
             Console.Clear();
-
+            //If active loan
             if (user.UserLoans.Count > 0)
             {
                 Console.WriteLine("You already have an active loan\n");
@@ -266,7 +292,7 @@ namespace GroupProject_Wookie_Warriors
                 }
                 return;
             }
-
+            //Shows total amount of money in sek for SEK accounts 
             foreach (var acc in user.Accounts)
             {
                 if (acc.Currency == "SEK")
@@ -274,16 +300,16 @@ namespace GroupProject_Wookie_Warriors
                     totalBalance += acc.Balance;
                 }
             }
-            CustomerAccounts(user);
+            CustomerAccounts(user);           
 
-            Console.WriteLine($"You have a total of: {totalBalance} SEK\n" +
+            Console.WriteLine($"You have a total of: {totalBalance} SEK, You can loan up to {totalBalance * 5} SEK\n" +
                               "Interest rate: 5%\n" +
                               "How much do you want to loan?");
 
             string number = Console.ReadLine();
             Console.WriteLine("How many years?");
             string time = Console.ReadLine();
-
+            //Chekcs different conditions 
             if (decimal.TryParse(number, out decimal loan) && decimal.TryParse(time, out decimal year))
             {
                 Console.Clear();
@@ -305,7 +331,7 @@ namespace GroupProject_Wookie_Warriors
                 interest = loan * rate * year;
                 payBack = loan + interest;
 
-                Console.WriteLine("Loan info:");
+                Console.WriteLine("Loan info:");// Loan information
                 Console.WriteLine($"Loan: {loan} SEK\n" +
                                   $"Payback interest: {interest} SEK in {year} years");
 
@@ -317,8 +343,7 @@ namespace GroupProject_Wookie_Warriors
 
                 if (takeLoan.ToLower() == "yes") 
                 {
-                    Console.WriteLine("Choose an account to transfer the loan to (only SEK accounts are valid):");
-
+                    
                     List<Account> sekAccounts = user.Accounts.Where(a => a.Currency == "SEK").ToList();
 
                     if (sekAccounts.Count == 0)
@@ -328,9 +353,9 @@ namespace GroupProject_Wookie_Warriors
                         return;
                     }
 
-                    int selectedAccountIndex = ScrollMenu(sekAccounts, "Your SEK Accounts:");
+                    int selectedAccountIndex = ScrollMenu(sekAccounts, "Your SEK Accounts:\nChoose an account to transfer the loan to (only SEK accounts are valid):");
                     var chosenAccount = sekAccounts[selectedAccountIndex];
-
+                    //Transfers loan to account
                     chosenAccount.Balance += loan;
                     user.UserLoans.Add(payBack);
 
@@ -354,9 +379,9 @@ namespace GroupProject_Wookie_Warriors
 
         public void PayBackLoan(User user,Dictionary<string,User> users)
         {
+            CustomerAccounts(user);
             Console.WriteLine("You can payback your loan here\n" +
-                    "Choose an account to payback with must be in Sek!");
-            Console.ReadKey();
+                    "Choose an account to payback with must be in Sek!");            
 
             int userAccount; //Checks if input is not valid 
             if(!int.TryParse(Console.ReadLine(), out userAccount) || userAccount >= user.Accounts.Count || userAccount < 1 || user.Accounts[userAccount - 1].Currency != "SEK")
@@ -386,8 +411,7 @@ namespace GroupProject_Wookie_Warriors
                 Console.WriteLine("Payment successful");
                 Console.ReadKey();
             }
-            DataManage.SaveData(users);
-            Console.ReadKey();
+            DataManage.SaveData(users);         
         }
 
 
@@ -407,7 +431,7 @@ namespace GroupProject_Wookie_Warriors
                     return;
                 }
             }
-
+            //Adds new account
             Console.WriteLine("We have decided that your balance will be 0 and your currency SEK. ");
             decimal Balance = 0;
             string Currency = "SEK";
@@ -443,8 +467,7 @@ namespace GroupProject_Wookie_Warriors
             {
                 if (int.TryParse(Console.ReadLine(), out Customerindex) && Customerindex >= 1 && Customerindex <= user.Accounts.Count)
                 {
-                    rightAccountChoice = true;
-                    Console.ReadKey();
+                    rightAccountChoice = true;                   
                 }
                 else
                 {
@@ -463,8 +486,7 @@ namespace GroupProject_Wookie_Warriors
 
 
                 if (currencyChoice == "EUR" || currencyChoice == "USD" || currencyChoice == "SEK")
-                {
-                    Console.ReadKey();
+                {                  
                     break;
 
                 }
@@ -476,10 +498,9 @@ namespace GroupProject_Wookie_Warriors
             {
                 Console.WriteLine("You cant convert to same currency that you have.");
                 Console.ReadKey();
-
                 return;
             }
-            
+            //Exchange curriencies 
             decimal exchangeRate = 0;          
             switch (accountChoice.Currency.ToUpper())
             {
@@ -569,7 +590,7 @@ namespace GroupProject_Wookie_Warriors
             Console.Clear();
             string currency = "SEK"; // currency choice 
             decimal rate = 0.03m; // 3% exchange rate
-            int savingAccount = user.Accounts.Count(account => account.AccountType== "SavingsAccount");
+            int savingAccount = user.Accounts.Count(account => account.AccountType == "SavingsAccount");
             //Checks if user have more than 2 or equal SavingsAccounts. 
             if(savingAccount >= 2)
             {
@@ -579,14 +600,14 @@ namespace GroupProject_Wookie_Warriors
             }
 
             decimal totalBalance = 0;
+            CustomerAccounts(user);
             foreach (var acc in user.Accounts)
-            {
-                Console.WriteLine($"- {acc.AccountType} {acc.Balance} {acc.Currency}");
+            {               
                 if(acc.Currency == "SEK")
                 {
                     totalBalance += acc.Balance;
                 }                        
-                    Console.ReadKey();
+                    
             }
             Console.WriteLine($"You have a total balance of: {totalBalance} {currency}");
             Console.WriteLine("our Interest rate: 3%\n");
@@ -611,11 +632,10 @@ namespace GroupProject_Wookie_Warriors
             bool validDepositAmount = false;
             while (!validDepositAmount)
             {
-                Console.WriteLine($"Amount you want to deposit to your new saving account? (minimum 1 & Maximum {totalBalance})");
-                if (decimal.TryParse(Console.ReadLine(), out depositAmount) && depositAmount >= 1 && depositAmount <= totalBalance)
+                Console.WriteLine($"Amount you want to deposit to your new saving account? (minimum 1 & Maximum {user.Accounts[chooseAccount - 1].Balance})");
+                if (decimal.TryParse(Console.ReadLine(), out depositAmount) && depositAmount >= 1 && depositAmount <= user.Accounts[chooseAccount - 1].Balance)
                 {
-                    validDepositAmount = true;
-                    Console.ReadKey();
+                    validDepositAmount = true;                   
                 }
                 else
                 {
@@ -644,7 +664,8 @@ namespace GroupProject_Wookie_Warriors
             {
                 Account newSavingAccount = new Account("SavingsAccount", finalBalance, currency);
                 user.Accounts.Add(newSavingAccount);             
-                Console.WriteLine($"Your saving account has been created with the amount {finalBalance} {currency}.");              
+                Console.WriteLine($"Your saving account has been created with the amount {finalBalance} {currency}.");
+                Console.WriteLine("Press enter to continue");
                 user.Accounts[chooseAccount - 1].Balance -= depositAmount;
                 Console.ReadKey();
             }
@@ -677,6 +698,7 @@ namespace GroupProject_Wookie_Warriors
             // Utför insättningen
             selectedAccount.Balance += amount;
             Console.WriteLine($"Deposited {amount} {selectedAccount.Currency}. New balance: {selectedAccount.Balance}");
+            Console.WriteLine("Press enter to continue");
             Console.ReadKey();
             // Spara data
             DataManage.SaveData(users);
@@ -718,7 +740,7 @@ namespace GroupProject_Wookie_Warriors
                         selectedIndex = (selectedIndex == users.Count - 1) ? 0 : selectedIndex + 1;
                         break;
                     case ConsoleKey.Escape:
-                        return -1; 
+                        return selectedIndex; 
                 }
 
             } while (key != ConsoleKey.Enter);
@@ -762,7 +784,7 @@ namespace GroupProject_Wookie_Warriors
                         selectedIndex = (selectedIndex == options.Count - 1) ? 0 : selectedIndex + 1;
                         break;
                     case ConsoleKey.Escape:
-                        return -1; // Escape för att avbryta
+                        return selectedIndex; // Escape för att avbryta
                 }
 
             } while (key != ConsoleKey.Enter);
