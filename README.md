@@ -1,3 +1,5 @@
+Figjam/UML : https://www.figma.com/board/inQt1Ws1sHIBFLwxYLjuNd/Wookie-Warriors?node-id=0-1&t=aHgruxqoyYE2iOw4-1
+
 Bank Program
 
 A banking system for both customers and administrators
